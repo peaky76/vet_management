@@ -1,6 +1,8 @@
 require('minitest/autorun')
 require('minitest/reporters')
+
 require_relative('../models/pet')
+require_relative('../models/vet')
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 
@@ -13,6 +15,12 @@ class TestPet < MiniTest::Test
             'type' => "dog",
             'owner_tel' => "0131 123 4567",
             'notes' => "Has arthritis"
+        })
+        @vet_1 = Vet.new({
+            'id' => 1,
+            'first_name' => "Sue",
+            'last_name' => "Ollogee",
+            'tel' => "0131 765 4321"
         })
     end
 
@@ -34,6 +42,11 @@ class TestPet < MiniTest::Test
 
     def test_has_notes()
         assert_equal("Has arthritis", @pet_1.notes)
+    end
+
+    def test_assign_to_vet()
+        @pet_1.assign_to_vet(@vet_1.id)
+        assert_equal(1, @pet_1.vet_id)
     end
 
 end

@@ -2,8 +2,8 @@ require_relative( '../db/sql_runner' )
 
 class Pet
 
-    attr_reader :id 
-    attr_accessor :dob, :name, :type, :owner_tel, :notes, :vet_id    
+    attr_reader :id, :vet_id 
+    attr_accessor :dob, :name, :type, :owner_tel, :notes    
 
     def initialize(options)
         @id = options['id'].to_i if options['id']
@@ -12,10 +12,10 @@ class Pet
         @type = options['type']
         @owner_tel = options['owner_tel']
         @notes = options['notes']
-        @vet_id = options['vet_id'].to_i
+        @vet_id = options['vet_id'].to_i if options['vet_id']
     end
 
-    # Instance methods
+    ## Instance methods
 
     # CRUD methods
 
@@ -44,7 +44,13 @@ class Pet
         SqlRunner.run(sql, values)
     end
 
-    # Class methods
+    # Other instance methods
+
+    def assign_to_vet(vet_id)
+        @vet_id = vet_id
+    end
+
+    ## Class methods
 
     # CRUD methods
 

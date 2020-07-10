@@ -56,7 +56,7 @@ pet_3 = Pet.new({
 pet_4 = Pet.new({
     'name' => "Twiggy",
     'dob' => "5/3/2020",
-    'type' => "koala",
+    'type' => "stick insect",
     'owner_tel' => "0131 123 7777",
     'notes' => "Triple heart bypass",
     'vet_id' => vet_1.id
@@ -64,16 +64,6 @@ pet_4 = Pet.new({
 
 pets = [pet_1, pet_2, pet_3, pet_4]
 pets.each { |pet| pet.save() }
-
-pet_4.type = "stick insect"
-pet_4.update()
-
-pet_3.delete()
-
-vet_2.tel = "0131 888 8888"
-vet_2.update()
-
-vet_3.delete()
 
 binding.pry
 nil
