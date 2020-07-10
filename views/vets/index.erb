@@ -1,7 +1,10 @@
 <h1> Vets </h1>
 
 <% for vet in @vets %>
+    <h2><%= vet.full_name %></h2>
     <ul>
-        <li><%= vet.first_name %></li>
-    </ul>
+        <% for pet in vet.pets %>
+            <li><%= pet.name %> | <%= pet.type %></li>
+        <% end %>
+    </ul>    
 <% end %>
