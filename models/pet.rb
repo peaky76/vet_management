@@ -6,16 +6,26 @@ class Pet
     attr_accessor :dob, :name, :type, :owner_tel, :notes    
 
     def initialize(options)
-        @id = options['id'].to_i if options['id']
+        @id = options['id'].to_i() if options['id']
         @dob = options['dob']
         @name = options['name']
         @type = options['type']
         @owner_tel = options['owner_tel']
         @notes = options['notes']
-        @vet_id = options['vet_id'].to_i if options['vet_id']
+        @vet_id = options['vet_id'].to_i() if options['vet_id']
     end
 
     ## Instance methods
+
+    # Properties
+
+    def vet()
+        sql = "SELECT * FROM vets
+        WHERE id = $1"
+        values = [@vet_id]
+        vet_data = SqlRunner.run(sql, values).first()
+        return Vet.new(vet_data)
+    end
 
     # CRUD methods
 
@@ -25,7 +35,7 @@ class Pet
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id"
         values = [@dob, @name, @type, @owner_tel, @notes, @vet_id]
-        @id = SqlRunner.run(sql, values)[0]['id'].to_i
+        @id = SqlRunner.run(sql, values)[0]['id'].to_i()
     end
 
     def update()

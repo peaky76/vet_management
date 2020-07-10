@@ -1,7 +1,10 @@
 <h1> Pets </h1>
 
+<% status = "Not assigned to vet" %>
+<% status = "Assigned to #{pet.vet.name}" if pet.is_assigned?() %>
+
 <% for pet in @pets %>
     <ul>
-        <li><%= pet.name %></li>
+        <li><%= pet.name %> | <%= pet.type %> | <%= status %></li>
     </ul>
 <% end %>

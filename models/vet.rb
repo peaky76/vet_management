@@ -20,6 +20,14 @@ class Vet
         return "Dr #{@first_name} #{@last_name}"
     end
 
+    def pets()
+        sql = "SELECT * FROM pets
+        WHERE vet_id = $1"
+        values = [@id]
+        pet_data = SqlRunner.run(sql, values)
+        return pet_data.map { |pet| Pet.new(pet) }
+    end
+
     # CRUD Methods
 
     def save()
