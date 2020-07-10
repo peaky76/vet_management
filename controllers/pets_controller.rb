@@ -11,12 +11,6 @@ get '/pets' do
     erb ( :"pets/index" )
 end
 
-# SHOW
-get '/pets/:id' do
-    @pet = Pet.find(params['id'])
-    erb ( :"pets/show" )    
-end
-
 # NEW
 get '/pets/new' do
     erb ( :"pets/new" )
@@ -24,8 +18,18 @@ end
 
 # CREATE
 post '/pets' do
-    erb ( :"pets/create" )
+    @pet = Pet.new(params)
+    @pet.save()
+    erb ( :"pets/create")
 end
+
+# SHOW
+get '/pets/:id' do
+    @pet = Pet.find(params['id'])
+    erb ( :"pets/show" )    
+end
+
+
 
 # EDIT
 get '/pets/:id/edit' do

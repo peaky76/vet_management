@@ -1,20 +1,31 @@
 <h1>Add pet</h1>
 
-<form method="POST" action="/pets">
+<form id="form-pet-new" class="form-new" method="POST" action="/pets">
 
-<label for="name">Name</label>
-<input type="text" name="name" id="name"/>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name"/>
+    <br/>
 
-<label for="dob">Date of Birth</label>
-<input type="text" name="dob" id="dob"/>
+    <label for="dob">Date of Birth</label>
+    <input type="text" name="dob" id="dob"/>
+    <br/>
 
-<label for="type">Type</label>
-<input type="text" name="type" id="type"/>
+    <label for="type">Type</label>
+    <input type="text" name="type" id="type"/>
+    <br/>
 
-<label for="owner_tel">Owner Tel</label>
-<input type="text" name="owner_tel" id="owner_tel"/>
+    <label for="owner_tel">Owner Name</label>
+    <input type="text" name="owner_name" id="owner_name"/>
+    <br/>
 
-<label for="notes">Notes</label>
-<input type="text" name="notes" id="notes"/>
+    <label for="owner_tel">Owner Tel</label>
+    <input type="text" name="owner_tel" id="owner_tel"/>
+    <br/>
+
+    <label for="notes">Notes</label>
+    <input type="text" name="notes" id="notes"/>
+    <br/>
+
+    <input type="submit" value="Add pet">
 
 </form>

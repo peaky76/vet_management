@@ -32,7 +32,7 @@ class Pet
     def save()
         sql = "INSERT INTO pets
         (name, dob, type, owner_name, owner_tel, notes, vet_id) 
-        VALUES ($1, $2, $3, $4, $5, $6)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING id"
         values = [@name, @dob, @type, @owner_name, @owner_tel, @notes, @vet_id]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i()
@@ -41,8 +41,8 @@ class Pet
     def update()
         sql = "UPDATE pets
         SET (name, dob, type, owner_name, owner_tel, notes, vet_id) =
-        ($1, $2, $3, $4, $5, $6)
-        WHERE id = $7"
+        ($1, $2, $3, $4, $5, $6, $7)
+        WHERE id = $8"
         values = [@name, @dob, @type, @owner_name, @owner_tel, @notes, @vet_id, @id]
         SqlRunner.run(sql, values)
     end
