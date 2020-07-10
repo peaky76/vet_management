@@ -53,13 +53,6 @@ class Pet
         SqlRunner.run(sql, values)
     end
 
-    def find(id)
-        sql = "SELECT * FROM pets
-        WHERE id = $1"
-        values = [@id]
-        return Pet.get(sql, values)
-    end
-
     # Other instance methods
 
     def assign_to_vet(vet_id)
@@ -84,6 +77,13 @@ class Pet
         SqlRunner.run(sql)
     end
 
+    def self.find(id)
+        sql = "SELECT * FROM pets
+        WHERE id = $1"
+        values = [id]
+        return Pet.get(sql, values)
+    end
+
     # Helper functions for db
     
     def self.get_all(sql, values = [])
@@ -92,7 +92,7 @@ class Pet
     end
 
     def self.get(sql, values = [])
-        return self.get_all(sql, values).first()
+        return self.get_all(sql, values).first()    
     end
 
 end

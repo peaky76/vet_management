@@ -68,6 +68,13 @@ class Vet
         SqlRunner.run(sql)
     end
 
+    def self.find(id)
+        sql = "SELECT * FROM vets
+        WHERE id = $1"
+        values = [id]
+        return Vet.get(sql, values)
+    end
+
      # Helper functions for db
 
      def self.get_all(sql, values = [])
