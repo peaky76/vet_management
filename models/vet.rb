@@ -24,8 +24,7 @@ class Vet
         sql = "SELECT * FROM pets
         WHERE vet_id = $1"
         values = [@id]
-        pet_data = SqlRunner.run(sql, values)
-        return pet_data.map { |pet| Pet.new(pet) }
+        return Pet.get_all(sql, values)
     end
 
     # CRUD Methods
@@ -61,13 +60,23 @@ class Vet
 
     def self.all()
         sql = "SELECT * FROM vets"
-        vet_data = SqlRunner.run(sql)
-        return vet_data.map { |vet| Vet.new(vet) }
+        return Vet.get_all(sql)
     end
 
     def self.delete_all()
         sql = "DELETE FROM vets"
         SqlRunner.run(sql)
+    end
+
+     # Helper functions for db
+
+     def self.get_all(sql, values = [])
+        vet_data = SqlRunner.run(sql, values)
+        return vet_data.map { |vet| Vet.new(vet) }
+    end
+
+    def self.get(sql, values = [])
+        return self.get_all(sql, values).first()
     end
 
 end
