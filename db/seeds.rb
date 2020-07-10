@@ -30,6 +30,7 @@ pet_1 = Pet.new({
     'name' => "Rover",
     'dob' => "1/4/2015",
     'type' => "dog",
+    'owner_name' => "Al Sayshun",
     'owner_tel' => "0131 123 4567",
     'notes' => "Has arthritis"
 })
@@ -38,6 +39,7 @@ pet_2 = Pet.new({
     'name' => "Tiddles",
     'dob' => "4/1/2017",
     'type' => "cat",
+    'owner_name' => "Shaw Tare",
     'owner_tel' => "0131 321 7654",
     'notes' => "No tail"
 })
@@ -46,6 +48,7 @@ pet_3 = Pet.new({
     'name' => "Joey",
     'dob' => "11/11/2019",
     'type' => "budgie",
+    'owner_name' => "Bud Jerrigar",
     'owner_tel' => "0131 333 4444",
     'notes' => "Broken wing"
 })
@@ -54,6 +57,7 @@ pet_4 = Pet.new({
     'name' => "Twiggy",
     'dob' => "5/3/2020",
     'type' => "stick insect",
+    'owner_name' => "Twiggy",
     'owner_tel' => "0131 123 7777",
     'notes' => "Triple heart bypass"
 })

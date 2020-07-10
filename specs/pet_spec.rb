@@ -13,6 +13,7 @@ class TestPet < MiniTest::Test
             'name' => "Rover",
             'dob' => "1/4/2015",
             'type' => "dog",
+            'owner_name' => "Al Sayshun",
             'owner_tel' => "0131 123 4567",
             'notes' => "Has arthritis"
         })
@@ -34,6 +35,10 @@ class TestPet < MiniTest::Test
 
     def test_has_type()
         assert_equal("dog", @pet_1.type)
+    end
+
+    def test_has_owner_name()
+        assert_equal("Al Sayshun", @pet_1.owner_name)
     end
 
     def test_has_owner_tel()
