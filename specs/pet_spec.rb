@@ -49,4 +49,13 @@ class TestPet < MiniTest::Test
         assert_equal(1, @pet_1.vet_id)
     end
 
+    def test_is_assigned_true()
+        @pet_1.assign_to_vet(@vet_1.id)
+        assert(@pet_1.is_assigned?())
+    end
+
+    def test_is_assigned_false()
+        refute(@pet_1.is_assigned?())
+    end
+
 end

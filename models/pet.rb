@@ -50,6 +50,10 @@ class Pet
         @vet_id = vet_id
     end
 
+    def is_assigned?()
+        return vet_id != nil
+    end
+
     ## Class methods
 
     # CRUD methods

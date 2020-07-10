@@ -31,8 +31,7 @@ pet_1 = Pet.new({
     'dob' => "1/4/2015",
     'type' => "dog",
     'owner_tel' => "0131 123 4567",
-    'notes' => "Has arthritis",
-    'vet_id' => vet_1.id
+    'notes' => "Has arthritis"
 })
 
 pet_2 = Pet.new({
@@ -40,8 +39,7 @@ pet_2 = Pet.new({
     'dob' => "4/1/2017",
     'type' => "cat",
     'owner_tel' => "0131 321 7654",
-    'notes' => "No tail",
-    'vet_id' => vet_2.id
+    'notes' => "No tail"
 })
 
 pet_3 = Pet.new({
@@ -49,8 +47,7 @@ pet_3 = Pet.new({
     'dob' => "11/11/2019",
     'type' => "budgie",
     'owner_tel' => "0131 333 4444",
-    'notes' => "Broken wing",
-    'vet_id' => vet_2.id
+    'notes' => "Broken wing"
 })
 
 pet_4 = Pet.new({
@@ -58,12 +55,17 @@ pet_4 = Pet.new({
     'dob' => "5/3/2020",
     'type' => "stick insect",
     'owner_tel' => "0131 123 7777",
-    'notes' => "Triple heart bypass",
-    'vet_id' => vet_1.id
+    'notes' => "Triple heart bypass"
 })
 
 pets = [pet_1, pet_2, pet_3, pet_4]
 pets.each { |pet| pet.save() }
+
+pet_1.assign_to_vet(vet_1.id)
+pet_2.assign_to_vet(vet_1.id)
+pet_3.assign_to_vet(vet_2.id)
+pet_4.assign_to_vet(vet_2.id)
+pets.each { |pet| pet.update() }
 
 binding.pry
 nil
