@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <title>Vet Surgery</title>
 </head>
 <body>
-    <%= yield %>
+
+    <header>
+        <img src="https://via.placeholder.com/150/FF0000/FFFFFF?Text=SurgeryLogo" alt="Surgery logo placeholder" />
+        <ul>
+            <li><a href="/pets">PETS</a></li>
+            <li><a href="/vets">VETS</a></li>
+        </ul>
+    </header>
+
+    <section id="content-main">
+        <%= yield %>
+    </section>
+
+    <footer>
+        <div id="footer-left">
+            <p>
+            Paws & Claws Veterinary Surgeons<br/>
+            1, High Street<br/>
+            Anytown<br/>
+            NE1 1AA<br/>
+            </p>
+        </div>
+        <div id="footer-right">
+            Design by Robert Peacock
+        </div>
+    </footer>
+
 </body>
 </html>
