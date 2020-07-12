@@ -2,23 +2,29 @@ require_relative( '../db/sql_runner' )
 
 class Pet
 
-    attr_reader :id, :vet_id 
-    attr_accessor :dob, :name, :type, :owner_name, :owner_tel, :notes    
+    attr_reader :id, :vet_id, :owner_id 
+    attr_accessor :dob, :name, :type, :notes    
 
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @name = options['name']
         @dob = options['dob']
         @type = options['type']
-        @owner_name = options['owner_name']
-        @owner_tel = options['owner_tel']
         @notes = options['notes']
+        @owner_id = options['owner_id'].to_i() if options['owner_id']
         @vet_id = options['vet_id'].to_i() if options['vet_id']
     end
 
     ## Instance methods
 
     # Properties
+
+    def owner()
+        sql = "SELECT * FROM owners
+        WHERE id = $1"
+        values = [@owner_id]
+        return Owner.get(sql, values)
+    end
 
     def vet()
         sql = "SELECT * FROM vets
@@ -40,19 +46,19 @@ class Pet
 
     def save()
         sql = "INSERT INTO pets
-        (name, dob, type, owner_name, owner_tel, notes, vet_id) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        (name, dob, type, notes, owner_id, vet_id) 
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id"
-        values = [@name, @dob, @type, @owner_name, @owner_tel, @notes, @vet_id]
+        values = [@name, @dob, @type, @notes, @owner_id, @vet_id]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i()
     end
 
     def update()
         sql = "UPDATE pets
-        SET (name, dob, type, owner_name, owner_tel, notes, vet_id) =
-        ($1, $2, $3, $4, $5, $6, $7)
-        WHERE id = $8"
-        values = [@name, @dob, @type, @owner_name, @owner_tel, @notes, @vet_id, @id]
+        SET (name, dob, type, notes, owner_id, vet_id) =
+        ($1, $2, $3, $4, $5, $6)
+        WHERE id = $7"
+        values = [@name, @dob, @type, @notes, @owner_id, @vet_id, @id]
         SqlRunner.run(sql, values)
     end
 

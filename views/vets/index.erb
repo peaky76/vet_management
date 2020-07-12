@@ -1,8 +1,10 @@
 <h1> Vets </h1>
 
+<ul>
 <% for vet in @vets %>
-    <h2><a href="/vets/<%= vet.id %>"><%= vet.full_name %></a></h2>  
+    <li><a href="/vets/<%= vet.id %>"><%= vet.full_name %></a></li>  
 <% end %>
+</ul>
 
 <%# <a href="/vets/new"><button type="button">Add new</button></a> %>
 <form class="btn-route" action="/vets/new" method="GET"><input type="submit" value="Add new"></form>

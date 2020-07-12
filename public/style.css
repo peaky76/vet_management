@@ -33,6 +33,10 @@ ul {
     list-style-type: none;
 }
 
+li {
+    margin-top: 0.5rem;
+}
+
 .btn-route {
     display: inline-block;
     margin-top: 1rem;
@@ -46,10 +50,18 @@ ul {
 }
 
 .form-field {  
-    width: 50%;
+
 }
 
-.form-field label,
-.form-field input {
-    width: 50%;
+.form-field > * {
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.form-field > label {
+    width: 8rem;
+}
+
+.form-field > input {
+    width: 17rem;
 }

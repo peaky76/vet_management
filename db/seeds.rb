@@ -75,36 +75,32 @@ pet_1 = Pet.new({
     'name' => "Rover",
     'dob' => "1/4/2015",
     'type' => "dog",
-    'owner_name' => "Al Sayshun",
-    'owner_tel' => random_tel(),
-    'notes' => "Has arthritis"
+    'notes' => "Has arthritis",
+    'owner_id' => owner_1.id
 })
 
 pet_2 = Pet.new({
     'name' => "Tiddles",
     'dob' => "4/1/2017",
     'type' => "cat",
-    'owner_name' => "Shaw Tare",
-    'owner_tel' => random_tel(),
-    'notes' => "No tail"
+    'notes' => "No tail",
+    'owner_id' => owner_1.id
 })
 
 pet_3 = Pet.new({
     'name' => "Joey",
     'dob' => "11/11/2019",
     'type' => "budgie",
-    'owner_name' => "Bud Jerrigar",
-    'owner_tel' => random_tel(),
-    'notes' => "Broken wing"
+    'notes' => "Broken wing",
+    'owner_id' => owner_2.id
 })
 
 pet_4 = Pet.new({
     'name' => "Twiggy",
     'dob' => "5/3/2020",
     'type' => "stick insect",
-    'owner_name' => "Twiggy",
-    'owner_tel' => random_tel(),
-    'notes' => "Triple heart bypass"
+    'notes' => "Triple heart bypass",
+    'owner_id' => owner_2.id
 })
 
 pets = [pet_1, pet_2, pet_3, pet_4]
@@ -118,7 +114,6 @@ pets.each { |pet| pet.update() }
 
 owner_2.addr_1 = "16 Forrest Street"
 owner_2.update()
-owner_3.delete()
 
 binding.pry
 nil

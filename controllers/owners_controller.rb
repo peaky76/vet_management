@@ -11,6 +11,12 @@ get '/owners' do
     erb ( :"owners/index" )
 end
 
+# REGISTER
+get '/owners/register' do
+    @owners = Owner.all()
+    erb( :"owners/registration" ) 
+end
+
 # NEW
 get '/owners/new' do
     erb ( :"owners/new" )
@@ -44,7 +50,10 @@ end
 
 # DESTROY
 post '/owners/:id/delete' do
-    @owner = Owner.new(params)
+    # Delete pets, otherwise cannot delete from database
+    for pet in @owner.pets
+        pet.delete()
+    end
     @owner.delete()
-    erb ( :"owners/destroy" )
+    erb ( :"owners/destroy" ) 
 end

@@ -2,7 +2,7 @@ require_relative( '../db/sql_runner' )
 
 class Owner
 
-    attr_reader :id, :balance
+    attr_reader :id, :balance, :registered
     attr_accessor :title, :first_name, :last_name, :addr_1, :addr_2, :town_city, :postcode, :email, :tel, :balance
 
     def initialize(options)
@@ -16,9 +16,9 @@ class Owner
         @postcode = options['postcode']
         @email = options['email']
         @tel = options['tel']
-        @balance = 0
-        @registered = true unless options['registered']
-        @marketing = false unless options['marketing']
+        options['balance'] == nil ? @balance = 0 : @balance = options['balance']
+        options['registered'] == nil ? @registered = true : @registered = options['registered'] 
+        options['marketing'] == nil ? @marketing = false : @marketing = options['marketing']
     end
 
      ## Instance methods
@@ -30,6 +30,13 @@ class Owner
 
     def full_name()
         return "#{@title} #{@first_name} #{@last_name}"
+    end
+
+    def pets()
+        sql = "SELECT * FROM pets
+        WHERE owner_id = $1"
+        values = [@id]
+        return Pet.get_all(sql, values)
     end
 
     # CRUD Methods

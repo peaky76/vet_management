@@ -1,8 +1,8 @@
 <h1> Pets </h1>
 
+<ul>
 <% for pet in @pets %>
     
-    <ul>
         <li>
             <a href="/pets/<%= pet.id %>"><%= pet.name %></a> | 
             <%= pet.type %> | 
@@ -12,9 +12,9 @@
                 <a href="/pets/<%= pet.id %>/edit"><em><%= pet.status %></em></a>
             <% end %>
         </li>
-    </ul>
     
 <% end %>
+</ul>
 
 <%# <a href="/pets/new"><button type="button">Add new</button></a> %>
 <form class="btn-route" action="/pets/new" method="GET"><input type="submit" value="Add new"></form>

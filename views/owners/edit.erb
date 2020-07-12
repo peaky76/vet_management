@@ -48,12 +48,13 @@
     </div>
 
     <div class="form-field">
-      <label for="registered">Registered?</label>
-      <input id="registered" type="checkbox" name="registered" value="Registered" 
-        <% if owner.is_registered?() %> checked <% end %>>  
-      <label for="marketing">Receive marketing?</label>
-      <input id="marketing" type="checkbox" name="marketing" value="Marketing" 
-        <% if owner.accepts_marketing?() %> checked <% end %>>
+
+        <label for="registered">Registered?</label>
+        <input id="registered" type="checkbox" name="registered" value="Registered" <%= "checked" if @owner.is_registered?() %>>
+
+        <label for="marketing">Receive marketing?</label>
+        <input id="marketing" type="checkbox" name="marketing" value="Marketing" <%= "checked" if @owner.accepts_marketing?() %>>
+                
     </div>
 
     <input type="submit" value="Update owner">

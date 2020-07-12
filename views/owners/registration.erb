@@ -1,4 +1,6 @@
-<h1> Owners </h1>
+<h1>Register new pet</h1>
+
+Select existing owner below or <a href="/owners/new">enter new owner</a>
 
 <ul>
 <% for owner in @owners %>
@@ -10,6 +12,4 @@
     
 <% end %>
 </ul>
-  
 
-<form class="btn-route" action="/owners/new" method="GET"><input type="submit" value="Add new"></form>
