@@ -1,0 +1,14 @@
+<h1> Owners </h1>
+
+<% for owner in @owners %>
+    
+    <ul>
+        <li>
+            <a href="/owners/<%= owner.id %>"><%= owner.full_name %></a> | 
+            <%= owner.full_address %>
+        </li>
+    </ul>
+    
+<% end %>
+
+<form class="btn-route" action="/owners/new" method="GET"><input type="submit" value="Add new"></form>

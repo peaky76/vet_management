@@ -1,0 +1,23 @@
+<h1><%= @owner.full_name %><sup class="id-sup"> (ID: <%= @owner.id %>)</sup></h1>
+<em>@owner.full_address</em>
+
+<h2>Pets</h2>
+
+<% for pet in @owner.pets %>
+    
+    <ul>
+        <li>
+            <a href="/pets/<%= pet.id %>"><%= pet.name %></a> | 
+            <%= pet.type %> | 
+            <% if pet.is_assigned?() %>
+                <%= pet.status %>
+            <% else %>
+                <a href="/pets/<%= pet.id %>/edit"><em><%= pet.status %></em></a>
+            <% end %>
+        </li>
+    </ul>
+    
+<% end %>
+
+<form class="btn-route" action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+<form class="btn-route" action="/pets/<%= @pet.id %>/delete" method="POST"><input type="submit" value="Delete"></form>

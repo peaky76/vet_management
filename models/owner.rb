@@ -17,8 +17,8 @@ class Owner
         @email = options['email']
         @tel = options['tel']
         @balance = 0
-        @registered = true
-        @marketing = false
+        @registered = true unless options['registered']
+        @marketing = false unless options['marketing']
     end
 
      ## Instance methods
