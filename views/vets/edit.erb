@@ -1,0 +1,19 @@
+<h1>Edit vet</h1>
+
+<form id="form-vet-edit" class="form-new" method="POST" action="/vets/<%= @vet.id %>">
+
+    <label for="first-name">First Name</label>
+    <input id="first-name" type="text" name="first_name" value="<%= @vet.first_name %>" />
+    <br/>
+
+    <label for="last-name">Last Name</label>
+    <input id="last-name" type="text" name="last_name" value="<%= @vet.last_name %>" />
+    <br/>
+
+    <label for="tel">Telephone Number</label>
+    <input id="tel" type="text" name="tel" value="<%= @vet.tel %>"/>
+    <br/>
+
+    <input type="submit" value="Edit vet">
+
+</form>

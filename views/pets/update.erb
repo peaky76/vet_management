@@ -1,0 +1,5 @@
+<%= @pet.name %> successfully updated.<br/>
+
+<form action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit <%= @pet.name %>"></form><br/>
+<form action="/pets" method="GET"><input type="submit" value="View all pets"></form><br/>
+<form action="/" method="GET"><input type="submit" value="Home"></form><br/>

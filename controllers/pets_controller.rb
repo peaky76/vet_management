@@ -31,16 +31,21 @@ end
 
 # EDIT
 get '/pets/:id/edit' do
+    @pet = Pet.find(params['id'])
     erb ( :"pets/edit" )
 end
 
 # UPDATE
 post '/pets/:id' do
+    @pet = Pet.new(params)
+    @pet.update()
     erb ( :"pets/update" )    
 end
 
 # DESTROY
 post '/pets/:id/delete' do
+    @pet = Pet.new(params)
+    @pet.delete()
     erb ( :"pets/destroy" )
 end
 

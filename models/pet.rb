@@ -69,6 +69,10 @@ class Pet
         @vet_id = vet_id
     end
 
+    def unassign()
+        @vet_id = nil
+    end
+
     def is_assigned?()
         return vet_id != nil
     end

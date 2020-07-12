@@ -31,15 +31,25 @@ end
 
 # EDIT
 get '/vets/:id/edit' do
+    @vet = Vet.find(params['id'])
     erb ( :"vets/edit" )
 end
 
 # UPDATE
 post '/vets/:id' do
+    @vet = Vet.new(params)
+    @vet.update()
     erb ( :"vets/update" )    
 end
 
 # DESTROY
 post '/vets/:id/delete' do
-    erb ( :"vets/destroy" )
+    @vet = Vet.new(params)
+    # Remove pets from vet's list, ready to be reassigned, otherwise cannot delete from database
+    for pet in @vet.pets
+        pet.unassign()
+        pet.update()
+    end
+    @vet.delete()
+    erb ( :"vets/destroy" ) 
 end

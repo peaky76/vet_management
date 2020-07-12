@@ -1,0 +1,31 @@
+<h1>Edit pet</h1>
+
+<form id="form-pet-edit" class="form-edit" method="POST" action="/pets/<%= @pet.id %>">
+
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" value="<%= @pet.name %>" />
+    <br/>
+
+    <label for="dob">Date of Birth</label>
+    <input id="dob" type="text" name="dob" value="<%= @pet.dob %>" />
+    <br/>
+
+    <label for="type">Type</label>
+    <input id="type" type="text" name="type" value="<%= @pet.type %>" />
+    <br/>
+
+    <label for="owner-name">Owner Name</label>
+    <input id="owner-name" type="text" name="owner_name" value="<%= @pet.owner_name %>" />
+    <br/>
+
+    <label for="owner-tel">Owner Tel</label>
+    <input id="owner-tel" type="text" name="owner_tel" value="<%= @pet.owner_tel %>" />
+    <br/>
+
+    <label for="notes">Notes</label>
+    <input id="notes" type="text" name="notes" value="<%= @pet.notes %>" />
+    <br/>
+
+    <input type="submit" value="Update pet">
+
+</form>
