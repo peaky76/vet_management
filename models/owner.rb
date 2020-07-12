@@ -2,7 +2,7 @@ require_relative( '../db/sql_runner' )
 
 class Owner
 
-    attr_reader :id, :balance, :registered
+    attr_reader :id, :balance
     attr_accessor :title, :first_name, :last_name, :addr_1, :addr_2, :town_city, :postcode, :email, :tel, :balance
 
     def initialize(options)
@@ -17,11 +17,11 @@ class Owner
         @email = options['email']
         @tel = options['tel']
         options['balance'] == nil ? @balance = 0 : @balance = options['balance']
-        options['registered'] == nil ? @registered = true : @registered = options['registered'] 
-        options['marketing'] == nil ? @marketing = false : @marketing = options['marketing']
+        options['registered'] == nil ? @registered = true : @registered = make_boolean(options['registered'])
+        options['marketing'] == nil ? @marketing = false : @marketing = make_boolean(options['marketing'])
     end
 
-     ## Instance methods
+    ## Instance methods
 
     # Properties
     def full_address()
@@ -123,6 +123,11 @@ class Owner
 
     def self.get(sql, values = [])
         return self.get_all(sql, values).first()    
+    end
+
+    def make_boolean(input)
+        return true if ["t", true, "yes", 1].include?(input) 
+        return false if ["f", false, "no", 0].include?(input)
     end
 
 end

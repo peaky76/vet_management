@@ -37,7 +37,8 @@ li {
     margin-top: 0.5rem;
 }
 
-.btn-route {
+.btn-route,
+.submit {
     display: inline-block;
     margin-top: 1rem;
     margin-right: 1rem;

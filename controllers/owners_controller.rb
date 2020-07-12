@@ -44,6 +44,8 @@ end
 # UPDATE
 post '/owners/:id' do
     @owner = Owner.new(params)
+    params['registered'] == "on" ? @owner.register() : @owner.deregister()
+    params['marketing'] == "on" ? @owner.opt_in() : @owner.opt_out()
     @owner.update()
     erb ( :"owners/update" )    
 end
