@@ -6,5 +6,10 @@
         <% for pet in vet.pets %>
             <li><%= pet.name %> | <%= pet.type %></li>
         <% end %>
+        <% if vet.pets.count == 0 %>
+            <em>No pets assigned</em>
+        <% end %>        
     </ul>    
 <% end %>
+
+<a href="/vets/new"><button type="button">Add new</button></a>

@@ -11,12 +11,6 @@ get '/vets' do
     erb ( :"vets/index" )
 end
 
-# SHOW
-get '/vets/:id' do
-    @vet = Vet.find(params['id'])
-    erb ( :"vets/show" )    
-end
-
 # NEW
 get '/vets/new' do
     erb ( :"vets/new" )
@@ -24,7 +18,15 @@ end
 
 # CREATE
 post '/vets' do
+    @vet = Vet.new(params)
+    @vet.save()
     erb ( :"vets/create" )
+end
+
+# SHOW
+get '/vets/:id' do
+    @vet = Vet.find(params['id'])
+    erb ( :"vets/show" )    
 end
 
 # EDIT

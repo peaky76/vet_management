@@ -29,8 +29,6 @@ get '/pets/:id' do
     erb ( :"pets/show" )    
 end
 
-
-
 # EDIT
 get '/pets/:id/edit' do
     erb ( :"pets/edit" )
