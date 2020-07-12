@@ -31,6 +31,7 @@ end
 
 # EDIT
 get '/pets/:id/edit' do
+    @vets = Vet.all()
     @pet = Pet.find(params['id'])
     erb ( :"pets/edit" )
 end
@@ -48,5 +49,6 @@ post '/pets/:id/delete' do
     @pet.delete()
     erb ( :"pets/destroy" )
 end
+
 
  

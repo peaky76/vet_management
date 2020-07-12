@@ -26,6 +26,16 @@
     <input id="notes" type="text" name="notes" value="<%= @pet.notes %>" />
     <br/>
 
+    <label for="select-vet">Vet</label>
+    <select id="select-vet" name="vet_id">
+        <% for vet in @vets %>
+            <option value="<%= vet.id %>" <% if vet.id == @pet.vet_id %> selected <% end %>>
+                <%= vet.full_name %>
+            </option>          
+        <% end %>
+    </select>
+
+
     <input type="submit" value="Update pet">
 
 </form>

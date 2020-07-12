@@ -3,7 +3,15 @@
 <% for pet in @pets %>
     
     <ul>
-        <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %> | <%= pet.status %></li>
+        <li>
+            <a href="/pets/<%= pet.id %>"><%= pet.name %></a> | 
+            <%= pet.type %> | 
+            <% if pet.is_assigned?() %>
+                <%= pet.status %>
+            <% else %>
+                <a href="/pets/<%= pet.id %>/edit"><em><%= pet.status %></em></a>
+            <% end %>
+        </li>
     </ul>
     
 <% end %>
