@@ -2,11 +2,8 @@
 
 <% for pet in @pets %>
     
-    <% status = "Not assigned to vet" %>
-    <% status = "Assigned to #{pet.vet.full_name}" if pet.is_assigned?() %>
-
     <ul>
-        <li><%= pet.name %> | <%= pet.type %> | <%= status %></li>
+        <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %> | <%= pet.status %></li>
     </ul>
     
 <% end %>

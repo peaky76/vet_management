@@ -32,3 +32,9 @@ footer {
 ul {
     list-style-type: none;
 }
+
+.id-sup {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: lightslategrey;
+}

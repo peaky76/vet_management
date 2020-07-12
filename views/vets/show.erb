@@ -1,2 +1,11 @@
-<%= @vet.full_name %><br/>
+<h1><%= @vet.full_name %></h1>
 <%= @vet.tel %><br/>
+
+<ul>
+    <% for pet in @vet.pets %>
+        <li><%= pet.name %> | <%= pet.type %></li>
+    <% end %>
+    <% if @vet.pets.count == 0 %>
+        <em>No pets assigned</em>
+    <% end %>        
+</ul>  

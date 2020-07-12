@@ -27,6 +27,15 @@ class Pet
         return Vet.get(sql, values)
     end
 
+    def status()
+        if self.is_assigned?
+            status = "Assigned to #{self.vet.full_name}"
+        else
+            status = "Not assigned to vet"
+        end
+        return status
+    end
+
     # CRUD methods
 
     def save()
