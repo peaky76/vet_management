@@ -1,6 +1,6 @@
 <%= @vet.full_name %> successfully added.<br/>
 
-<form action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit <%= @vet.full_name %>"></form><br/>
-<form action="/vets/new" method="GET"><input type="submit" value="Add another"></form><br/>
-<form action="/vets" method="GET"><input type="submit" value="View all vets"></form><br/>
-<form action="/" method="GET"><input type="submit" value="Home"></form><br/>
+<form class="btn-route" action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit <%= @vet.full_name %>"></form><br/>
+<form class="btn-route" action="/vets/new" method="GET"><input type="submit" value="Add another"></form><br/>
+<form class="btn-route" action="/vets" method="GET"><input type="submit" value="View all vets"></form><br/>
+<form class="btn-route" action="/" method="GET"><input type="submit" value="Home"></form><br/>

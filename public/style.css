@@ -33,8 +33,23 @@ ul {
     list-style-type: none;
 }
 
+.btn-route {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
 .id-sup {
     font-size: 0.75rem;
     font-style: italic;
     color: lightslategrey;
+}
+
+.form-field {  
+    width: 50%;
+}
+
+.form-field label,
+.form-field input {
+    width: 50%;
 }

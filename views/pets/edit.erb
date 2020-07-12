@@ -2,39 +2,46 @@
 
 <form id="form-pet-edit" class="form-edit" method="POST" action="/pets/<%= @pet.id %>">
 
-    <label for="name">Name</label>
-    <input id="name" type="text" name="name" value="<%= @pet.name %>" />
-    <br/>
+    <div class="form-field">
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" value="<%= @pet.name %>" />
+    </div>
 
-    <label for="dob">Date of Birth</label>
-    <input id="dob" type="text" name="dob" value="<%= @pet.dob %>" />
-    <br/>
+    <div class="form-field">
+        <label for="dob">Date of Birth</label>
+        <input id="dob" type="text" name="dob" value="<%= @pet.dob %>" />
+    </div>
 
-    <label for="type">Type</label>
-    <input id="type" type="text" name="type" value="<%= @pet.type %>" />
-    <br/>
+    <div class="form-field">
+        <label for="type">Type</label>
+        <input id="type" type="text" name="type" value="<%= @pet.type %>" />
+    </div>
 
-    <label for="owner-name">Owner Name</label>
-    <input id="owner-name" type="text" name="owner_name" value="<%= @pet.owner_name %>" />
-    <br/>
+    <div class="form-field">
+        <label for="owner-name">Owner Name</label>
+        <input id="owner-name" type="text" name="owner_name" value="<%= @pet.owner_name %>" />
+    </div>
 
-    <label for="owner-tel">Owner Tel</label>
-    <input id="owner-tel" type="text" name="owner_tel" value="<%= @pet.owner_tel %>" />
-    <br/>
+    <div class="form-field">
+        <label for="owner-tel">Owner Tel</label>
+        <input id="owner-tel" type="text" name="owner_tel" value="<%= @pet.owner_tel %>" />
+    </div>
 
-    <label for="notes">Notes</label>
-    <input id="notes" type="text" name="notes" value="<%= @pet.notes %>" />
-    <br/>
+    <div class="form-field">
+        <label for="notes">Notes</label>
+        <input id="notes" type="text" name="notes" value="<%= @pet.notes %>" />
+    </div>
 
-    <label for="select-vet">Vet</label>
-    <select id="select-vet" name="vet_id">
-        <% for vet in @vets %>
-            <option value="<%= vet.id %>" <% if vet.id == @pet.vet_id %> selected <% end %>>
-                <%= vet.full_name %>
-            </option>          
-        <% end %>
-    </select>
-
+    <div class="form-field">
+        <label for="select-vet">Vet</label>
+        <select id="select-vet" name="vet_id">
+            <% for vet in @vets %>
+                <option value="<%= vet.id %>" <% if vet.id == @pet.vet_id %> selected <% end %>>
+                    <%= vet.full_name %>
+                </option>          
+            <% end %>
+        </select>
+    </div>
 
     <input type="submit" value="Update pet">
 
