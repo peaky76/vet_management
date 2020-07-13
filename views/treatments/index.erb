@@ -2,7 +2,10 @@
 
 <ul>
 <% for treatment in @treatments %>
-    <li><a href="/treatments/<%= treatment.id %>"><%= treatment.name %></a></li>  
+    <li><%= treatment.name %> | £<%= treatment.price %> 
+        <form class="btn-route" action="/treatments/<%= treatment.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+        <form class="btn-route" action="/treatments/<%= treatment.id %>/delete" method="POST"><input type="submit" value="Delete"></form>    
+    </li>  
 <% end %>
 </ul>
 

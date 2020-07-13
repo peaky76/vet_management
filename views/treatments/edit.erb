@@ -8,10 +8,11 @@
     </div>
 
     <div class="form-field">
-        <label for="cost">Cost (£)</label>
-        <input id="cost" type="text" name="cost" value="<%= @treatment.cost %>" />
+        <label for="price">Price (£)</label>
+        <input id="price" type="text" name="price" value="<%= @treatment.price %>" />
     </div>
 
-    <input class="submit" type="submit" value="Edit treatment">
+    <input class="submit" type="submit" value="Save">
+    <button type="button"><a href="/treatments">Cancel</button>
 
 </form>

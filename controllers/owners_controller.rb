@@ -26,7 +26,7 @@ end
 post '/owners' do
     @owner = Owner.new(params)
     @owner.save()
-    erb ( :"owners/create")
+    redirect to '/owners'
 end
 
 # SHOW
@@ -47,15 +47,19 @@ post '/owners/:id' do
     params['registered'] == "on" ? @owner.register() : @owner.deregister()
     params['marketing'] == "on" ? @owner.opt_in() : @owner.opt_out()
     @owner.update()
-    erb ( :"owners/update" )    
+    redirect to '/owners'    
 end
 
 # DESTROY
 post '/owners/:id/delete' do
+    @owner = Owner.find(params['id'])
     # Delete pets, otherwise cannot delete from database
     for pet in @owner.pets
+        for treatment in pet.treatments_given()
+            treatment.delete()
+        end
         pet.delete()
     end
     @owner.delete()
-    erb ( :"owners/destroy" ) 
+    redirect to '/owners' 
 end

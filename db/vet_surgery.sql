@@ -40,7 +40,7 @@ CREATE TABLE pets (
 CREATE TABLE treatments (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    cost NUMERIC(8,2)
+    price NUMERIC(8,2)
 );
 
 CREATE TABLE pet_treatments (

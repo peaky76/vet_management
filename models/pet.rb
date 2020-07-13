@@ -33,6 +33,10 @@ class Pet
         return Vet.get(sql, values)
     end
 
+    def ownership()
+        return "Owned by #{self.owner.full_name}"
+    end
+
     def status()
         if self.is_assigned?
             status = "Assigned to #{self.vet.full_name}"

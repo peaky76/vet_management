@@ -38,6 +38,11 @@ li {
     margin-top: 0.5rem;
 }
 
+button > a {
+    text-decoration: none;
+    color: black;
+}
+
 .btn-route,
 .submit {
     display: inline-block;

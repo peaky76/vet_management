@@ -40,7 +40,7 @@ end
 post '/pets/:id' do
     @pet = Pet.new(params)
     @pet.update()
-    erb ( :"pets/update" )    
+    erb ( :"pets/show" )
 end
 
 # DESTROY

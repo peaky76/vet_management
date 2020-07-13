@@ -3,12 +3,12 @@ require_relative( '../db/sql_runner' )
 class Treatment
 
     attr_reader :id 
-    attr_accessor :name, :cost    
+    attr_accessor :name, :price   
 
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @name = options['name']
-        @cost = options['cost'].to_f()
+        @price = options['price'].to_f()
     end
 
     # Instance methods
@@ -17,19 +17,19 @@ class Treatment
 
      def save()
         sql = "INSERT INTO treatments
-        (name, cost) 
+        (name, price) 
         VALUES ($1, $2)
         RETURNING id"
-        values = [@name, @cost]
+        values = [@name, @price]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i()
     end
 
     def update()
         sql = "UPDATE treatments
-        SET (name, cost) =
+        SET (name, price) =
         ($1, $2)
         WHERE id = $3"
-        values = [@name, @cost, @id]
+        values = [@name, @price, @id]
         SqlRunner.run(sql, values)
     end
 

@@ -1,0 +1,25 @@
+<h1>Add treatment for <%= @pet.name %></h1>
+
+<form id="form-pet-treatment-new" class="form-new" method="POST" action="/pet_treatments">
+
+    <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+
+    <div class="form-field">
+        <label for="select-treatment">Treatment</label>
+        <select id="select-treatment" name="treatment_id">
+            <% for treatment in Treatment.all() %>
+                <option value="<%= treatment.id %>">
+                    <%= treatment.name %> (£<%= treatment.price %>)
+                </option>          
+            <% end %>
+        </select>
+    </div>
+
+    <div class="form-field">
+        <label for="date">Date</label>
+        <input id="date" type="text" name="date" />
+    </div>    
+    
+    <input class="submit" type="submit" value="Add treatment">
+
+</form>

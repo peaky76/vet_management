@@ -20,7 +20,7 @@ end
 post '/treatments' do
     @treatment = Treatment.new(params)
     @treatment.save()
-    erb ( :"treatments/create")
+    redirect to '/treatments'
 end
 
 # SHOW
@@ -39,12 +39,12 @@ end
 post '/treatments/:id' do
     @treatment = Treatment.new(params)
     @treatment.update()
-    erb ( :"treatments/update" )    
+    redirect to '/treatments'    
 end
 
 # DESTROY
 post '/treatments/:id/delete' do
     @treatment = Treatment.new(params)
     @treatment.delete()
-    erb ( :"treatments/destroy" )
+    redirect to '/treatments'
 end
