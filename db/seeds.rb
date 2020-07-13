@@ -1,3 +1,4 @@
+require_relative( "../models/pet_treatment.rb" )
 require_relative( "../models/treatment.rb" )
 require_relative( "../models/pet.rb" )
 require_relative( "../models/owner.rb" )
@@ -107,12 +108,6 @@ pet_4 = Pet.new({
 pets = [pet_1, pet_2, pet_3, pet_4]
 pets.each { |pet| pet.save() }
 
-pet_1.assign_to_vet(vet_1.id)
-pet_2.assign_to_vet(vet_1.id)
-pet_3.assign_to_vet(vet_2.id)
-pet_4.assign_to_vet(vet_2.id)
-pets.each { |pet| pet.update() }
-
 treatment_1 = Treatment.new({
     'name' => "Neutering",
     'cost' => 49.95
@@ -129,10 +124,30 @@ treatment_3 = Treatment.new({
 treatments = [treatment_1, treatment_2, treatment_3]
 treatments.each { |treatment| treatment.save() }
 
-treatment_2.cost = 29.95
-treatment_2.update()
+pet_treatment_1 = PetTreatment.new({
+    'pet_id' => pet_1.id,
+    'treatment_id' => treatment_1.id,
+    'date' => "13/7/2020"
+})
+pet_treatment_2 = PetTreatment.new({
+    'pet_id' => pet_4.id,
+    'treatment_id' => treatment_1.id,
+    'date' => "6/7/2020"
+})
+pet_treatment_3 = PetTreatment.new({
+    'pet_id' => pet_1.id,
+    'treatment_id' => treatment_2.id,
+    'date' => "14/7/2020"
+})
+    
+pet_treatments = [pet_treatment_1, pet_treatment_2, pet_treatment_3]
+pet_treatments.each { |pet_treatment| pet_treatment.save() }
 
-treatment_3.delete()
+pet_1.assign_to_vet(vet_1.id)
+pet_2.assign_to_vet(vet_1.id)
+pet_3.assign_to_vet(vet_2.id)
+pet_4.assign_to_vet(vet_2.id)
+pets.each { |pet| pet.update() }
 
 binding.pry
 nil

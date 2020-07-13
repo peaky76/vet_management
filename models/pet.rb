@@ -42,6 +42,13 @@ class Pet
         return status
     end
 
+    def treatments()
+        sql = "SELECT * FROM pet_treatments
+        WHERE pet_id = $1"
+        values = [@id]
+        return PetTreatment.get_all(sql, values)
+    end
+
     # CRUD methods
 
     def save()

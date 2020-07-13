@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS pet_treatments;
 DROP TABLE IF EXISTS treatments;
 DROP TABLE IF EXISTS pets;
 DROP TABLE IF EXISTS owners;
@@ -41,3 +42,10 @@ CREATE TABLE treatments (
     name VARCHAR(255),
     cost NUMERIC(8,2)
 );
+
+CREATE TABLE pet_treatments (
+    id SERIAL PRIMARY KEY,
+    pet_id INT REFERENCES pets(id),
+    treatment_id INT REFERENCES treatments(id),
+    date VARCHAR(255)
+)
