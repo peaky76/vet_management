@@ -5,10 +5,10 @@
 <h2>Treatments</h2>
 
 <ul>
-<% for treatment in @pet.treatments %>
-    <li><%= treatment.name %></li>
+<% for treatment in @pet.treatments_given %>
+    <li><%= treatment.date %> | <%= Treatment.find(treatment.treatment_id).name %></li>
 <% end %>
-<% if @pet.treatments.count == 0 %>
+<% if @pet.treatments_given.count == 0 %>
     <em>No treatments given yet.
 <% end %>
 </ul>
