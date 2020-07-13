@@ -8,3 +8,13 @@ Pellentesque volutpat dolor vitae tempus bibendum. Aliquam nibh turpis, maximus 
 </p>
 
 <form class="btn-route" action="/owners/register" method="GET"><input type="submit" value="New registration"></form>
+
+<h2>Outstanding bills</h2>
+
+<ul>
+<% for owner in Owner.all() %>
+    <% if owner.balance_due > 0 %>
+        <li><%= owner.full_name %> owes £<%= sprintf('%.2f', owner.balance_due) %></li>
+    <% end %>
+<% end %>
+</ul>

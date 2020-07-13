@@ -65,8 +65,8 @@ class TestOwner < MiniTest::Test
         assert_equal("0131 556 7788", @owner_1.tel)
     end
 
-    def test_balance()
-        assert_equal(0, @owner_1.balance)
+    def test_balance_due()
+        assert_equal(0, @owner_1.balance_due)
     end
 
     def test_is_registered_true_start()

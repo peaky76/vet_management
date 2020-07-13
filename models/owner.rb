@@ -2,8 +2,8 @@ require_relative( '../db/sql_runner' )
 
 class Owner
 
-    attr_reader :id, :balance
-    attr_accessor :title, :first_name, :last_name, :addr_1, :addr_2, :town_city, :postcode, :email, :tel, :balance
+    attr_reader :id, :balance_due
+    attr_accessor :title, :first_name, :last_name, :addr_1, :addr_2, :town_city, :postcode, :email, :tel, :balance_due
 
     def initialize(options)
         @id = options['id'].to_i() if options['id']
@@ -16,7 +16,7 @@ class Owner
         @postcode = options['postcode']
         @email = options['email']
         @tel = options['tel']
-        options['balance'] == nil ? @balance = 0 : @balance = options['balance']
+        options['balance_due'] == nil ? @balance_due = 0.00 : @balance_due = options['balance_due'].to_f()
         options['registered'] == nil ? @registered = true : @registered = make_boolean(options['registered'])
         options['marketing'] == nil ? @marketing = false : @marketing = make_boolean(options['marketing'])
     end
@@ -43,21 +43,21 @@ class Owner
 
     def save()
         sql = "INSERT INTO owners
-        (title, first_name, last_name, addr_1, addr_2, town_city, postcode, email, tel, balance, registered, marketing) 
+        (title, first_name, last_name, addr_1, addr_2, town_city, postcode, email, tel, balance_due, registered, marketing) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
         RETURNING id"
         values = [@title, @first_name, @last_name, @addr_1, @addr_2, @town_city, @postcode, @email, @tel,
-        @balance, @registered, @marketing]
+        @balance_due, @registered, @marketing]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i()
     end
 
     def update()
         sql = "UPDATE owners
-        SET (title, first_name, last_name, addr_1, addr_2, town_city, postcode, email, tel, balance, registered, marketing) =
+        SET (title, first_name, last_name, addr_1, addr_2, town_city, postcode, email, tel, balance_due, registered, marketing) =
         ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
         WHERE id = $13"
         values = [@title, @first_name, @last_name, @addr_1, @addr_2, @town_city, @postcode, @email, @tel,
-        @balance, @registered, @marketing, @id]        
+        @balance_due, @registered, @marketing, @id]        
         SqlRunner.run(sql, values)
     end
 

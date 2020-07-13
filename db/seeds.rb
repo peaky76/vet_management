@@ -1,3 +1,4 @@
+require_relative( "../models/payment.rb" )
 require_relative( "../models/pet_treatment.rb" )
 require_relative( "../models/treatment.rb" )
 require_relative( "../models/pet.rb" )
@@ -150,6 +151,13 @@ pet_2.assign_to_vet(vet_1.id)
 pet_3.assign_to_vet(vet_2.id)
 pet_4.assign_to_vet(vet_2.id)
 pets.each { |pet| pet.update() }
+
+payment_1 = Payment.new({
+    'owner_id' => owner_1.id,
+    'amount' => 50.00,
+    'date' => "14/7/2020"
+})
+payment_1.save()
 
 binding.pry
 nil

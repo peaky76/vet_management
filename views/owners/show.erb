@@ -1,5 +1,6 @@
 <h1><%= @owner.full_name %><sup class="id-sup"> (ID: <%= @owner.id %>)</sup></h1>
 <em><%= @owner.full_address %></em>
+<p>Balance due: £<%= sprintf('%.2f', @owner.balance_due) %>
 
 <h2>Pets</h2>
 

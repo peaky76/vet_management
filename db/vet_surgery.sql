@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS pet_treatments;
 DROP TABLE IF EXISTS treatments;
 DROP TABLE IF EXISTS pets;
@@ -22,7 +23,7 @@ CREATE TABLE owners (
     postcode VARCHAR(255),
     email VARCHAR(255),
     tel VARCHAR(255),
-    balance INT,
+    balance_due NUMERIC(8,2),
     registered BOOLEAN,
     marketing BOOLEAN
 );
@@ -48,4 +49,11 @@ CREATE TABLE pet_treatments (
     pet_id INT REFERENCES pets(id),
     treatment_id INT REFERENCES treatments(id),
     date VARCHAR(255)
-)
+);
+
+CREATE TABLE payments (
+    id SERIAL PRIMARY KEY,
+    owner_id INT REFERENCES owners(id),
+    amount NUMERIC(8,2),
+    date VARCHAR(255)
+);

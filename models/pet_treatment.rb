@@ -13,6 +13,22 @@ class PetTreatment
 
     # Instance methods
     
+    def cost()
+        return Treatment.find(@treatment_id).price
+    end
+
+    def owner_id()
+        return Pet.find(@pet_id).owner_id
+    end
+
+    def bill_to_owner()
+        sql = "UPDATE owners 
+        SET balance_due = balance_due + $1
+        WHERE id = $2"
+        values = [self.cost, self.owner_id]
+        SqlRunner.run(sql, values)
+    end
+
     # CRUD methods
 
     def save()
@@ -21,7 +37,8 @@ class PetTreatment
         VALUES ($1, $2, $3)
         RETURNING id"
         values = [@pet_id, @treatment_id, @date]
-        @id = SqlRunner.run(sql, values)[0]['id'].to_i()
+        @id = SqlRunner.run(sql, values)[0]['id'].to_i() 
+        self.bill_to_owner()
     end
 
     def update()
