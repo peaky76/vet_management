@@ -1,10 +1,10 @@
 <h1> Payments </h1>
 
-<% @payments.sort_by { |payment| Date.parse(payment.date) } %>
+<% @payments.sort_by { |payment| payment.date } %>
 
 <ul>
 <% for payment in @payments %>
     <% owner = Owner.find(payment.owner_id).full_name %>
-    <li><%= "#{owner} paid #{payment.amount} on #{payment.date}" %></li>  
+    <li><%= "#{owner} paid #{payment.amount.to_currency} on #{payment.pretty_date}" %></li>  
 <% end %>
 </ul>

@@ -9,7 +9,7 @@
         <select id="select-treatment" name="treatment_id">
             <% for treatment in Treatment.all() %>
                 <option value="<%= treatment.id %>">
-                    <%= treatment.name %> (£<%= treatment.price %>)
+                    <%= treatment.name %> (<%= treatment.curr_price.to_currency %>)
                 </option>          
             <% end %>
         </select>

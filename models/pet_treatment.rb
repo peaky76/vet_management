@@ -2,19 +2,25 @@ require_relative( '../db/sql_runner' )
 
 class PetTreatment
 
-    attr_reader :id, :pet_id, :treatment_id, :date
+    attr_reader :id, :pet_id, :treatment_id, :cost, :date
     
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @pet_id = options['pet_id'].to_i()
         @treatment_id = options['treatment_id'].to_i()
-        @date = Date.parse(options['date']).strftime("%-d %B %Y")
+        # If no cost is given for the treatment, use the current price for this kind of treatment
+        options['cost'] != nil ? @cost = options['cost'].to_f() : @cost = self.curr_price
+        @date = Date.parse(options['date'])
     end
 
     # Instance methods
     
-    def cost()
-        return Treatment.find(@treatment_id).price
+    def curr_price()
+        return Treatment.find(@treatment_id).curr_price
+    end
+
+    def pretty_date()
+        return @date.strftime("%-d %B %Y")
     end
 
     def owner_id()
@@ -25,7 +31,7 @@ class PetTreatment
         sql = "UPDATE owners 
         SET balance_due = balance_due + $1
         WHERE id = $2"
-        values = [self.cost, self.owner_id]
+        values = [@cost, self.owner_id]
         SqlRunner.run(sql, values)
     end
 
@@ -33,20 +39,20 @@ class PetTreatment
 
     def save()
         sql = "INSERT INTO pet_treatments
-        (pet_id, treatment_id, date) 
-        VALUES ($1, $2, $3)
+        (pet_id, treatment_id, cost, date) 
+        VALUES ($1, $2, $3, $4)
         RETURNING id"
-        values = [@pet_id, @treatment_id, @date]
+        values = [@pet_id, @treatment_id, @cost, @date]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i() 
         self.bill_to_owner()
     end
 
     def update()
         sql = "UPDATE pet_treatments
-        SET (pet_id, treatment_id, date) =
-        ($1, $2, $3)
-        WHERE id = $4"
-        values = [@pet_id, @treatment_id, @date, @id]
+        SET (pet_id, treatment_id, cost, date) =
+        ($1, $2, $3, $4)
+        WHERE id = $5"
+        values = [@pet_id, @treatment_id, @cost, @date, @id]
         SqlRunner.run(sql, values)
     end
 

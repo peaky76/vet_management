@@ -1,3 +1,5 @@
+require('time_difference')
+
 require_relative( '../db/sql_runner' )
 
 class Pet
@@ -8,7 +10,7 @@ class Pet
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @name = options['name']
-        @dob = Date.parse(options['dob']).strftime("%-d %B %Y")
+        @dob = Date.parse(options['dob'])
         @type = options['type']
         @notes = options['notes']
         @owner_id = options['owner_id'].to_i() if options['owner_id']
@@ -18,6 +20,17 @@ class Pet
     ## Instance methods
 
     # Properties
+
+    def age()
+        age = TimeDifference.between(Date.today, @dob).in_years.floor
+        return "#{age} years old" if age >= 1
+        age = TimeDifference.between(Date.today, @dob).in_months.floor
+        return "#{age} months old"
+    end
+
+    def pretty_dob()
+        return @dob.strftime("%-d %B %Y")
+    end
 
     def owner()
         sql = "SELECT * FROM owners

@@ -56,7 +56,7 @@ class Owner
     end
 
     def total_billed()
-        return self.billed_treatments().reduce(0) { |total, treatment| total + treatment.price}
+        return self.billed_treatments().reduce(0) { |total, treatment| total + treatment.cost}
     end
     
     def total_paid()
@@ -148,6 +148,8 @@ class Owner
     def self.get(sql, values = [])
         return self.get_all(sql, values).first()    
     end
+
+    # Other helper functions
 
     def make_boolean(input)
         return true if ["t", true, "yes", 1].include?(input) 

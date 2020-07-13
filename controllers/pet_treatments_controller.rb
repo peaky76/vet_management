@@ -21,6 +21,5 @@ end
 post '/pet_treatments' do
     @pet_treatment = PetTreatment.new(params)
     @pet_treatment.save()
-    @pet_treatment.bill_to_owner()
     redirect to "/pets/#{params["pet_id"]}"
 end

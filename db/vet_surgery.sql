@@ -41,13 +41,14 @@ CREATE TABLE pets (
 CREATE TABLE treatments (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    price NUMERIC(8,2)
+    curr_price NUMERIC(8,2)
 );
 
 CREATE TABLE pet_treatments (
     id SERIAL PRIMARY KEY,
     pet_id INT REFERENCES pets(id),
     treatment_id INT REFERENCES treatments(id),
+    cost NUMERIC(8,2),
     date DATE
 );
 

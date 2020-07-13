@@ -2,18 +2,22 @@
 
 <form id="form-vet-new" class="form-new" method="POST" action="/vets">
 
+    <div class="form-field">
     <label for="first-name">First Name</label>
     <input id="first-name" type="text" name="first_name" />
-    <br/>
+    </div>
 
+    <div class="form-field">
     <label for="last-name">Last Name</label>
     <input id="last-name" type="text" name="last_name" />
-    <br/>
+    </div>
 
+    <div class="form-field">
     <label for="tel">Telephone Number</label>
     <input id="tel" type="text" name="tel" />
-    <br/>
+    </div>
 
-    <input class="submit" type="submit" value="Add vet">
+    <input class="submit" type="submit" value="Save">
+    <button type="button"><a href="/vets">Cancel</button>
 
 </form>

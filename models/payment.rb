@@ -9,11 +9,15 @@ class Payment
         @id = options['id'].to_i() if options['id']
         @owner_id = options['owner_id'].to_i()
         @amount = options['amount'].to_f()
-        @date = Date.parse(options['date']).strftime("%-d %B %Y")
+        @date = Date.parse(options['date'])
     end
 
     # Instance methods
     
+    def pretty_date()
+        return @date.strftime("%-d %B %Y")
+    end
+
     def take_from_owner()
         sql = "UPDATE owners 
         SET balance_due = balance_due - $1

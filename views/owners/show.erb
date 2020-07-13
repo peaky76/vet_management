@@ -18,9 +18,9 @@
 <ul>
 <% for treatment in @owner.billed_treatments %>
     <li>
-    <%= treatment.date %> | 
+    <%= treatment.pretty_date %> | 
     <%= Treatment.find(treatment.treatment_id).name %> for <%= Pet.find(treatment.pet_id).name %> | 
-    <%= Treatment.find(treatment.treatment_id).price %> 
+    <%= treatment.cost.to_currency %> 
     </li>
 <% end %>
 <% if @owner.billed_treatments.count == 0 %>
@@ -28,16 +28,22 @@
 <% end %>
 </ul>
 
+TOTAL: <%= @owner.total_billed.to_currency %>
+
 <h2>Payments</h2>
 
 <ul>
 <% for payment in @owner.payments %>
-    <li><%= payment.date %> | <%= payment.amount %></li>
+    <li><%= payment.pretty_date %> | <%= payment.amount.to_currency %></li>
 <% end %>
 <% if @owner.payments.count == 0 %>
     <em>No payments made yet.</em>
 <% end %>
 </ul>
+
+TOTAL: <%= @owner.total_paid.to_currency %>
+
+<br/>
 
 <form class="btn-route" action="/owners/<%= @owner.id %>/edit" method="GET"><input type="submit" value="Edit details"></form>
 <form class="btn-route" action="/pets/new" method="GET">
