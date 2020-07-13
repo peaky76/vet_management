@@ -1,15 +1,5 @@
 <h1> Owners </h1>
 
-<ul>
-<% for owner in @owners %>
-
-        <li>
-            <a href="/owners/<%= owner.id %>"><%= owner.full_name %></a> | 
-            <%= owner.full_address %>
-        </li>
-    
-<% end %>
-</ul>
-  
+<%= erb( :"owners/owner_list" ) %>  
 
 <form class="btn-route" action="/owners/new" method="GET"><input type="submit" value="Add new"></form>

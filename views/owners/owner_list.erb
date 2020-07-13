@@ -1,0 +1,21 @@
+<% @owners.sort_by { |owner| owner.last_name } %>
+
+<ul>
+<% for owner in @owners %>
+
+    <% if owner.is_registered?() %>
+        <li>
+            <a href="/owners/<%= owner.id %>">
+                <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>)
+            </a> | 
+            <%= owner.full_address %>
+        </li>
+    <% else %>
+        <li class="deregistered">
+            <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>) | 
+            <%= owner.full_address %>
+        </li>
+    <% end %>
+    
+<% end %>
+</ul>

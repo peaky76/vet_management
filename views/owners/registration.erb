@@ -2,14 +2,6 @@
 
 Select existing owner below or <a href="/owners/new">enter new owner</a>
 
-<ul>
-<% for owner in @owners %>
+<%= erb( :"owners/owner_list" ) %>  
 
-        <li>
-            <a href="/owners/<%= owner.id %>"><%= owner.full_name %></a> | 
-            <%= owner.full_address %>
-        </li>
-    
-<% end %>
-</ul>
 
