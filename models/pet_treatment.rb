@@ -58,7 +58,7 @@ class PetTreatment
         sql = "SELECT * FROM pet_treatments
         WHERE id = $1"
         values = [id]
-        return Treatment.get(sql, values)
+        return PetTreatment.get(sql, values)
     end
 
     # Helper functions for db

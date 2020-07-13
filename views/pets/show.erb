@@ -2,6 +2,17 @@
 <em><%= @pet.type.upcase %><br/></em>
 <em><%= @pet.status %></em>
 
+<h2>Treatments</h2>
+
+<ul>
+<% for treatment in @pet.treatments %>
+    <li><%= treatment.name %></li>
+<% end %>
+<% if @pet.treatments.count == 0 %>
+    <em>No treatments given yet.
+<% end %>
+</ul>
+
 <h2>Notes</h2>
 <p>
 <%= @pet.notes %><br/>

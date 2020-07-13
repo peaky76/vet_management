@@ -43,10 +43,12 @@ class Pet
     end
 
     def treatments()
-        sql = "SELECT * FROM pet_treatments
-        WHERE pet_id = $1"
+        sql = "SELECT treatments.* FROM treatments
+        INNER JOIN pet_treatments
+        ON pet_treatments.treatment_id = treatments.id
+        WHERE pet_treatments.pet_id = $1"
         values = [@id]
-        return PetTreatment.get_all(sql, values)
+        return Treatment.get_all(sql, values)
     end
 
     # CRUD methods

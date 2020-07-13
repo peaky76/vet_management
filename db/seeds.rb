@@ -11,6 +11,8 @@ def random_tel()
     return "(0131) #{part_1} #{part_2}"
 end
 
+PetTreatment.delete_all()
+Treatment.delete_all()
 Pet.delete_all()
 Owner.delete_all()
 Vet.delete_all()
