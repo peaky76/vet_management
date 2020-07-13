@@ -1,7 +1,8 @@
 require('minitest/autorun')
 require('minitest/reporters')
 
-require_relative('../models/treatment')
+require_relative('../models/owner')
+require_relative('../models/payment')
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 
@@ -9,7 +10,7 @@ class TestPayment < MiniTest::Test
 
     def setup()
         @owner_1 = Owner.new({
-            'id' => 1
+            'id' => 1,
             'title' => "Mr",
             'first_name' => "Al",
             'last_name' => "Sayshun",
@@ -23,7 +24,7 @@ class TestPayment < MiniTest::Test
         })
         @payment_1 = Payment.new({
             'owner_id' => 1,
-            'amount' => 50.00
+            'amount' => 50.00,
             'date' => "14/7/2020"
         })
     end

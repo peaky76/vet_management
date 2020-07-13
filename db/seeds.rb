@@ -159,5 +159,12 @@ payment_1 = Payment.new({
 })
 payment_1.save()
 
+payment_2 = Payment.new({
+    'owner_id' => owner_1.id,
+    'amount' => 20.00,
+    'date' => "15/7/2020"
+})
+payment_2.save()
+
 binding.pry
 nil

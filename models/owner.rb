@@ -39,6 +39,24 @@ class Owner
         return Pet.get_all(sql, values)
     end
 
+    def total_bills()
+        sql = "SELECT SUM(price) FROM treatments
+        INNER JOIN pet_treatments
+        ON pet_treatments.treatment_id = treatments.id
+        INNER JOIN pets
+        ON pets.id = pet_treatments.pet_id
+        WHERE pets.owner_id = $1"
+        values = [@id]
+        return SqlRunner.run(sql, values)[0]['sum']
+    end
+    
+    def total_payments()
+        sql = "SELECT SUM(amount) FROM payments
+        WHERE owner_id = $1"
+        values = [@id]
+        return SqlRunner.run(sql, values)[0]['sum']
+    end
+
     # CRUD Methods
 
     def save()
