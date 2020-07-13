@@ -13,6 +13,32 @@
     <% end %>              
 </ul>
 
+<h2>Billings</h2>
+
+<ul>
+<% for treatment in @owner.billed_treatments %>
+    <li>
+    <%= treatment.date %> | 
+    <%= Treatment.find(treatment.treatment_id).name %> for <%= Pet.find(treatment.pet_id).name %> | 
+    <%= Treatment.find(treatment.treatment_id).price %> 
+    </li>
+<% end %>
+<% if @owner.billed_treatments.count == 0 %>
+    <em>No billings yet.</em>
+<% end %>
+</ul>
+
+<h2>Payments</h2>
+
+<ul>
+<% for payment in @owner.payments %>
+    <li><%= payment.date %> | <%= payment.amount %></li>
+<% end %>
+<% if @owner.payments.count == 0 %>
+    <em>No payments made yet.</em>
+<% end %>
+</ul>
+
 <form class="btn-route" action="/owners/<%= @owner.id %>/edit" method="GET"><input type="submit" value="Edit details"></form>
 <form class="btn-route" action="/pets/new" method="GET">
     <input type="hidden" name="owner_id" value="<%= @owner.id %>">

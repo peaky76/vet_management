@@ -8,7 +8,7 @@ class Pet
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @name = options['name']
-        @dob = options['dob']
+        @dob = Date.parse(options['dob']).strftime("%-d %B %Y")
         @type = options['type']
         @notes = options['notes']
         @owner_id = options['owner_id'].to_i() if options['owner_id']

@@ -25,7 +25,7 @@ class TestPayment < MiniTest::Test
         @payment_1 = Payment.new({
             'owner_id' => 1,
             'amount' => 50.00,
-            'date' => "14/7/2020"
+            'date' => "11/7/2020"
         })
     end
 
@@ -34,7 +34,7 @@ class TestPayment < MiniTest::Test
     end
 
     def test_has_date()
-        assert_equal("14/7/2020", @payment_1.date)
+        assert_equal("11 July 2020", @payment_1.date)
     end
 
 end

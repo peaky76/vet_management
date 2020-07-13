@@ -30,19 +30,11 @@ class TestPet < MiniTest::Test
     end
 
     def test_has_dob()
-        assert_equal("1/4/2015", @pet_1.dob)
+        assert_equal("1 April 2015", @pet_1.dob)
     end
 
     def test_has_type()
         assert_equal("dog", @pet_1.type)
-    end
-
-    def test_has_owner_name()
-        assert_equal("Al Sayshun", @pet_1.owner_name)
-    end
-
-    def test_has_owner_tel()
-        assert_equal("0131 123 4567", @pet_1.owner_tel)
     end
 
     def test_has_notes()

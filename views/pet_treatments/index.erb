@@ -1,6 +1,6 @@
 <h1> Pet treatments </h1>
 
-<% @pet_treatments.sort_by { |treatment| treatment.date } %>
+<% @pet_treatments.sort_by! { |treatment| Date.parse(treatment.date) } %>
 
 <ul>
 <% for treatment in @pet_treatments %>

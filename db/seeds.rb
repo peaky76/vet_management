@@ -12,6 +12,7 @@ def random_tel()
     return "(0131) #{part_1} #{part_2}"
 end
 
+Payment.delete_all()
 PetTreatment.delete_all()
 Treatment.delete_all()
 Pet.delete_all()
@@ -130,17 +131,17 @@ treatments.each { |treatment| treatment.save() }
 pet_treatment_1 = PetTreatment.new({
     'pet_id' => pet_1.id,
     'treatment_id' => treatment_1.id,
-    'date' => "13/7/2020"
+    'date' => "1/7/2020"
 })
 pet_treatment_2 = PetTreatment.new({
     'pet_id' => pet_4.id,
     'treatment_id' => treatment_1.id,
-    'date' => "6/7/2020"
+    'date' => "6/6/2020"
 })
 pet_treatment_3 = PetTreatment.new({
     'pet_id' => pet_1.id,
     'treatment_id' => treatment_2.id,
-    'date' => "14/7/2020"
+    'date' => "14/3/2020"
 })
     
 pet_treatments = [pet_treatment_1, pet_treatment_2, pet_treatment_3]
@@ -155,14 +156,14 @@ pets.each { |pet| pet.update() }
 payment_1 = Payment.new({
     'owner_id' => owner_1.id,
     'amount' => 50.00,
-    'date' => "14/7/2020"
+    'date' => "11/7/2020"
 })
 payment_1.save()
 
 payment_2 = Payment.new({
     'owner_id' => owner_1.id,
     'amount' => 20.00,
-    'date' => "15/7/2020"
+    'date' => "12/7/2020"
 })
 payment_2.save()
 

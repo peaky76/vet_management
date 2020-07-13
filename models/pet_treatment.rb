@@ -8,7 +8,7 @@ class PetTreatment
         @id = options['id'].to_i() if options['id']
         @pet_id = options['pet_id'].to_i()
         @treatment_id = options['treatment_id'].to_i()
-        @date = options['date']
+        @date = Date.parse(options['date']).strftime("%-d %B %Y")
     end
 
     # Instance methods

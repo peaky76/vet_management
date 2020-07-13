@@ -9,7 +9,7 @@ class Payment
         @id = options['id'].to_i() if options['id']
         @owner_id = options['owner_id'].to_i()
         @amount = options['amount'].to_f()
-        @date = options['date']
+        @date = Date.parse(options['date']).strftime("%-d %B %Y")
     end
 
     # Instance methods
@@ -25,7 +25,7 @@ class Payment
     # CRUD methods
 
     def save()
-        self.take_from_owner
+        self.take_from_owner()
         sql = "INSERT INTO payments
         (owner_id, amount, date) 
         VALUES ($1, $2, $3)

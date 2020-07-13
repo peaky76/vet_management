@@ -31,7 +31,7 @@ CREATE TABLE owners (
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    dob VARCHAR(255),
+    dob DATE,
     type VARCHAR(255),
     notes TEXT,
     owner_id INT REFERENCES owners(id),
@@ -48,12 +48,12 @@ CREATE TABLE pet_treatments (
     id SERIAL PRIMARY KEY,
     pet_id INT REFERENCES pets(id),
     treatment_id INT REFERENCES treatments(id),
-    date VARCHAR(255)
+    date DATE
 );
 
 CREATE TABLE payments (
     id SERIAL PRIMARY KEY,
     owner_id INT REFERENCES owners(id),
     amount NUMERIC(8,2),
-    date VARCHAR(255)
+    date DATE
 );
