@@ -115,21 +115,21 @@ pets.each { |pet| pet.update() }
 
 treatment_1 = Treatment.new({
     'name' => "Neutering",
-    'cost' => 5000
+    'cost' => 49.95
 })
 treatment_2 = Treatment.new({
     'name' => "Worming",
-    'cost' => 2500
+    'cost' => 25.95
 })
 treatment_3 = Treatment.new({
     'name' => "De-fleaing",
-    'cost' => 1500
+    'cost' => 14.95
 })
 
 treatments = [treatment_1, treatment_2, treatment_3]
 treatments.each { |treatment| treatment.save() }
 
-treatment_2.cost = 3000
+treatment_2.cost = 29.95
 treatment_2.update()
 
 treatment_3.delete()

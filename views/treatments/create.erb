@@ -1,0 +1,6 @@
+<%= @treatment.name %> successfully added.<br/>
+
+<form class="btn-route" action="/treatments/<%= @treatment.id %>/edit" method="GET"><input type="submit" value="Edit <%= @treatment.full_name %>"></form><br/>
+<form class="btn-route" action="/treatments/new" method="GET"><input type="submit" value="Add another"></form><br/>
+<form class="btn-route" action="/treatments" method="GET"><input type="submit" value="View all treatments"></form><br/>
+<form class="btn-route" action="/" method="GET"><input type="submit" value="Home"></form><br/>

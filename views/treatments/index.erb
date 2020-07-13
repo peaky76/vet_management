@@ -1,0 +1,9 @@
+<h1> Treatments </h1>
+
+<ul>
+<% for treatment in @treatments %>
+    <li><a href="/treatments/<%= treatment.id %>"><%= treatment.name %></a></li>  
+<% end %>
+</ul>
+
+<form class="btn-route" action="/treatments/new" method="GET"><input type="submit" value="Add new"></form>

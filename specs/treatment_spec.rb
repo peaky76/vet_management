@@ -10,11 +10,11 @@ class TestTreatment < MiniTest::Test
     def setup()
         @treatment_1 = Treatment.new({
             'name' => "Neutering",
-            'cost' => 5000
+            'cost' => 50.00
         })
         @treatment_2 = Treatment.new({
             'name' => "Worming",
-            'cost' => 2500
+            'cost' => 25.00
         })
     end
 
@@ -23,7 +23,7 @@ class TestTreatment < MiniTest::Test
     end
 
     def test_has_cost()
-        assert_equal(2500, @treatment_2.cost)
+        assert_equal(25.00, @treatment_2.cost)
     end
 
 end

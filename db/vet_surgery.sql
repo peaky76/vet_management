@@ -39,5 +39,5 @@ CREATE TABLE pets (
 CREATE TABLE treatments (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    cost INT
+    cost NUMERIC(8,2)
 );
