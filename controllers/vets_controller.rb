@@ -39,7 +39,7 @@ end
 post '/vets/:id' do
     @vet = Vet.new(params)
     @vet.update()
-    erb ( :"vets/update" )    
+    redirect to '/vets'  
 end
 
 # DESTROY
@@ -51,5 +51,5 @@ post '/vets/:id/delete' do
         pet.update()
     end
     @vet.delete()
-    erb ( :"vets/destroy" ) 
+    redirect to '/vets'
 end

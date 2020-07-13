@@ -2,6 +2,8 @@
 
 <form id="form-pet-new" class="form-new" method="POST" action="/pets">
 
+    <input type="hidden" name="owner_id" value="<%= @owner_id %>" />
+
     <div class="form-field">
         <label for="name">Name</label>
         <input id="name" type="text" name="name" />

@@ -13,6 +13,7 @@ end
 
 # NEW
 get '/pets/new' do
+    @owner_id = params['owner_id']
     erb ( :"pets/new" )
 end
 
@@ -20,7 +21,7 @@ end
 post '/pets' do
     @pet = Pet.new(params)
     @pet.save()
-    erb ( :"pets/create")
+    redirect to "/owners/#{params["owner_id"]}"
 end
 
 # SHOW
@@ -40,14 +41,14 @@ end
 post '/pets/:id' do
     @pet = Pet.new(params)
     @pet.update()
-    erb ( :"pets/show" )
+    redirect to '/pets'
 end
 
 # DESTROY
 post '/pets/:id/delete' do
     @pet = Pet.new(params)
     @pet.delete()
-    erb ( :"pets/destroy" )
+    redirect to '/pets'
 end
 
 

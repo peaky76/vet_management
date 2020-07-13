@@ -34,7 +34,11 @@ class Pet
     end
 
     def ownership()
-        return "Owned by #{self.owner.full_name}"
+        if owner()
+            return "Owned by #{self.owner.full_name}" if owner()
+        else
+            return "Not owned by anyone"
+        end
     end
 
     def status()

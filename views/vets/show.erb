@@ -3,7 +3,7 @@
 
 <ul>
     <% for pet in @vet.pets %>
-        <li><%= pet.name %> | <%= pet.type %></li>
+        <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
     <% end %>
     <% if @vet.pets.count == 0 %>
         <em>No pets assigned</em>
