@@ -14,6 +14,7 @@ def random_tel()
     return "(0131) #{part_1} #{part_2}"
 end
 
+Timeslot.delete_all()
 Payment.delete_all()
 PetTreatment.delete_all()
 Treatment.delete_all()
@@ -169,7 +170,13 @@ payment_2 = Payment.new({
 })
 payment_2.save()
 
-appointments = Timeslot.generate(Time.now(), vet_1.id)
+schedule_1 = Timeslot.generate_schedule(Date.today(), vet_1.id)
+schedule_2 = Timeslot.generate_schedule(Date.today(), vet_2.id)
+schedule_3 = Timeslot.generate_schedule(Date.today() + 1.day, vet_1.id)
+
+schedule_1.each { |appointment| appointment.save() }
+schedule_2.each { |appointment| appointment.save() }
+schedule_3.each { |appointment| appointment.save() }
 
 binding.pry
 nil

@@ -2,13 +2,13 @@ require_relative( '../db/sql_runner' )
 
 class Timeslot
 
-    attr_reader :id, :vet_id, :pet_id, :time_date 
+    attr_reader :id, :vet_id, :pet_id, :date_time 
 
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @vet_id = options['vet_id'] 
         @pet_id = options['pet_id'] if options['pet_id']
-        @date_time = options['date_time']
+        @date_time = Time.parse(options['date_time'])
     end
 
     # Instance methods
@@ -43,19 +43,19 @@ class Timeslot
 
      def save()
         sql = "INSERT INTO timeslots
-        (vet_id, pet_id, time_date) 
+        (vet_id, pet_id, date_time) 
         VALUES ($1, $2, $3)
         RETURNING id"
-        values = [@vet_id, @pet_id, @time_date]
+        values = [@vet_id, @pet_id, @date_time]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i()
     end
 
     def update()
         sql = "UPDATE timeslots
-        SET (vet_id, pet_id, time_date) =
+        SET (vet_id, pet_id, date_time) =
         ($1, $2, $3)
         WHERE id = $4"
-        values = [@vet_id, @pet_id, @time_date, @id]
+        values = [@vet_id, @pet_id, @date_time, @id]
         SqlRunner.run(sql, values)
     end
 
@@ -68,30 +68,29 @@ class Timeslot
 
     # Class methods
 
-    def self.generate(date, vet_id)
+    def self.generate_schedule(date, vet_id)
         
         timeslots = []
         
         vet = Vet.find(vet_id)
-        
-        # Get surgery hours 
-        open = Surgery.opening_time 
-        close = Surgery.closing_time
-        out = Surgery.lunch_start
-        back = Surgery.lunch_end
-        appt_len = Surgery.appointment_length
+ 
+        # Simple variables for date elements
+        y = date.year 
+        m = date.month 
+        d = date.day 
 
         # Prepare time vars based on date parameter supplied
-        curr_time = DateTime.new(date.year, date.month, date.day, open.hour, open.minute)
-        end_time = DateTime.new(date.year, date.month, date.day, close.hour, close.minute)
-        lunch_start = DateTime.new(date.year, date.month, date.day, out.hour, out.minute)
-        lunch_end = DateTime.new(date.year, date.month, date.day, back.hour, back.minute)
+        appt_len = Surgery.appointment_length
+        curr_time = DateTime.new(y, m, d, Surgery.open['hour'], Surgery.open['minute'])
+        end_time = DateTime.new(y, m, d, Surgery.close['hour'], Surgery.close['minute'])
+        lunch_start = DateTime.new(y, m, d, Surgery.lunch_start['hour'], Surgery.lunch_start['minute'])
+        lunch_end = DateTime.new(y, m, d, Surgery.lunch_end['hour'], Surgery.lunch_end['minute'])
 
         # Add a new timeslot at fixed interval between open and close, avoiding lunch
         while curr_time < end_time do
             if curr_time < lunch_start || curr_time > lunch_end
                 timeslots << Timeslot.new({
-                    'date_time' => curr_time,
+                    'date_time' => curr_time.to_s,
                     'vet_id' => vet_id
                 })
             end

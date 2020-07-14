@@ -27,6 +27,13 @@ class Vet
         return Pet.get_all(sql, values)
     end
 
+    def schedule()
+        sql = "SELECT * FROM timeslots
+        WHERE vet_id = $1"
+        values = [@id]
+        return Timeslot.get_all(sql, values)
+    end
+
     # CRUD Methods
 
     def save()

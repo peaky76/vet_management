@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS timeslots;
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS pet_treatments;
 DROP TABLE IF EXISTS treatments;
@@ -57,4 +58,11 @@ CREATE TABLE payments (
     owner_id INT REFERENCES owners(id),
     amount NUMERIC(8,2),
     date DATE
+);
+
+CREATE TABLE timeslots (
+    id SERIAL PRIMARY KEY,
+    vet_id INT REFERENCES vets(id),
+    pet_id INT REFERENCES pets(id),
+    date_time TIMESTAMP
 );

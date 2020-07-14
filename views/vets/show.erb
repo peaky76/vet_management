@@ -1,17 +1,62 @@
-<h1><%= @vet.full_name %></h1>
-<%= @vet.tel %><br/>
+<div class="content-left">
 
-<ul>
-    <% for pet in @vet.pets %>
-        <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
+    <header>
+        <h1><%= @vet.full_name %></h1>
+        <%= @vet.tel %><br/>
+    </header>
+
+    <h2>Registered pets</h2>
+    <ul>
+        <% for pet in @vet.pets %>
+            <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
+        <% end %>
+        <% if @vet.pets.count == 0 %>
+            <em>No pets assigned</em>
+        <% end %>        
+    </ul>  
+
+    <form class="btn-route" action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+    <form class="btn-route" action="/vets/<%= @vet.id %>/delete" method="POST"><input type="submit" value="Delete"></form><br/>
+
+</div>
+
+<div class="content-right">
+
+    <h2>Schedule</h2>
+
+    <% future_appts = @vet.schedule.filter { |timeslot| timeslot.date_time.to_date >= Date.today() } %>
+
+    <% if future_appts.length > 0 %>
+        <%# Start w/ yesterday's date and change it with every new day in the appts book %>
+        <%# ul tags and title based on curr_date %>
+        <% curr_date = Date.today.prev_day %>
+        <ul>
+        <% for timeslot in future_appts %>
+            <% if timeslot.date_time.to_date > curr_date %>
+                <% curr_date = timeslot.date_time.to_date %>
+                </ul>
+                <h4><%= timeslot.pretty_date %></h4>
+                <ul>
+            <% end %>     
+            <li>
+                <%= timeslot.pretty_time %> |
+                <% if timeslot.is_available?() %>
+                    <em>Currently available</em>
+                <% else %>
+                    <a href="/pets/<%= timeslot.pet_id %>">
+                        <%= Pet.find(timeslot.pet_id).name %>
+                    </a>
+                <% end %>
+            </li>
+        <% end %>
+        </ul>
+    <% else %>
+        <em>No timeslots scheduled.</em>
     <% end %>
-    <% if @vet.pets.count == 0 %>
-        <em>No pets assigned</em>
-    <% end %>        
-</ul>  
 
-<form class="btn-route" action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
-<form class="btn-route" action="/vets/<%= @vet.id %>/delete" method="POST"><input type="submit" value="Delete"></form><br/>
+</div>
+
+
 
 
 

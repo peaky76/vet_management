@@ -1,21 +1,29 @@
-<h1> Welcome </h1>
+<div class="content-left">
 
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae fringilla ligula. Curabitur tincidunt velit id augue elementum, in pharetra felis porttitor. Donec venenatis, tortor vitae ultrices accumsan, nulla est egestas orci, eu finibus mi odio a nunc. Nulla faucibus semper venenatis. Praesent eu urna eu nibh lobortis tempus. Aenean ac erat sed urna venenatis condimentum et in ante. Nam interdum venenatis odio, non rutrum metus finibus sed. Donec rhoncus, urna id placerat bibendum, mauris nulla semper sem, et ullamcorper justo justo iaculis lacus. Quisque eget semper dolor, rhoncus posuere erat. Aliquam finibus massa id nisl congue scelerisque. Aenean et dapibus leo. Nunc rutrum facilisis lorem, in euismod sem sollicitudin non.
-</p>
-<p>
-Pellentesque volutpat dolor vitae tempus bibendum. Aliquam nibh turpis, maximus quis odio ut, euismod dapibus risus. Curabitur eu mattis urna, id pretium sapien. Nunc aliquam congue nunc in blandit. Nam nisl tortor, convallis vitae pharetra vel, pulvinar et ex. Praesent fringilla velit non lacinia pretium. Ut nec nisi leo. Sed vitae finibus nulla. Curabitur convallis gravida tincidunt.
-</p>
+    <header>
+        <h1> Welcome </h1>
 
-<form class="btn-route" action="/owners/register" method="GET"><input type="submit" value="New registration"></form>
-<form class="btn-route" action="/payments/new" method="GET"><input type="submit" value="Take payment"></form>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae fringilla ligula. Curabitur tincidunt velit id augue elementum, in pharetra felis porttitor. Donec venenatis, tortor vitae ultrices accumsan, nulla est egestas orci, eu finibus mi odio a nunc. Nulla faucibus semper venenatis. Praesent eu urna eu nibh lobortis tempus. Aenean ac erat sed urna venenatis condimentum et in ante. Nam interdum venenatis odio, non rutrum metus finibus sed. Donec rhoncus, urna id placerat bibendum, mauris nulla semper sem, et ullamcorper justo justo iaculis lacus. Quisque eget semper dolor, rhoncus posuere erat. Aliquam finibus massa id nisl congue scelerisque. Aenean et dapibus leo. Nunc rutrum facilisis lorem, in euismod sem sollicitudin non.
+        </p>
+        <p>
+        Pellentesque volutpat dolor vitae tempus bibendum. Aliquam nibh turpis, maximus quis odio ut, euismod dapibus risus. Curabitur eu mattis urna, id pretium sapien. Nunc aliquam congue nunc in blandit. Nam nisl tortor, convallis vitae pharetra vel, pulvinar et ex. Praesent fringilla velit non lacinia pretium. Ut nec nisi leo. Sed vitae finibus nulla. Curabitur convallis gravida tincidunt.
+        </p>
+    </header>
 
-<h2>Outstanding bills</h2>
+    <form class="btn-route" action="/owners/register" method="GET"><input type="submit" value="New registration"></form>
+    <form class="btn-route" action="/payments/new" method="GET"><input type="submit" value="Take payment"></form>
 
-<ul>
-<% for owner in Owner.all() %>
-    <% if owner.balance_due > 0 %>
-        <li><%= owner.full_name %> owes <%= owner.balance_due.to_currency %></li>
+</div>
+
+<div class="content-right">
+    <h2>Outstanding bills</h2>
+
+    <ul>
+    <% for owner in Owner.all() %>
+        <% if owner.balance_due > 0 %>
+            <li><%= owner.full_name %> owes <%= owner.balance_due.to_currency %></li>
+        <% end %>
     <% end %>
-<% end %>
-</ul>
+    </ul>
+</div>
