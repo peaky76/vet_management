@@ -48,7 +48,7 @@ class Pet
 
     def ownership()
         if owner()
-            return "Owned by #{self.owner.full_name}" if owner()
+            return "Owner: #{self.owner.full_name}" if owner()
         else
             return "Not owned by anyone"
         end
@@ -56,7 +56,7 @@ class Pet
 
     def status()
         if self.is_assigned?
-            status = "Assigned to #{self.vet.full_name}"
+            status = "Assigned to: #{self.vet.full_name}"
         else
             status = "Not assigned to vet"
         end

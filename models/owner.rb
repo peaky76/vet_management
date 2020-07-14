@@ -25,7 +25,7 @@ class Owner
 
     # Properties
     def full_address()
-        return "#{@addr_1}, #{@addr_2}, #{town_city}, #{postcode}"
+        return [@addr_1, @addr_2, @town_city, @postcode]
     end
 
     def full_name()
@@ -56,11 +56,19 @@ class Owner
     end
 
     def total_billed()
-        return self.billed_treatments().reduce(0) { |total, treatment| total + treatment.cost}
+        if billed_treatments.count > 0
+            return self.billed_treatments().reduce(0) { |total, treatment| total + treatment.cost}
+        else  
+            return 0.00
+        end   
     end
     
     def total_paid()
-        return self.payments().reduce(0) { |total, payment| total + payment.amount }
+        if payments.count > 0
+            return self.payments().reduce(0) { |total, payment| total + payment.amount }
+        else
+            return 0.00
+        end
     end
 
     # CRUD Methods

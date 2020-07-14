@@ -1,24 +1,34 @@
-<h1><%= @pet.name %><sup class="id-sup"> (ID: <%= @pet.id %>)</sup></h1> 
-<%= @pet.age %> (<%= @pet.pretty_dob %>)
-<h4><%= @pet.type.upcase %></em></h4>
-<em><%= @pet.ownership %></em><br/>
-<em><%= @pet.status %></em>
+<div class="content-left">
+    <header>
+        <h1><%= @pet.name %><sup class="id-sup"> (ID: <%= @pet.id %>)</sup></h1> 
+        <%= @pet.age %> (<%= @pet.pretty_dob %>)
+        <h4><%= @pet.type.upcase %></em></h4>
+        <em><a href="/owners/<%= @pet.owner_id %>"><%= @pet.ownership %></a></em><br/>
+        <em><a href="/vets/<%= @pet.vet_id %>"><%= @pet.status %></a></em>
+    </header>
+</div>
 
-<h2>Treatments</h2>
+<div class="content-right">
+    <section>
+        <h2>Treatments</h2>
 
-<ul>
-<% for treatment in @pet.treatments_given %>
-    <li><%= treatment.pretty_date %> | <%= Treatment.find(treatment.treatment_id).name %></li>
-<% end %>
-<% if @pet.treatments_given.count == 0 %>
-    <em>No treatments given yet.</em>
-<% end %>
-</ul>
+        <ul>
+        <% for treatment in @pet.treatments_given %>
+            <li><%= treatment.pretty_date %> | <%= Treatment.find(treatment.treatment_id).name %></li>
+        <% end %>
+        <% if @pet.treatments_given.count == 0 %>
+            <em>No treatments given yet.</em>
+        <% end %>
+        </ul>
+    </section>
 
-<h2>Notes</h2>
-<p>
-<%= @pet.notes %><br/>
-</p>
+    <section>
+        <h2>Notes</h2>
+        <p>
+        <%= @pet.notes %><br/>
+        </p>
+    </section>
+</div>
 
 <form class="btn-route" action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
 <form class="btn-route" action="/pet_treatments/new" method="GET">

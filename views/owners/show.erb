@@ -1,53 +1,71 @@
-<h1><%= @owner.full_name %><sup class="id-sup"> (ID: <%= @owner.id %>)</sup></h1>
-<em><%= @owner.full_address %></em>
-<p>Balance due: £<%= sprintf('%.2f', @owner.balance_due) %>
+<div class="content-left">
+    <header>
+        <h1><%= @owner.full_name %><sup class="id-sup"> (ID: <%= @owner.id %>)</sup></h1>
+        <em>
+            <% for element in @owner.full_address %>
+                <%= element %><br/>
+            <% end %>
+        </em>
+        <p><%= @owner.tel %></p>
+        <p>Balance due: £<%= sprintf('%.2f', @owner.balance_due) %>
+    </header>
 
-<h2>Pets</h2>
+    <section class="button-row">
+            <form class="btn-route" action="/owners/<%= @owner.id %>/edit" method="GET"><input type="submit" value="Edit details"></form>
+            <form class="btn-route" action="/pets/new" method="GET">
+                <input type="hidden" name="owner_id" value="<%= @owner.id %>">
+                <input type="submit" value="Add pet">
+            </form>
+            <form class="btn-route" action="/owners/<%= @owner.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
+    </section>
+</div>
 
-<ul>
-    <% for pet in @owner.pets %>
-        <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
-    <% end %>
-    <% if @owner.pets.count == 0 %>
-        <em>No pets assigned</em>
-    <% end %>              
-</ul>
+<div class="content-right">
+    <section>
+        <h2>Pets</h2>
 
-<h2>Billings</h2>
+        <ul>
+            <% for pet in @owner.pets %>
+                <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
+            <% end %>
+            <% if @owner.pets.count == 0 %>
+                <em>No pets assigned</em>
+            <% end %>              
+        </ul>
+    </section>
 
-<ul>
-<% for treatment in @owner.billed_treatments %>
-    <li>
-    <%= treatment.pretty_date %> | 
-    <%= Treatment.find(treatment.treatment_id).name %> for <%= Pet.find(treatment.pet_id).name %> | 
-    <%= treatment.cost.to_currency %> 
-    </li>
-<% end %>
-<% if @owner.billed_treatments.count == 0 %>
-    <em>No billings yet.</em>
-<% end %>
-</ul>
+    <section>
+        <h2>Billings</h2>
 
-TOTAL: <%= @owner.total_billed.to_currency %>
+        <ul>
+        <% for treatment in @owner.billed_treatments %>
+            <li>
+            <%= treatment.pretty_date %> | 
+            <%= Treatment.find(treatment.treatment_id).name %> for <%= Pet.find(treatment.pet_id).name %> | 
+            <%= treatment.cost.to_currency %> 
+            </li>
+        <% end %>
+        <% if @owner.billed_treatments.count == 0 %>
+            <em>No billings yet.</em>
+        <% end %>
+        </ul>
 
-<h2>Payments</h2>
+        TOTAL: <%= @owner.total_billed.to_currency %>
+    </section>
 
-<ul>
-<% for payment in @owner.payments %>
-    <li><%= payment.pretty_date %> | <%= payment.amount.to_currency %></li>
-<% end %>
-<% if @owner.payments.count == 0 %>
-    <em>No payments made yet.</em>
-<% end %>
-</ul>
+    <section>
+        <h2>Payments</h2>
 
-TOTAL: <%= @owner.total_paid.to_currency %>
+        <ul>
+        <% for payment in @owner.payments %>
+            <li><%= payment.pretty_date %> | <%= payment.amount.to_currency %></li>
+        <% end %>
+        <% if @owner.payments.count == 0 %>
+            <em>No payments made yet.</em>
+        <% end %>
+        </ul>
 
-<br/>
-
-<form class="btn-route" action="/owners/<%= @owner.id %>/edit" method="GET"><input type="submit" value="Edit details"></form>
-<form class="btn-route" action="/pets/new" method="GET">
-    <input type="hidden" name="owner_id" value="<%= @owner.id %>">
-    <input type="submit" value="Add pet">
-</form>
-<form class="btn-route" action="/owners/<%= @owner.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
+        TOTAL: <%= @owner.total_paid.to_currency %>
+    </section>
+   
+</div>
