@@ -2,7 +2,7 @@ require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
 
-require_relative( '../models/payment.rb' )
+require_relative( '../models/payment' )
 also_reload( '../models/*' )
 
 # INDEX

@@ -21,6 +21,20 @@
 </div>
 
 <div class="content-right">
+    
+    <section>
+        <h2>Appointments</h2>
+
+        <ul>
+        <% for appointment in @pet.appointments %>
+            <li><%= appointment.pretty_date %> | <%= appointment.pretty_time %></li>
+        <% end %>
+        <% if @pet.appointments.count == 0 %>
+            <em>No appointments recorded.</em>
+        <% end %>
+        </ul>
+    </section>
+    
     <section>
         <h2>Treatments</h2>
 

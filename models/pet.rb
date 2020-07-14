@@ -63,12 +63,20 @@ class Pet
         return status
     end
 
+    def appointments()
+        sql = "SELECT * FROM appointments
+        WHERE pet_id = $1"
+        values =[@id]
+        return Appointment.get_all(sql, values)
+    end
+
     def treatments_given()
         sql = "SELECT * FROM pet_treatments
         WHERE pet_id = $1"
         values = [@id]
         return PetTreatment.get_all(sql, values)
     end
+
 
     # CRUD methods
 

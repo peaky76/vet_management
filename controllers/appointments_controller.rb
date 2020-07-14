@@ -2,6 +2,7 @@ require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
 
+require_relative( '../models/appointment' )
 also_reload( '../models/*' )
 
 # INDEX
@@ -17,10 +18,10 @@ end
 
 # CREATE
 post '/appointments' do
-    params['date_time'] = Timeslot.find(params['id']).date_time
-    @timeslot = Timeslot.new(params)
-    @timeslot.update()
-    redirect to '/appointments'
+    params['date_time'] = Appointment.find(params['id']).date_time
+    @appointment = Appointment.new(params)
+    @appointment.update()
+    redirect to "/pets/#{params["pet_id"]}"
 end
 
 # # SHOW

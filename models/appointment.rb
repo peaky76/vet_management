@@ -1,6 +1,6 @@
 require_relative( '../db/sql_runner' )
 
-class Timeslot
+class Appointment
 
     attr_reader :id, :vet_id, :pet_id, :date_time 
 
@@ -42,7 +42,7 @@ class Timeslot
     # CRUD methods
 
      def save()
-        sql = "INSERT INTO timeslots
+        sql = "INSERT INTO appointments
         (vet_id, pet_id, date_time) 
         VALUES ($1, $2, $3)
         RETURNING id"
@@ -51,7 +51,7 @@ class Timeslot
     end
 
     def update()
-        sql = "UPDATE timeslots
+        sql = "UPDATE appointments
         SET (vet_id, pet_id, date_time) =
         ($1, $2, $3)
         WHERE id = $4"
@@ -60,7 +60,7 @@ class Timeslot
     end
 
     def delete()
-        sql = "DELETE FROM timeslots
+        sql = "DELETE FROM appointments
         WHERE id = $1"
         values = [@id]
         SqlRunner.run(sql, values)
@@ -70,7 +70,7 @@ class Timeslot
 
     def self.generate_schedule(date, vet_id)
         
-        timeslots = []
+        appointments = []
         
         vet = Vet.find(vet_id)
  
@@ -86,10 +86,10 @@ class Timeslot
         lunch_start = DateTime.new(y, m, d, Surgery.lunch_start['hour'], Surgery.lunch_start['minute'])
         lunch_end = DateTime.new(y, m, d, Surgery.lunch_end['hour'], Surgery.lunch_end['minute'])
 
-        # Add a new timeslot at fixed interval between open and close, avoiding lunch
+        # Add a new appointment at fixed interval between open and close, avoiding lunch
         while curr_time < end_time do
             if curr_time < lunch_start || curr_time > lunch_end
-                timeslots << Timeslot.new({
+                appointments << Appointment.new({
                     'date_time' => curr_time.to_s,
                     'vet_id' => vet_id
                 })
@@ -97,33 +97,33 @@ class Timeslot
             curr_time += appt_len.minutes
         end
         
-        return timeslots
+        return appointments
     end
 
     # CRUD methods
 
     def self.all()
-        sql = "SELECT * FROM timeslots"
-        return Timeslot.get_all(sql)
+        sql = "SELECT * FROM appointments"
+        return Appointment.get_all(sql)
     end
 
     def self.delete_all()
-        sql = "DELETE FROM timeslots"
+        sql = "DELETE FROM appointments"
         SqlRunner.run(sql)
     end
 
     def self.find(id)
-        sql = "SELECT * FROM timeslots
+        sql = "SELECT * FROM appointments
         WHERE id = $1"
         values = [id]
-        return Timeslot.get(sql, values)
+        return Appointment.get(sql, values)
     end
 
     # Helper functions for db
 
     def self.get_all(sql, values = [])
-        timeslot_data = SqlRunner.run(sql, values)
-        return timeslot_data.map { |timeslot| Timeslot.new(timeslot) }
+        appointment_data = SqlRunner.run(sql, values)
+        return appointment_data.map { |appointment| Appointment.new(appointment) }
     end
 
     def self.get(sql, values = [])

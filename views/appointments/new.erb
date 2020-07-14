@@ -6,16 +6,16 @@
     <input type="hidden" name="vet_id" value="<%= @pet.vet_id %>">
 
     <% vet = Vet.find(@pet.vet_id) %>
-    <% available_slots = vet.future_schedule.filter { |timeslot| timeslot.is_available? } %>
+    <% available_slots = vet.future_schedule.filter { |appointment| appointment.is_available? } %>
 
     Appointment will be with <%= vet.full_name %>
 
     <div class="form-field">
         <label for="select-appointment">Date and time</label>
         <select id="select-appointment" name="id">
-            <% for timeslot in available_slots %>
-                <option value="<%= timeslot.id %>">
-                    <%= timeslot.pretty_date %> : <%= timeslot.pretty_time %>
+            <% for appointment in available_slots %>
+                <option value="<%= appointment.id %>">
+                    <%= appointment.pretty_date %> : <%= appointment.pretty_time %>
                 </option>          
             <% end %>
         </select>

@@ -28,16 +28,16 @@ class Vet
     end
 
     def schedule()
-        sql = "SELECT * FROM timeslots
+        sql = "SELECT * FROM appointments
         WHERE vet_id = $1"
         values = [@id]
-        schedule = Timeslot.get_all(sql, values)
-        sorted_schedule = schedule.sort_by { |timeslot| timeslot.date_time }
+        schedule = Appointment.get_all(sql, values)
+        sorted_schedule = schedule.sort_by { |appointment| appointment.date_time }
         return sorted_schedule
     end
 
     def future_schedule()
-        return self.schedule.filter { |timeslot| timeslot.date_time.to_date >= Date.today() } 
+        return self.schedule.filter { |appointment| appointment.date_time.to_date >= Date.today() } 
     end
 
 

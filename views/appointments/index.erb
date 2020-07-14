@@ -6,16 +6,16 @@
     <% for vet in Vet.all() %>
         <h2><%= vet.full_name %></h2>
         
-        <% schedule_for_day = vet.schedule.filter { |timeslot| timeslot.date_time.to_date == Date.today() } %>
+        <% schedule_for_day = vet.schedule.filter { |appointment| appointment.date_time.to_date == Date.today() } %>
         <ul>
-            <% for timeslot in schedule_for_day %>    
+            <% for appointment in schedule_for_day %>    
                 <li>
-                    <%= timeslot.pretty_time %> |
-                    <% if timeslot.is_available?() %>
+                    <%= appointment.pretty_time %> |
+                    <% if appointment.is_available?() %>
                         <em>Currently available</em>
                     <% else %>
-                        <a href="/pets/<%= timeslot.pet_id %>">
-                            <%= Pet.find(timeslot.pet_id).name %>
+                        <a href="/pets/<%= appointment.pet_id %>">
+                            <%= Pet.find(appointment.pet_id).name %>
                         </a>
                     <% end %>
                 </li>

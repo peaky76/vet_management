@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS timeslots;
+DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS pet_treatments;
 DROP TABLE IF EXISTS treatments;
@@ -35,8 +35,8 @@ CREATE TABLE pets (
     dob DATE,
     type VARCHAR(255),
     notes TEXT,
-    owner_id INT REFERENCES owners(id),
-    vet_id INT REFERENCES vets(id)
+    owner_id INT REFERENCES owners(id) ON DELETE CASCADE,
+    vet_id INT REFERENCES vets(id) ON DELETE CASCADE
 );
 
 CREATE TABLE treatments (
@@ -48,21 +48,21 @@ CREATE TABLE treatments (
 CREATE TABLE pet_treatments (
     id SERIAL PRIMARY KEY,
     pet_id INT REFERENCES pets(id),
-    treatment_id INT REFERENCES treatments(id),
+    treatment_id INT REFERENCES treatments(id) ON DELETE CASCADE,
     cost NUMERIC(8,2),
     date DATE
 );
 
 CREATE TABLE payments (
     id SERIAL PRIMARY KEY,
-    owner_id INT REFERENCES owners(id),
+    owner_id INT REFERENCES owners(id) ON DELETE CASCADE,
     amount NUMERIC(8,2),
     date DATE
 );
 
-CREATE TABLE timeslots (
+CREATE TABLE appointments (
     id SERIAL PRIMARY KEY,
-    vet_id INT REFERENCES vets(id),
-    pet_id INT REFERENCES pets(id),
+    vet_id INT REFERENCES vets(id) ON DELETE CASCADE,
+    pet_id INT REFERENCES pets(id) ON DELETE CASCADE,
     date_time TIMESTAMP
 );

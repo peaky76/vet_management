@@ -29,27 +29,27 @@
         <%# ul tags and title based on curr_date %>
         <% curr_date = Date.today.prev_day %>
         <ul>
-        <% for timeslot in @vet.future_schedule %>
-            <% if timeslot.date_time.to_date > curr_date %>
-                <% curr_date = timeslot.date_time.to_date %>
+        <% for appointment in @vet.future_schedule %>
+            <% if appointment.date_time.to_date > curr_date %>
+                <% curr_date = appointment.date_time.to_date %>
                 </ul>
-                <h4><%= timeslot.pretty_date %></h4>
+                <h4><%= appointment.pretty_date %></h4>
                 <ul>
             <% end %>     
             <li>
-                <%= timeslot.pretty_time %> |
-                <% if timeslot.is_available?() %>
+                <%= appointment.pretty_time %> |
+                <% if appointment.is_available?() %>
                     <em>Currently available</em>
                 <% else %>
-                    <a href="/pets/<%= timeslot.pet_id %>">
-                        <%= Pet.find(timeslot.pet_id).name %>
+                    <a href="/pets/<%= appointment.pet_id %>">
+                        <%= Pet.find(appointment.pet_id).name %>
                     </a>
                 <% end %>
             </li>
         <% end %>
         </ul>
     <% else %>
-        <em>No timeslots scheduled.</em>
+        <em>No appointments scheduled.</em>
     <% end %>
 
 </div>
