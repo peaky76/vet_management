@@ -46,23 +46,6 @@ class Pet
         return Vet.get(sql, values)
     end
 
-    def ownership()
-        if owner()
-            return "Owner: #{self.owner.full_name}" if owner()
-        else
-            return "Not owned by anyone"
-        end
-    end
-
-    def status()
-        if self.is_assigned?
-            status = "Assigned to: #{self.vet.full_name}"
-        else
-            status = "Not assigned to vet"
-        end
-        return status
-    end
-
     def appointments()
         sql = "SELECT * FROM appointments
         WHERE pet_id = $1"

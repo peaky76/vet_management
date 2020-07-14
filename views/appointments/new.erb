@@ -6,6 +6,7 @@
     <input type="hidden" name="vet_id" value="<%= @pet.vet_id %>">
 
     <% vet = Vet.find(@pet.vet_id) %>
+
     <% available_slots = vet.future_schedule.filter { |appointment| appointment.is_available? } %>
 
     Appointment will be with <%= vet.full_name %>

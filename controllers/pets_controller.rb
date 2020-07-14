@@ -21,7 +21,7 @@ end
 post '/pets' do
     @pet = Pet.new(params)
     @pet.save()
-    redirect to "/owners/#{params["owner_id"]}"
+    redirect to "/owners/#{params['owner_id']}"
 end
 
 # SHOW
@@ -41,7 +41,7 @@ end
 post '/pets/:id' do
     @pet = Pet.new(params)
     @pet.update()
-    redirect to '/pets'
+    redirect to "/pets/#{params['id']}"
 end
 
 # DESTROY

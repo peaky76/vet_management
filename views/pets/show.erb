@@ -3,19 +3,30 @@
         <h1><%= @pet.name %><sup class="id-sup"> (ID: <%= @pet.id %>)</sup></h1> 
         <%= @pet.age %> (<%= @pet.pretty_dob %>)
         <h4><%= @pet.type.upcase %></em></h4>
-        <em><a href="/owners/<%= @pet.owner_id %>"><%= @pet.ownership %></a></em><br/>
-        <em><a href="/vets/<%= @pet.vet_id %>"><%= @pet.status %></a></em>
+        <em>
+            Owned by: <a href="/owners/<%= @pet.owner_id %>"><%= @pet.owner.full_name %></a><br/>
+            <% if @pet.is_assigned? %>
+                Assigned to: <a href="/vets/<%= @pet.vet_id %>"><%= @pet.vet.full_name %></a>
+            <% else %>
+                <a href="/pets/<%= @pet.id %>/edit">
+                    Not assigned to vet
+                </a>
+            <% end %>
+        </em>
     </header>
 
     <form class="btn-route" action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
-    <form class="btn-route" action="/pet_treatments/new" method="GET">
-        <input type="hidden" name="pet_id" value="<%= @pet.id %>">
-        <input type="submit" value="Add treatment">
-    </form>
-    <form class="btn-route" action="/appointments/new" method="GET">
-        <input type="hidden" name="pet_id" value="<%= @pet.id %>">
-        <input type="submit" value="Make appointment"></form>
-    </form>
+    <%# Only display new appointments and treatment button if pet has been assigned a vet  %>
+    <% if @pet.vet %>
+        <form class="btn-route" action="/pet_treatments/new" method="GET">
+            <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+            <input type="submit" value="Add treatment">
+        </form>
+        <form class="btn-route" action="/appointments/new" method="GET">
+            <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+            <input type="submit" value="Make appointment"></form>
+        </form>
+    <% end %>
     <form class="btn-route" action="/pets/<%= @pet.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
 
 </div>
