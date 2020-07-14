@@ -8,10 +8,18 @@ class Timeslot
         @id = options['id'].to_i() if options['id']
         @vet_id = options['vet_id'] 
         @pet_id = options['pet_id'] if options['pet_id']
-        @time_date = options['time_date']
+        @date_time = DateTime.parse(options['date_time'])
     end
 
     # Instance methods
+
+    def pretty_date()
+        return @date_time.strftime("%-d %B %Y")
+    end
+
+    def pretty_time()
+        return @date_time.strftime("%H:%M")
+    end
 
     def pet()
         sql = "SELECT * FROM pets
@@ -59,6 +67,11 @@ class Timeslot
     end
 
     # Class methods
+
+    def self.generate(date, vet_id)
+        vet = Vet.find(vet_id)
+
+    end
 
     # CRUD methods
 

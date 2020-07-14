@@ -44,6 +44,15 @@ class TestTimeslot < MiniTest::Test
         assert_equal("Rover", @timeslot_1.pet.name)
     end
 
+    def test_has_pretty_date()
+        assert_equal("13 July 2020", @timeslot_1.pretty_date)
+    end
+
+    def test_has_pretty_time()
+        assert_equal("11:15", @timeslot_1.pretty_time)
+    end
+
+
     def test_is_available_true()
         assert(@timeslot_2.is_available?())
     end
