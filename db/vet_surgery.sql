@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS pet_treatments;
 DROP TABLE IF EXISTS treatments;
-DROP TABLE IF EXISTS purchases;
+DROP TABLE IF EXISTS owner_products;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS pets;
 DROP TABLE IF EXISTS owners;
@@ -61,7 +61,7 @@ CREATE TABLE products (
     curr_price NUMERIC(8,2)
 );
 
-CREATE TABLE purchases (
+CREATE TABLE owner_products (
     id SERIAL PRIMARY KEY,
     owner_id INT REFERENCES owners(id) ON DELETE CASCADE,
     product_id INT REFERENCES products(id) ON DELETE CASCADE,

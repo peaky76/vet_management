@@ -1,4 +1,4 @@
-<div class="content-left">
+<div class="content-top">
     <header>
         <h1><%= @owner.full_name %><sup class="id-sup"> (ID: <%= @owner.id %>)</sup></h1>
         <em>
@@ -20,7 +20,7 @@
     </section>
 </div>
 
-<div class="content-right">
+<div class="content-bottom">
     <section>
         <h2>Pets</h2>
 
@@ -37,18 +37,19 @@
     <section>
         <h2>Billings</h2>
 
-        <ul>
-        <% for treatment in @owner.billed_treatments %>
-            <li>
-            <%= treatment.pretty_date %> | 
-            <%= Treatment.find(treatment.treatment_id).name %> for <%= Pet.find(treatment.pet_id).name %> | 
-            <%= treatment.cost.to_currency %> 
-            </li>
+        <% if @owner.purchases.count > 0 %>
+            <ul>
+            <% for purchase in @owner.purchases.to_chron_order %>
+                <li>
+                <%= purchase.pretty_date %> | 
+                <%= purchase.description %> | 
+                <%= purchase.cost.to_currency %> 
+                </li>
+            <% end %>
+            </ul>
+        <% else %>
+            No billings yet.
         <% end %>
-        <% if @owner.billed_treatments.count == 0 %>
-            <em>No billings yet.</em>
-        <% end %>
-        </ul>
 
         TOTAL: <%= @owner.total_billed.to_currency %>
     </section>

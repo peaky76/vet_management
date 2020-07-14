@@ -39,13 +39,11 @@ class Owner
         return Pet.get_all(sql, values)
     end
 
-    def purchases()
-        sql = "SELECT * FROM purchases
+    def billed_products()
+        sql = "SELECT * FROM owner_products
         WHERE owner_id = $1"
         values = [@id]
-        purchase_list = Purchase.get_all(sql, values)
-        sorted_list = purchase_list.sort_by { |purchase| purchase.date }
-        return sorted_list
+        return OwnerProduct.get_all(sql, values)
     end
 
     def billed_treatments()
@@ -57,6 +55,10 @@ class Owner
         return PetTreatment.get_all(sql, values)
     end
 
+    def purchases()
+        return self.billed_products + self.billed_treatments
+    end
+
     def payments()
         sql = "SELECT * FROM payments
         WHERE owner_id = $1"
@@ -66,8 +68,8 @@ class Owner
 
     def total_billed()
         sum = 0.00
-        if purchases.count > 0
-            sum += self.purchases().reduce(0) { |total, purchase| total + purchase.cost }
+        if billed_products.count > 0
+            sum += self.billed_products().reduce(0) { |total, product| total + product.cost }
         end
         if billed_treatments.count > 0
             sum += self.billed_treatments().reduce(0) { |total, treatment| total + treatment.cost }

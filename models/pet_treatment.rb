@@ -1,16 +1,14 @@
 require_relative( '../db/sql_runner' )
+require_relative( 'sale' )
 
-class PetTreatment
+class PetTreatment < Sale
 
-    attr_reader :id, :pet_id, :treatment_id, :cost, :date
+    attr_reader :pet_id, :treatment_id
     
-    def initialize(options)
-        @id = options['id'].to_i() if options['id']
+    def initialize(options)   
         @pet_id = options['pet_id'].to_i()
         @treatment_id = options['treatment_id'].to_i()
-        # If no cost is given for the treatment, use the current price for this kind of treatment
-        options['cost'] != nil ? @cost = options['cost'].to_f() : @cost = self.curr_price
-        @date = Date.parse(options['date'])
+        super(options)
     end
 
     # Instance methods
@@ -19,8 +17,16 @@ class PetTreatment
         return Treatment.find(@treatment_id).curr_price
     end
 
-    def pretty_date()
-        return @date.strftime("%-d %B %Y")
+    def pet()
+        return Pet.find(@pet_id)
+    end
+
+    def treatment()
+        return Treatment.find(@treatment_id)
+    end
+
+    def description()
+        return "#{self.treatment.name} for #{self.pet.name}"
     end
 
     def owner_id()

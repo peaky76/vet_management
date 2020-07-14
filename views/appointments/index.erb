@@ -1,25 +1,36 @@
-<div class="content-left">
-    <h1> Today's Appointments </h1>
-</div>
+<h1> Appointments for <%= @date.strftime("%-d %B %Y") %> </h1>
 
-<div class="content-right">
+<div class="content-bottom">
     <% for vet in Vet.all() %>
+        <section>
         <h2><%= vet.full_name %></h2>
         
-        <% schedule_for_day = vet.schedule.filter { |appointment| appointment.date_time.to_date == Date.today() } %>
-        <ul>
-            <% for appointment in schedule_for_day %>    
-                <li>
-                    <%= appointment.pretty_time %> |
-                    <% if appointment.is_available?() %>
-                        <em>Currently available</em>
-                    <% else %>
-                        <a href="/pets/<%= appointment.pet_id %>">
-                            <%= Pet.find(appointment.pet_id).name %>
-                        </a>
-                    <% end %>
-                </li>
-            <% end %>
-        </ul>  
+        <% schedule_for_day = vet.schedule.filter { |appointment| appointment.date_time.to_date == @date } %>
+        <% if schedule_for_day.length > 0 %>     
+            <ul>
+                <% for appointment in schedule_for_day %>    
+                    <li>
+                        <%= appointment.pretty_time %> |
+                        <% if appointment.is_available?() %>
+                            <em>Currently available</em>
+                        <% else %>
+                            <a href="/pets/<%= appointment.pet_id %>">
+                                <%= Pet.find(appointment.pet_id).name %>
+                            </a>
+                        <% end %>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <em>No availability for this day.</em>
+        <% end %>  
+        </section>
     <% end %>
 </div>
+
+
+<form class="btn-route" action="/appointments" method="GET">
+    <button name="date" value="<%= @date - 1.day %>" type="submit"><< Prev</button>
+    <button name="date" value="<%= @date + 1.day %>" type="submit">Next >></button>
+</form>
+

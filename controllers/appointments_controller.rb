@@ -7,6 +7,8 @@ also_reload( '../models/*' )
 
 # INDEX
 get '/appointments' do
+    @date = Date.today() 
+    @date = Date.parse(params['date']) if params['date']
     erb ( :"appointments/index" )
 end
 

@@ -1,0 +1,11 @@
+<h1> Purchases </h1>
+
+<% @owner_products.sort_by! { |owner_product| owner_product.date } %>
+
+<ul>
+<% for owner_product in @owner_products %>
+    <% owner = Owner.find(owner_product.owner_id).full_name %>
+    <% product_name = Product.find(owner_product.product_id).name %>
+    <li><%= "#{owner} bought #{product_name} on #{owner_product.pretty_date}" %></li>  
+<% end %>
+</ul>

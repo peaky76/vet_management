@@ -1,13 +1,14 @@
-require_relative( "../models/payment.rb" )
-require_relative( "../models/pet_treatment.rb" )
-require_relative( "../models/treatment.rb" )
-require_relative( "../models/purchase.rb" )
-require_relative( "../models/product.rb" )
-require_relative( "../models/pet.rb" )
-require_relative( "../models/owner.rb" )
-require_relative( "../models/vet.rb" )
 require_relative( "../models/appointment.rb" )
+require_relative( "../models/owner.rb" )
+require_relative( "../models/owner_product.rb" )
+require_relative( "../models/payment.rb" )
+require_relative( "../models/pet.rb" )
+require_relative( "../models/pet_treatment.rb" )
+require_relative( "../models/product.rb" )
 require_relative( "../models/surgery.rb" )
+require_relative( "../models/treatment.rb" )
+require_relative( "../models/vet.rb" )
+
 require("pry-byebug")
 
 def random_tel()
@@ -18,7 +19,7 @@ end
 
 Appointment.delete_all()
 Payment.delete_all()
-Purchase.delete_all()
+OwnerProduct.delete_all()
 Product.delete_all()
 PetTreatment.delete_all()
 Treatment.delete_all()
@@ -60,28 +61,39 @@ owner_1 = Owner.new({
 })
 owner_2 = Owner.new({
     'title' => "Ms",
-    'first_name' => "Leigh",
-    'last_name' => "Murr",
-    'addr_1' => "8 Forest Street",
-    'addr_2' => "Wildtown",
+    'first_name' => "Fi",
+    'last_name' => "Line",
+    'addr_1' => "3 Furball Drive",
+    'addr_2' => "Scratchyside",
     'town_city' => "Edinburgh",
     'postcode' => "EH13 6ZZ",
-    'email' => "leighmurr@intheforest.com",
+    'email' => "fi.line@purr.com",
     'tel' => random_tel()
 })
 owner_3 = Owner.new({
-    'title' => "Col",
-    'first_name' => "Harland",
-    'last_name' => "Sanders",
-    'addr_1' => "12 Kentucky Road",
-    'addr_2' => "Fryville",
+    'title' => "Ms",
+    'first_name' => "Kat",
+    'last_name' => "Luvver",
+    'addr_1' => "6 Catnip Place",
+    'addr_2' => "Tailton",
     'town_city' => "Edinburgh",
-    'postcode' => "EH3 6KK",
-    'email' => "colonel@kfc.com",
+    'postcode' => "EH2 6SS",
+    'email' => "kat.luvver@purr.com",
+    'tel' => random_tel()
+})
+owner_4 = Owner.new({
+    'title' => "Mr",
+    'first_name' => "Pat",
+    'last_name' => "Head",
+    'addr_1' => "61 Petting Avenue",
+    'addr_2' => "Cagely",
+    'town_city' => "Edinburgh",
+    'postcode' => "EH5 2BB",
+    'email' => "pat.head@cage.co.uk",
     'tel' => random_tel()
 })
 
-owners = [owner_1, owner_2, owner_3]
+owners = [owner_1, owner_2, owner_3, owner_4]
 owners.each { |owner| owner.save()}
 
 pet_1 = Pet.new({
@@ -91,24 +103,35 @@ pet_1 = Pet.new({
     'notes' => "Has arthritis",
     'owner_id' => owner_1.id
 })
-
 pet_2 = Pet.new({
+    'name' => "Spot",
+    'dob' => "6/6/2013",
+    'type' => "dog",
+    'notes' => "Bad eyesight",
+    'owner_id' => owner_1.id
+})
+pet_3 = Pet.new({
     'name' => "Tiddles",
     'dob' => "4/1/2017",
     'type' => "cat",
     'notes' => "No tail",
-    'owner_id' => owner_1.id
+    'owner_id' => owner_2.id
 })
-
-pet_3 = Pet.new({
+pet_4 = Pet.new({
+    'name' => "Fluffy",
+    'dob' => "3/3/2014",
+    'type' => "cat",
+    'notes' => "Vicious",
+    'owner_id' => owner_2.id
+})
+pet_5 = Pet.new({
     'name' => "Joey",
     'dob' => "11/11/2019",
     'type' => "budgie",
     'notes' => "Broken wing",
     'owner_id' => owner_2.id
 })
-
-pet_4 = Pet.new({
+pet_6 = Pet.new({
     'name' => "Twiggy",
     'dob' => "5/3/2020",
     'type' => "stick insect",
@@ -116,7 +139,7 @@ pet_4 = Pet.new({
     'owner_id' => owner_2.id
 })
 
-pets = [pet_1, pet_2, pet_3, pet_4]
+pets = [pet_1, pet_2, pet_3, pet_4, pet_5, pet_6]
 pets.each { |pet| pet.save() }
 
 treatment_1 = Treatment.new({
@@ -129,35 +152,30 @@ treatment_2 = Treatment.new({
 })
 treatment_3 = Treatment.new({
     'name' => "De-fleaing",
-    'curr_price' => 14.95
+    'curr_price' => 19.95
+})
+treatment_4 = Treatment.new({
+    'name' => "Vaccination",
+    'curr_price' => 12.95
+})
+treatment_5 = Treatment.new({
+    'name' => "Transplant",
+    'curr_price' => 399.95
+})
+treatment_6 = Treatment.new({
+    'name' => "Claw clipping",
+    'curr_price' => 19.95
 })
 
-treatments = [treatment_1, treatment_2, treatment_3]
+treatments = [treatment_1, treatment_2, treatment_3, treatment_4, treatment_5, treatment_6]
 treatments.each { |treatment| treatment.save() }
-
-pet_treatment_1 = PetTreatment.new({
-    'pet_id' => pet_1.id,
-    'treatment_id' => treatment_1.id,
-    'date' => "1/7/2020"
-})
-pet_treatment_2 = PetTreatment.new({
-    'pet_id' => pet_4.id,
-    'treatment_id' => treatment_1.id,
-    'date' => "6/6/2020"
-})
-pet_treatment_3 = PetTreatment.new({
-    'pet_id' => pet_1.id,
-    'treatment_id' => treatment_2.id,
-    'date' => "14/3/2020"
-})
     
-pet_treatments = [pet_treatment_1, pet_treatment_2, pet_treatment_3]
-pet_treatments.each { |pet_treatment| pet_treatment.save() }
-
 pet_1.assign_to_vet(vet_1.id)
 pet_2.assign_to_vet(vet_1.id)
 pet_3.assign_to_vet(vet_2.id)
 pet_4.assign_to_vet(vet_2.id)
+pet_5.assign_to_vet(vet_3.id)
+pet_6.assign_to_vet(vet_3.id)
 pets.each { |pet| pet.update() }
 
 product_1 = Product.new({
@@ -165,41 +183,31 @@ product_1 = Product.new({
     'curr_price' => 9.99
 })
 product_2 = Product.new({
+    'name' => "Flea collar",
+    'curr_price' => 12.99
+})
+product_3 = Product.new({
     'name' => "Pet shampoo",
     'curr_price' => 10.99
 })
+product_4 = Product.new({
+    'name' => "Worming tablets",
+    'curr_price' => 8.49
+})
 
-products = [product_1, product_2]
+products = [product_1, product_2, product_3, product_4]
 products.each { |product| product.save() }
 
-purchase_1 = Purchase.new({
-    'owner_id' => owner_1.id,
-    'product_id' => product_2.id,
-    'date' => "14/7/2020"
-})
-purchase_1.save()
+date = Date.new(2020,7,1)
+end_date = Date.new(2020,8,1)
 
-payment_1 = Payment.new({
-    'owner_id' => owner_1.id,
-    'amount' => 50.00,
-    'date' => "11/7/2020"
-})
-payment_1.save()
-
-payment_2 = Payment.new({
-    'owner_id' => owner_1.id,
-    'amount' => 20.00,
-    'date' => "12/7/2020"
-})
-payment_2.save()
-
-schedule_1 = Appointment.generate_schedule(Date.today(), vet_1.id)
-schedule_2 = Appointment.generate_schedule(Date.today(), vet_2.id)
-schedule_3 = Appointment.generate_schedule(Date.today() + 1.day, vet_1.id)
-
-schedule_1.each { |appointment| appointment.save() }
-schedule_2.each { |appointment| appointment.save() }
-schedule_3.each { |appointment| appointment.save() }
+while date < end_date do
+    for vet in vets
+        schedule = Appointment.generate_schedule(date, vet.id)
+        schedule.each { |appointment| appointment.save() }
+    end
+    date += 1.day
+end
 
 binding.pry
 nil

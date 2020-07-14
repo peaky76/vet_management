@@ -40,7 +40,6 @@ class Vet
         return self.schedule.filter { |appointment| appointment.date_time.to_date >= Date.today() } 
     end
 
-
     # CRUD Methods
 
     def save()

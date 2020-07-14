@@ -1,14 +1,10 @@
 require_relative( '../db/sql_runner' )
+require_relative( 'sales_item' )
 
-class Product
-
-    attr_reader :id 
-    attr_accessor :name, :curr_price   
+class Product < SalesItem
 
     def initialize(options)
-        @id = options['id'].to_i() if options['id']
-        @name = options['name']
-        @curr_price = options['curr_price'].to_f
+        super(options)
     end
 
     # Instance methods

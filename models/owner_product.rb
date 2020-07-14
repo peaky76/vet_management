@@ -1,16 +1,14 @@
 require_relative( '../db/sql_runner' )
+require_relative( 'sale' )
 
-class Purchase
+class OwnerProduct < Sale
 
-    attr_reader :id, :owner_id, :product_id, :cost, :date
+    attr_reader :owner_id, :product_id
     
     def initialize(options)
-        @id = options['id'].to_i() if options['id']
         @owner_id = options['owner_id'].to_i()
         @product_id = options['product_id'].to_i()
-        # If no cost is given, use the current price for this kind of product
-        options['cost'] != nil ? @cost = options['cost'].to_f() : @cost = self.curr_price
-        @date = Date.parse(options['date'])
+        super(options)
     end
 
     # Instance methods
@@ -19,8 +17,16 @@ class Purchase
         return Product.find(@product_id).curr_price
     end
 
-    def pretty_date()
-        return @date.strftime("%-d %B %Y")
+    def owner()
+        return Owner.find(@owner_id)
+    end
+
+    def product()
+        return Product.find(@product_id)
+    end
+
+    def description()
+        return self.product.name
     end
 
     def bill_to_owner()
@@ -34,7 +40,7 @@ class Purchase
     # CRUD methods
 
     def save()
-        sql = "INSERT INTO purchases
+        sql = "INSERT INTO owner_products
         (owner_id, product_id, cost, date) 
         VALUES ($1, $2, $3, $4)
         RETURNING id"
@@ -44,7 +50,7 @@ class Purchase
     end
 
     def update()
-        sql = "UPDATE purchases
+        sql = "UPDATE owner_products
         SET (owner_id, product_id, cost, date) =
         ($1, $2, $3, $4)
         WHERE id = $5"
@@ -53,7 +59,7 @@ class Purchase
     end
 
     def delete()
-        sql = "DELETE FROM purchases
+        sql = "DELETE FROM owner_products
         WHERE id = $1"
         values = [@id]
         SqlRunner.run(sql, values)
@@ -64,27 +70,27 @@ class Purchase
     # CRUD methods
 
     def self.all()
-        sql = "SELECT * FROM purchases"
-        return Purchase.get_all(sql)
+        sql = "SELECT * FROM owner_products"
+        return OwnerProduct.get_all(sql)
     end
 
     def self.delete_all()
-        sql = "DELETE FROM purchases"
+        sql = "DELETE FROM owner_products"
         SqlRunner.run(sql)
     end
 
     def self.find(id)
-        sql = "SELECT * FROM purchases
+        sql = "SELECT * FROM owner_products
         WHERE id = $1"
         values = [id]
-        return Purchase.get(sql, values)
+        return OwnerProduct.get(sql, values)
     end
 
     # Helper functions for db
 
     def self.get_all(sql, values = [])
-        purchase_data = SqlRunner.run(sql, values)
-        return purchase_data.map { |purchase| Purchase.new(purchase) }
+        owner_product_data = SqlRunner.run(sql, values)
+        return owner_product_data.map { |purchase| OwnerProduct.new(purchase) }
     end
 
     def self.get(sql, values = [])
