@@ -69,17 +69,35 @@ class Timeslot
     # Class methods
 
     def self.generate(date, vet_id)
+        
         timeslots = []
+        
         vet = Vet.find(vet_id)
-        date_time = DateTime.new(date.year, date.month, date.day, 9, 0)
-        close_hour = 17
-        while date_time.hour < close_hour do
-            timeslots << Timeslot.new({
-                'date_time' => date_time,
-                'vet_id' => vet_id
-            })
-            date_time += 30.minutes # Adds 20 minutes to the time
+        
+        # Get surgery hours 
+        open = Surgery.opening_time 
+        close = Surgery.closing_time
+        out = Surgery.lunch_start
+        back = Surgery.lunch_end
+        appt_len = Surgery.appointment_length
+
+        # Prepare time vars based on date parameter supplied
+        curr_time = DateTime.new(date.year, date.month, date.day, open.hour, open.minute)
+        end_time = DateTime.new(date.year, date.month, date.day, close.hour, close.minute)
+        lunch_start = DateTime.new(date.year, date.month, date.day, out.hour, out.minute)
+        lunch_end = DateTime.new(date.year, date.month, date.day, back.hour, back.minute)
+
+        # Add a new timeslot at fixed interval between open and close, avoiding lunch
+        while curr_time < end_time do
+            if curr_time < lunch_start || curr_time > lunch_end
+                timeslots << Timeslot.new({
+                    'date_time' => curr_time,
+                    'vet_id' => vet_id
+                })
+            end
+            curr_time += appt_len.minutes
         end
+        
         return timeslots
     end
 

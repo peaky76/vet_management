@@ -5,6 +5,7 @@ require_relative( "../models/pet.rb" )
 require_relative( "../models/owner.rb" )
 require_relative( "../models/vet.rb" )
 require_relative( "../models/timeslot.rb" )
+require_relative( "../models/surgery.rb" )
 require("pry-byebug")
 
 def random_tel()
