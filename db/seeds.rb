@@ -1,6 +1,8 @@
 require_relative( "../models/payment.rb" )
 require_relative( "../models/pet_treatment.rb" )
 require_relative( "../models/treatment.rb" )
+require_relative( "../models/purchase.rb" )
+require_relative( "../models/product.rb" )
 require_relative( "../models/pet.rb" )
 require_relative( "../models/owner.rb" )
 require_relative( "../models/vet.rb" )
@@ -16,6 +18,8 @@ end
 
 Appointment.delete_all()
 Payment.delete_all()
+Purchase.delete_all()
+Product.delete_all()
 PetTreatment.delete_all()
 Treatment.delete_all()
 Pet.delete_all()
@@ -155,6 +159,25 @@ pet_2.assign_to_vet(vet_1.id)
 pet_3.assign_to_vet(vet_2.id)
 pet_4.assign_to_vet(vet_2.id)
 pets.each { |pet| pet.update() }
+
+product_1 = Product.new({
+    'name' => "Flea cream",
+    'curr_price' => 9.99
+})
+product_2 = Product.new({
+    'name' => "Pet shampoo",
+    'curr_price' => 10.99
+})
+
+products = [product_1, product_2]
+products.each { |product| product.save() }
+
+purchase_1 = Purchase.new({
+    'owner_id' => owner_1.id,
+    'product_id' => product_2.id,
+    'date' => "14/7/2020"
+})
+purchase_1.save()
 
 payment_1 = Payment.new({
     'owner_id' => owner_1.id,

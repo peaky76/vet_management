@@ -38,7 +38,14 @@
 
         <ul>
         <% for appointment in @pet.appointments %>
-            <li><%= appointment.pretty_date %> | <%= appointment.pretty_time %></li>
+            <li>
+            <%= appointment.pretty_date %> | 
+            <%= appointment.pretty_time %>
+            <form class="btn-route" action="/appointments/<%= appointment.id %>" method="POST">
+                <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+                <input type="submit" value="Cancel"></form>
+            </form>
+            </li>
         <% end %>
         <% if @pet.appointments.count == 0 %>
             <em>No appointments recorded.</em>

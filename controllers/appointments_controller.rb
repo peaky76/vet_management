@@ -24,22 +24,15 @@ post '/appointments' do
     redirect to "/pets/#{params["pet_id"]}"
 end
 
-# # SHOW
-# get '/appointments/:id' do
-#     erb ( :"appointments/show" )    
-# end
+# UPDATE
+post '/appointments/:id' do
+    @appointment = Appointment.find(params['id'])
+    @appointment.cancel()
+    @appointment.update()
+    redirect to "/pets/#{params['pet_id']}"   
+end
 
-# # EDIT
-# get '/appointments/:id/edit' do
-#     erb ( :"appointments/edit" )
-# end
-
-# # UPDATE
-# post '/appointments/:id' do
-#     redirect to '/appointments'    
-# end
-
-# # DESTROY
-# post '/appointments/:id/delete' do
-#     redirect to '/appointments'
-# end
+# SETUP
+get '/appointments/setup' do
+    erb( :"appointments/setup" ) 
+end

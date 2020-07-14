@@ -7,9 +7,9 @@
             <a href="/pets/<%= pet.id %>"><%= pet.name %></a> | 
             <%= pet.type %> | 
             <% if pet.is_assigned?() %>
-                <%= pet.status %>
+                Assigned to <%= pet.vet.full_name %>
             <% else %>
-                <a href="/pets/<%= pet.id %>/edit"><em><%= pet.status %></em></a>
+                <a href="/pets/<%= pet.id %>/edit"><em>Not assigned</em></a>
             <% end %>
         </li>
     

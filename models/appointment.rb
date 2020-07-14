@@ -35,8 +35,16 @@ class Appointment
         return Vet.get(sql, values)
     end
 
+    def cancel()
+        @pet_id = nil
+    end
+
     def is_available?()
         return @pet_id == nil
+    end
+
+    def is_past?()
+        return @date_time >= Date.today()
     end
     
     # CRUD methods

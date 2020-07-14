@@ -39,6 +39,15 @@ class Owner
         return Pet.get_all(sql, values)
     end
 
+    def purchases()
+        sql = "SELECT * FROM purchases
+        WHERE owner_id = $1"
+        values = [@id]
+        purchase_list = Purchase.get_all(sql, values)
+        sorted_list = purchase_list.sort_by { |purchase| purchase.date }
+        return sorted_list
+    end
+
     def billed_treatments()
         sql = "SELECT pet_treatments.* FROM pet_treatments
         INNER JOIN pets
@@ -56,19 +65,22 @@ class Owner
     end
 
     def total_billed()
+        sum = 0.00
+        if purchases.count > 0
+            sum += self.purchases().reduce(0) { |total, purchase| total + purchase.cost }
+        end
         if billed_treatments.count > 0
-            return self.billed_treatments().reduce(0) { |total, treatment| total + treatment.cost}
-        else  
-            return 0.00
-        end   
+            sum += self.billed_treatments().reduce(0) { |total, treatment| total + treatment.cost }
+        end
+        return sum
     end
     
     def total_paid()
+        sum = 0.00
         if payments.count > 0
-            return self.payments().reduce(0) { |total, payment| total + payment.amount }
-        else
-            return 0.00
+            sum += self.payments().reduce(0) { |total, payment| total + payment.amount }
         end
+        return sum
     end
 
     # CRUD Methods

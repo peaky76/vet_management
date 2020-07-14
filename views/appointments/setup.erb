@@ -1,0 +1,18 @@
+<h1>Set up appointment</h1>
+
+<form id="form-appointment-setup" class="form-new" method="GET" action="/appointments/new">
+
+    <div class="form-field">
+        <label for="select-pet">Select pet</label>
+        <select id="select-pet" name="pet_id">
+            <% for pet in Pet.all() %>
+                <option value="<%= pet.id %>">
+                    <%= pet.name %> <em>(<%= pet.owner.full_name %>)</em>
+                </option>          
+            <% end %>
+        </select>
+    </div>
+    
+    <input class="submit" type="submit" value="Select">
+
+</form>

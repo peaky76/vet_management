@@ -1,0 +1,12 @@
+<h1> Products </h1>
+
+<ul>
+<% for product in @products %>
+    <li><%= product.name %> | <%= product.curr_price.to_currency %> 
+        <form class="btn-route" action="/products/<%= product.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+        <form class="btn-route" action="/products/<%= product.id %>/delete" method="POST"><input type="submit" value="Delete"></form>    
+    </li>  
+<% end %>
+</ul>
+
+<form class="btn-route" action="/products/new" method="GET"><input type="submit" value="Add new"></form>

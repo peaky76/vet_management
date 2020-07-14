@@ -57,9 +57,10 @@ class Pet
         sql = "SELECT * FROM pet_treatments
         WHERE pet_id = $1"
         values = [@id]
-        return PetTreatment.get_all(sql, values)
+        treatments_list = PetTreatment.get_all(sql, values)
+        sorted_list = treatments_list.sort_by { |treatment| treatment.date }
+        return sorted_list
     end
-
 
     # CRUD methods
 
