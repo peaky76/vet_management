@@ -4,6 +4,7 @@ require_relative( "../models/treatment.rb" )
 require_relative( "../models/pet.rb" )
 require_relative( "../models/owner.rb" )
 require_relative( "../models/vet.rb" )
+require_relative( "../models/timeslot.rb" )
 require("pry-byebug")
 
 def random_tel()
@@ -166,6 +167,8 @@ payment_2 = Payment.new({
     'date' => "12/7/2020"
 })
 payment_2.save()
+
+appointments = Timeslot.generate(Time.now(), vet_1.id)
 
 binding.pry
 nil

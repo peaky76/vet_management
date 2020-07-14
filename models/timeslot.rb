@@ -8,7 +8,7 @@ class Timeslot
         @id = options['id'].to_i() if options['id']
         @vet_id = options['vet_id'] 
         @pet_id = options['pet_id'] if options['pet_id']
-        @date_time = DateTime.parse(options['date_time'])
+        @date_time = options['date_time']
     end
 
     # Instance methods
@@ -69,8 +69,18 @@ class Timeslot
     # Class methods
 
     def self.generate(date, vet_id)
+        timeslots = []
         vet = Vet.find(vet_id)
-
+        date_time = DateTime.new(date.year, date.month, date.day, 9, 0)
+        close_hour = 17
+        while date_time.hour < close_hour do
+            timeslots << Timeslot.new({
+                'date_time' => date_time,
+                'vet_id' => vet_id
+            })
+            date_time += 30.minutes # Adds 20 minutes to the time
+        end
+        return timeslots
     end
 
     # CRUD methods
