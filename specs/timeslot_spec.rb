@@ -30,6 +30,10 @@ class TestTimeslot < MiniTest::Test
             'pet_id' => @pet_1.id,
             'date_time' => "13/7/2020 11:15"
         })
+        @timeslot_2 = Timeslot.new({
+            'vet_id' => @vet_1.id,
+            'date_time' => "13/7/2020 11:45"
+        })
     end
 
     def test_has_vet()
@@ -38,6 +42,14 @@ class TestTimeslot < MiniTest::Test
 
     def test_has_price()
         assert_equal("Rover", @timeslot_1.pet.name)
+    end
+
+    def test_is_available_true()
+        assert(@timeslot_2.is_available?())
+    end
+    
+    def test_is_available_false()
+        refute(@timeslot_1.is_available?())
     end
 
 end

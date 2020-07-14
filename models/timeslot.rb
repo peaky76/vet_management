@@ -6,8 +6,8 @@ class Timeslot
 
     def initialize(options)
         @id = options['id'].to_i() if options['id']
-        @vet_id = options['vet_id']
-        @pet_id = options['pet_id']
+        @vet_id = options['vet_id'] 
+        @pet_id = options['pet_id'] if options['pet_id']
         @time_date = options['time_date']
     end
 
@@ -25,6 +25,10 @@ class Timeslot
         WHERE id = $1"
         values = [@vet_id]
         return Vet.get(sql, values)
+    end
+
+    def is_available?()
+        return @pet_id == nil
     end
     
     # CRUD methods
