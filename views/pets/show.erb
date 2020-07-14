@@ -6,6 +6,18 @@
         <em><a href="/owners/<%= @pet.owner_id %>"><%= @pet.ownership %></a></em><br/>
         <em><a href="/vets/<%= @pet.vet_id %>"><%= @pet.status %></a></em>
     </header>
+
+    <form class="btn-route" action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+    <form class="btn-route" action="/pet_treatments/new" method="GET">
+        <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+        <input type="submit" value="Add treatment">
+    </form>
+    <form class="btn-route" action="/appointments/new" method="GET">
+        <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+        <input type="submit" value="Make appointment"></form>
+    </form>
+    <form class="btn-route" action="/pets/<%= @pet.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
+
 </div>
 
 <div class="content-right">
@@ -30,9 +42,3 @@
     </section>
 </div>
 
-<form class="btn-route" action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
-<form class="btn-route" action="/pet_treatments/new" method="GET">
-    <input type="hidden" name="pet_id" value="<%= @pet.id %>">
-    <input type="submit" value="Add treatment">
-</form>
-<form class="btn-route" action="/pets/<%= @pet.id %>/delete" method="POST"><input type="submit" value="Delete"></form>

@@ -1,0 +1,10 @@
+<li>
+    <%= timeslot.pretty_time %> |
+    <% if timeslot.is_available?() %>
+        <em>Currently available</em>
+    <% else %>
+        <a href="/pets/<%= timeslot.pet_id %>">
+            <%= Pet.find(timeslot.pet_id).name %>
+        </a>
+    <% end %>
+</li>

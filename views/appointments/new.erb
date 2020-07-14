@@ -1,0 +1,26 @@
+<h1>Add appointment for <%= @pet.name %></h1>
+
+<form id="form-appointment-new" class="form-new" method="POST" action="/appointments">
+
+    <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+    <input type="hidden" name="vet_id" value="<%= @pet.vet_id %>">
+
+    <% vet = Vet.find(@pet.vet_id) %>
+    <% available_slots = vet.future_schedule.filter { |timeslot| timeslot.is_available? } %>
+
+    Appointment will be with <%= vet.full_name %>
+
+    <div class="form-field">
+        <label for="select-appointment">Date and time</label>
+        <select id="select-appointment" name="id">
+            <% for timeslot in available_slots %>
+                <option value="<%= timeslot.id %>">
+                    <%= timeslot.pretty_date %> : <%= timeslot.pretty_time %>
+                </option>          
+            <% end %>
+        </select>
+    </div>
+    
+    <input class="submit" type="submit" value="Create appointment">
+
+</form>

@@ -31,8 +31,15 @@ class Vet
         sql = "SELECT * FROM timeslots
         WHERE vet_id = $1"
         values = [@id]
-        return Timeslot.get_all(sql, values)
+        schedule = Timeslot.get_all(sql, values)
+        sorted_schedule = schedule.sort_by { |timeslot| timeslot.date_time }
+        return sorted_schedule
     end
+
+    def future_schedule()
+        return self.schedule.filter { |timeslot| timeslot.date_time.to_date >= Date.today() } 
+    end
+
 
     # CRUD Methods
 

@@ -24,14 +24,12 @@
 
     <h2>Schedule</h2>
 
-    <% future_appts = @vet.schedule.filter { |timeslot| timeslot.date_time.to_date >= Date.today() } %>
-
-    <% if future_appts.length > 0 %>
+    <% if @vet.future_schedule.length > 0 %>
         <%# Start w/ yesterday's date and change it with every new day in the appts book %>
         <%# ul tags and title based on curr_date %>
         <% curr_date = Date.today.prev_day %>
         <ul>
-        <% for timeslot in future_appts %>
+        <% for timeslot in @vet.future_schedule %>
             <% if timeslot.date_time.to_date > curr_date %>
                 <% curr_date = timeslot.date_time.to_date %>
                 </ul>

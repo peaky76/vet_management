@@ -2,49 +2,43 @@ require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
 
-require_relative( '../models/timeslot.rb' )
 also_reload( '../models/*' )
 
 # INDEX
-get '/timeslots' do
-    @timeslots = Timeslot.all
-    erb ( :"timeslots/index" )
+get '/appointments' do
+    erb ( :"appointments/index" )
 end
 
 # NEW
-get '/timeslots/new' do
-    erb ( :"timeslots/new" )
+get '/appointments/new' do
+    @pet = Pet.find(params['pet_id'])
+    erb ( :"appointments/new" )
 end
 
 # CREATE
-post '/timeslots' do
-    @timeslot = Timeslot.new(params)
-    @timeslot.save()
-    redirect to '/timeslots'
-end
-
-# SHOW
-get '/timeslots/:id' do
-    @timeslot = Timeslot.find(params['id'])
-    erb ( :"timeslots/show" )    
-end
-
-# EDIT
-get '/timeslots/:id/edit' do
-    @timeslot = Timeslot.find(params['id'])
-    erb ( :"timeslots/edit" )
-end
-
-# UPDATE
-post '/timeslots/:id' do
+post '/appointments' do
+    params['date_time'] = Timeslot.find(params['id']).date_time
     @timeslot = Timeslot.new(params)
     @timeslot.update()
-    redirect to '/timeslots'    
+    redirect to '/appointments'
 end
 
-# DESTROY
-post '/timeslots/:id/delete' do
-    @timeslot = Timeslot.new(params)
-    @timeslot.delete()
-    redirect to '/timeslots'
-end
+# # SHOW
+# get '/appointments/:id' do
+#     erb ( :"appointments/show" )    
+# end
+
+# # EDIT
+# get '/appointments/:id/edit' do
+#     erb ( :"appointments/edit" )
+# end
+
+# # UPDATE
+# post '/appointments/:id' do
+#     redirect to '/appointments'    
+# end
+
+# # DESTROY
+# post '/appointments/:id/delete' do
+#     redirect to '/appointments'
+# end
