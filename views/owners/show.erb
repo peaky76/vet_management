@@ -7,7 +7,21 @@
             <% end %>
         </em>
         <p><%= @owner.tel %></p>
-        <p>Balance due: £<%= sprintf('%.2f', @owner.balance_due) %>
+        <p>
+            <% if @owner.accepts_marketing? %>
+                <span class="data-ok">Marketing OK</span>
+            <% else %>
+                <span class="data-no">No marketing</span>
+            <% end %>
+        </p>
+        <p>Balance due: £
+            <% if @owner.balance_due > 0 %>
+                <span class="data-no">
+            <% else %>
+                <span class="data-ok">
+            <% end %>    
+                    <%= sprintf('%.2f', @owner.balance_due) %>
+                </span>
     </header>
 
 </div>

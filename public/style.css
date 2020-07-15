@@ -104,10 +104,13 @@ ul {
 
 li {
     margin-bottom: 0.25rem;
+}
+
+nav > ul > li {
     text-transform: uppercase;
 }
 
-li:before {
+nav > ul > li:before {
     content: "\00BB \0020";
 }
 
@@ -165,7 +168,6 @@ th, td {
 }
 
 .data-ok {
-    font-style: italic;
     color: green;
 }
 
@@ -174,6 +176,10 @@ th, td {
 }
 
 /* FORM */
+
+form {
+    width: 65%;
+}
 
 .form-field {  
 
@@ -185,28 +191,36 @@ th, td {
 }
 
 .form-field > label {
-    width: 8rem;
+    width: 10rem;
 }
 
 .form-field > input,
 .form-field > textarea {
-    width: 17rem;
+    width: 20rem;
+    text-transform: none;
+    text-align: left;
+}
+
+#registered, #marketing {
+    width: auto;
 }
 
 /* BUTTONS */
 
-input {
+input, button {
     font-family: Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
     border: 0.0625rem solid #B6B1AB;
 }
 
-input:hover {
+input:hover, button:hover {
     background-color: #FFCF99;
     cursor: pointer;
 }
 
-button > a {
+button > a,
+button > a:hover,
+button > a:visited {
     text-decoration: none;
     color: black;
 }
@@ -214,6 +228,10 @@ button > a {
 .button-row {
     margin-top: 1rem;
     width: 100%;
+}
+
+.btn-route {
+    width: auto;
 }
 
 .btn-route,
@@ -242,18 +260,12 @@ button > a {
     top: -1rem;
     border: 0.1rem solid #111D4A;
     padding: 0.25rem;
-    background-color: #FFCF99;
+    background-color:#FFF8F0;
     color: #1E1E24;
     z-index: 100;
 }
 
 /* MISCELLANEOUS */
-
-.id-sup {
-    font-size: 0.75rem;
-    font-style: italic;
-    color: lightslategrey;
-}
 
 .deregistered {
     font-style: italic;
