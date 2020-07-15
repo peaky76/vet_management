@@ -1,12 +1,20 @@
 <h1> Treatments </h1>
 
-<ul>
+<table id="table-treatments-list">
 <% for treatment in @treatments %>
-    <li><%= treatment.name %> | <%= treatment.curr_price.to_currency %> 
-        <form class="btn-route" action="/treatments/<%= treatment.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
-        <form class="btn-route" action="/treatments/<%= treatment.id %>/delete" method="POST"><input type="submit" value="Delete"></form>    
-    </li>  
+    <tr>
+        <td>
+            <%= treatment.name %>
+        </td> 
+        <td>
+            <%= treatment.curr_price.to_currency %>
+        </td>
+        <td> 
+            <form class="btn-route" action="/treatments/<%= treatment.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+            <form class="btn-route" action="/treatments/<%= treatment.id %>/delete" method="POST"><input type="submit" value="Delete"></form>    
+        </td>
+    </tr>  
 <% end %>
-</ul>
+</table>
 
 <form class="btn-route" action="/treatments/new" method="GET"><input type="submit" value="Add new"></form>

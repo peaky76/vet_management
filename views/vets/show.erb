@@ -5,15 +5,24 @@
         <%= @vet.tel %><br/>
     </header>
 
-    <h2>Registered pets</h2>
-    <ul>
+    <table>
+        <caption><h2>Registered pets</h2></caption>
         <% for pet in @vet.pets %>
-            <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
+            <tr>
+                <td>
+                    <a href="/pets/<%= pet.id %>"><%= pet.name %></a>
+                </td> 
+                <td>
+                    <%= pet.type %>
+                </td>
+            </tr>
         <% end %>
         <% if @vet.pets.count == 0 %>
-            <em>No pets assigned</em>
+            <tr>
+                <em>No pets assigned</em>
+            </tr>
         <% end %>        
-    </ul>  
+    </table>  
 
     <form class="btn-route" action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
     <form class="btn-route" action="/vets/<%= @vet.id %>/delete" method="POST"><input type="submit" value="Delete"></form><br/>
@@ -22,35 +31,43 @@
 
 <div class="content-right">
 
-    <h2>Schedule</h2>
+    <section id="section-vet-schedule">
+        <h2>Schedule</h2>
 
-    <% if @vet.future_schedule.length > 0 %>
-        <%# Start w/ yesterday's date and change it with every new day in the appts book %>
-        <%# ul tags and title based on curr_date %>
-        <% curr_date = Date.today.prev_day %>
-        <ul>
-        <% for appointment in @vet.future_schedule %>
-            <% if appointment.date_time.to_date > curr_date %>
-                <% curr_date = appointment.date_time.to_date %>
-                </ul>
-                <h4><%= appointment.pretty_date %></h4>
-                <ul>
-            <% end %>     
-            <li>
-                <%= appointment.pretty_time %> |
-                <% if appointment.is_available?() %>
-                    <em>Currently available</em>
-                <% else %>
-                    <a href="/pets/<%= appointment.pet_id %>">
-                        <%= Pet.find(appointment.pet_id).name %>
-                    </a>
-                <% end %>
-            </li>
+        <% if @vet.future_schedule.length > 0 %>
+            <%# Start w/ yesterday's date and change it with every new day in the appts book %>
+            <%# ul tags and title based on curr_date %>
+            <% curr_date = Date.today.prev_day %>
+            <table id="table-vet-schedule">
+            <% for appointment in @vet.future_schedule %>
+                <% if appointment.date_time.to_date > curr_date %>
+                    <% curr_date = appointment.date_time.to_date %>
+                    </table>
+                    <table>
+                    <caption><h4><%= appointment.pretty_date %></h4></caption>
+                <% end %>     
+                <tr>
+                    <td>
+                        <%= appointment.pretty_time %>
+                    </td>
+                    <td>
+                        <% if appointment.is_available?() %>
+                            <em>Currently available</em>
+                        <% else %>
+                            <a href="/pets/<%= appointment.pet_id %>">
+                                <%= Pet.find(appointment.pet_id).name %>
+                            </a>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+            </table>
+        <% else %>
+            <tr>
+                <em>No appointments scheduled.</em>
+            </tr>
         <% end %>
-        </ul>
-    <% else %>
-        <em>No appointments scheduled.</em>
-    <% end %>
+    </section>
 
 </div>
 

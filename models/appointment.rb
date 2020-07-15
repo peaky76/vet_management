@@ -76,35 +76,48 @@ class Appointment
 
     # Class methods
 
-    def self.generate_schedule(date, vet_id)
+    def self.generate_schedule(date_start, date_end, vet_id)
         
         appointments = []
-        
+        appt_len = Surgery.appointment_length
         vet = Vet.find(vet_id)
  
-        # Simple variables for date elements
-        y = date.year 
-        m = date.month 
-        d = date.day 
+        curr_date = date_start
 
-        # Prepare time vars based on date parameter supplied
-        appt_len = Surgery.appointment_length
-        curr_time = DateTime.new(y, m, d, Surgery.open['hour'], Surgery.open['minute'])
-        end_time = DateTime.new(y, m, d, Surgery.close['hour'], Surgery.close['minute'])
-        lunch_start = DateTime.new(y, m, d, Surgery.lunch_start['hour'], Surgery.lunch_start['minute'])
-        lunch_end = DateTime.new(y, m, d, Surgery.lunch_end['hour'], Surgery.lunch_end['minute'])
+        # Loop through days from start to end
+        while curr_date < date_end do
+ 
+            # Simple variables for date elements
+            y = curr_date.year 
+            m = curr_date.month 
+            d = curr_date.day 
+            dow = curr_date.strftime("%A")
 
-        # Add a new appointment at fixed interval between open and close, avoiding lunch
-        while curr_time < end_time do
-            if curr_time < lunch_start || curr_time > lunch_end
-                appointments << Appointment.new({
-                    'date_time' => curr_time.to_s,
-                    'vet_id' => vet_id
-                })
+            unless Surgery.closed_days.include?(dow) || vet.days_off.include?(dow)
+                
+                # Prepare time vars based on date parameter supplied
+                curr_time = DateTime.new(y, m, d, Surgery.open['hour'], Surgery.open['minute'])
+                end_time = DateTime.new(y, m, d, Surgery.close['hour'], Surgery.close['minute'])
+                lunch_start = DateTime.new(y, m, d, Surgery.lunch_start['hour'], Surgery.lunch_start['minute'])
+                lunch_end = DateTime.new(y, m, d, Surgery.lunch_end['hour'], Surgery.lunch_end['minute'])
+
+                # Add a new appointment at fixed interval between open and close, avoiding lunch
+                while curr_time < end_time do
+                    if curr_time < lunch_start || curr_time > lunch_end
+                        appointments << Appointment.new({
+                            'date_time' => curr_time.to_s,
+                            'vet_id' => vet_id
+                        })
+                    end
+                    curr_time += appt_len.minutes
+                end
+
             end
-            curr_time += appt_len.minutes
+
+            curr_date += 1.day
+
         end
-        
+
         return appointments
     end
 

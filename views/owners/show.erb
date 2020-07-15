@@ -21,52 +21,84 @@
 </div>
 
 <div class="content-bottom">
-    <section>
-        <h2>Pets</h2>
 
-        <ul>
+    <section>    
+        <table id="table-pet-index">
+            <caption><h2>Pets</h2></caption>    
+
             <% for pet in @owner.pets %>
-                <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a> | <%= pet.type %></li>
-            <% end %>
-            <% if @owner.pets.count == 0 %>
-                <em>No pets assigned</em>
-            <% end %>              
-        </ul>
+                <tr>
+                    <td>
+                        <a href="/pets/<%= pet.id %>"><%= pet.name %></a>
+                    </td> 
+                    <td>
+                        <%= pet.type %>
+                    </td>
+                </tr>
+            <% end %>      
+        </table>
+        <% if @owner.pets.count == 0 %>
+            <em>No pets assigned.</em>
+        <% end %>
     </section>
 
     <section>
-        <h2>Billings</h2>
+        <table id="table-owner-billings">
+            <caption><h2>Billings</h2></caption>
+            <% if @owner.purchases.count > 0 %>
 
-        <% if @owner.purchases.count > 0 %>
-            <ul>
-            <% for purchase in @owner.purchases.to_chron_order %>
-                <li>
-                <%= purchase.pretty_date %> | 
-                <%= purchase.description %> | 
-                <%= purchase.cost.to_currency %> 
-                </li>
-            <% end %>
-            </ul>
-        <% else %>
-            No billings yet.
+                <% for purchase in @owner.purchases.to_chron_order %>
+                <tr>
+                    <td>
+                        <%= purchase.pretty_date %>
+                    </td> 
+                    <td>
+                        <%= purchase.description %>
+                    </td> 
+                    <td>
+                        <%= purchase.cost.to_currency %> 
+                    </td>
+                </tr>
+                <% end %>
+
+                <tr>
+                    <td colspan="2">
+                        TOTAL: <%= @owner.total_billed.to_currency %>
+                    </td>
+                </tr>
+
+            <% end%>
+        </table>
+        <% if @owner.purchases.count == 0 %>
+            <em>No billings yet.</em>
         <% end %>
-
-        TOTAL: <%= @owner.total_billed.to_currency %>
     </section>
-
+    
     <section>
-        <h2>Payments</h2>
-
-        <ul>
-        <% for payment in @owner.payments %>
-            <li><%= payment.pretty_date %> | <%= payment.amount.to_currency %></li>
-        <% end %>
+        <table id="table-owner-payments">
+            <caption><h2>Payments</h2></caption>
+            
+            <% if @owner.payments.count > 0 %>
+            <% for payment in @owner.payments %>
+                <tr>
+                    <td>
+                        <%= payment.pretty_date %>
+                    </td> 
+                    <td>
+                        <%= payment.amount.to_currency %>
+                    </td>
+                </tr>    
+            <% end %>        
+            <tr>
+                <td colspan="2">
+                    TOTAL: <%= @owner.total_paid.to_currency %>
+                </td>
+            </tr>
+            <% end %>
+        </table>
         <% if @owner.payments.count == 0 %>
-            <em>No payments made yet.</em>
+            <em>No payments made yet.</em>    
         <% end %>
-        </ul>
-
-        TOTAL: <%= @owner.total_paid.to_currency %>
     </section>
-   
+
 </div>

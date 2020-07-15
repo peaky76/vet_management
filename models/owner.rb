@@ -32,6 +32,10 @@ class Owner
         return "#{@title} #{@first_name} #{@last_name}"
     end
 
+    def pretty_address()
+        return "#{@addr_1}, #{@addr_2}, #{@town_city.upcase}, #{@postcode}"
+    end
+
     def pets()
         sql = "SELECT * FROM pets
         WHERE owner_id = $1"

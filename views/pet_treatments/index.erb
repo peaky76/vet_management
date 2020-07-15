@@ -1,11 +1,11 @@
-<h1> Pet treatments </h1>
+<h1>Treatments given</h1>
 
 <% @pet_treatments.sort_by! { |treatment| treatment.date } %>
 
 <ul>
 <% for treatment in @pet_treatments %>
     <% pet = Pet.find(treatment.pet_id).name %>
-    <% treatment_name = Treatment.find(treatment.treatment_id).name %>
+    <% treatment_name = Treatment.find(treatment.treatment_id).name.downcase %>
     <li><%= "#{pet} underwent #{treatment_name} on #{treatment.pretty_date}" %></li>  
 <% end %>
 </ul>

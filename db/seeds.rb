@@ -30,7 +30,8 @@ Vet.delete_all()
 vet_1 = Vet.new({
     'first_name' => "Sue",
     'last_name' => "Ollogee",
-    'tel' => random_tel()
+    'tel' => random_tel(),
+    'days_off' => ["Wednesday"]
 })
 
 vet_2 = Vet.new({
@@ -42,7 +43,8 @@ vet_2 = Vet.new({
 vet_3 = Vet.new({
     'first_name' => "Abby",
     'last_name' => "Twah",
-    'tel' => random_tel()
+    'tel' => random_tel(),
+    'days_off' => ["Thursday", "Friday"]
 })
 
 vets = [vet_1, vet_2, vet_3]
@@ -198,15 +200,12 @@ product_4 = Product.new({
 products = [product_1, product_2, product_3, product_4]
 products.each { |product| product.save() }
 
-date = Date.new(2020,7,1)
+start_date = Date.new(2020,7,1)
 end_date = Date.new(2020,8,1)
 
-while date < end_date do
-    for vet in vets
-        schedule = Appointment.generate_schedule(date, vet.id)
-        schedule.each { |appointment| appointment.save() }
-    end
-    date += 1.day
+for vet in vets
+    schedule = Appointment.generate_schedule(start_date, end_date, vet.id)
+    schedule.each { |appointment| appointment.save() }
 end
 
 binding.pry

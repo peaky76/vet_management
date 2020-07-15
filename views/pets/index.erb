@@ -1,17 +1,30 @@
 <h1> Pets </h1>
 
-<ul>
-<% for pet in @pets %>
-    
-        <li>
-            <a href="/pets/<%= pet.id %>"><%= pet.name %></a> | 
-            <%= pet.type %> | 
-            <% if pet.is_assigned?() %>
-                Assigned to <%= pet.vet.full_name %>
-            <% else %>
-                <a href="/pets/<%= pet.id %>/edit"><em>Not assigned</em></a>
-            <% end %>
-        </li>
+<table id="table-pets-index">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Vet</th>
+    </tr>
+</thead>
+<% for pet in @pets.sort_by! { |pet| pet.name } %>
+
+        <tr>
+            <td>
+                <a href="/pets/<%= pet.id %>"><%= pet.name %></a>
+            </td> 
+            <td>
+                <%= pet.type %>
+            </td> 
+            <td>
+                <% if pet.is_assigned?() %>
+                    <%= pet.vet.full_name %>
+                <% else %>
+                    <a href="/pets/<%= pet.id %>/edit"><em>Not assigned</em></a>
+                <% end %>
+            </td>
+        </tr>
     
 <% end %>
-</ul>
+</table>

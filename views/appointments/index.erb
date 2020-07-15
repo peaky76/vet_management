@@ -1,30 +1,41 @@
-<h1> Appointments for <%= @date.strftime("%-d %B %Y") %> </h1>
+<h1> Appointments for <%= @date.strftime("%A %-d %B %Y") %> </h1>
+
+<% day_of_week = @date.strftime("%A") %>
 
 <div class="content-bottom">
     <% for vet in Vet.all() %>
-        <section>
-        <h2><%= vet.full_name %></h2>
+        <table id="table-vet-schedule">
+            <caption><h2><%= vet.full_name %></h2></caption>
         
-        <% schedule_for_day = vet.schedule.filter { |appointment| appointment.date_time.to_date == @date } %>
-        <% if schedule_for_day.length > 0 %>     
-            <ul>
+            <% schedule_for_day = vet.schedule.filter { |appointment| appointment.date_time.to_date == @date } %>
+            <% if schedule_for_day.length > 0 %>     
                 <% for appointment in schedule_for_day %>    
-                    <li>
-                        <%= appointment.pretty_time %> |
+                    <tr>
+                        <td>
+                            <%= appointment.pretty_time %>
+                        </td>
                         <% if appointment.is_available?() %>
-                            <em>Currently available</em>
+                            <td class="data-ok">
+                                Currently available
+                            </td>
                         <% else %>
-                            <a href="/pets/<%= appointment.pet_id %>">
-                                <%= Pet.find(appointment.pet_id).name %>
-                            </a>
+                            <td class="data-no">
+                                <a href="/pets/<%= appointment.pet_id %>">
+                                    <%= Pet.find(appointment.pet_id).name %>
+                                </a>
+                            </td>
                         <% end %>
-                    </li>
+                    </tr>
+
                 <% end %>
-            </ul>
-        <% else %>
-            <em>No availability for this day.</em>
-        <% end %>  
-        </section>
+            <% elsif Surgery.closed_days.include?(day_of_week) %>
+                <em>Surgery closed.</em>
+            <% elsif vet.days_off.include?(day_of_week) %>
+                <em>Day off.</em> 
+            <% else %>
+                <em>Appointments not set up for this day.</em>
+            <% end %>  
+        </table>
     <% end %>
 </div>
 

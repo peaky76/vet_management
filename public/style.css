@@ -1,6 +1,7 @@
 body {
     display: flex;
     flex-wrap: wrap;
+    margin: 0;
     color: #1E1E24;
     background-color: #FFF8F0;
     font-family: Geneva, Tahoma, sans-serif;
@@ -10,13 +11,31 @@ body > * {
     padding: 1em;
 }
 
-header {
-    flex-basis: 20%;
-}
-
 h1 {
     color: #92140C;
 }
+
+/* PAGE LAYOUT */
+
+header {
+    flex-basis: 20%;
+    background-color: #92140C;
+    color: #FFF8F0;
+}
+
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.25em solid #111D4A;
+    background-color: #FFCF99;
+}
+
+#footer-right {
+    text-align: right;
+}
+
+/* PAGE BODY */
 
 #content-main {
     flex-basis: 70%;
@@ -30,45 +49,73 @@ h1 {
     justify-content: space-between;
 }
 
-footer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3em;
-    border-top: 0.25em solid #111D4A;
-    background-color: #FFCF99;
-}
-
-#footer-right {
-    text-align: right;
-}
+/* NAV */
 
 ul {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 1rem;
 }
 
 li {
-    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
 }
 
-button > a {
+li:before {
+    content: "\00BB \0020";
+}
+
+nav a,
+nav a:visited {
+    color: #FFF8F0; 
     text-decoration: none;
-    color: black;
 }
 
-.btn-route,
-.submit {
+nav a:hover {
+    text-decoration: underline;
+}
+
+.nav-heading{
     display: inline-block;
-    margin-top: 1rem;
-    margin-right: 1rem;
+    color: #FFCF99;
+    font-size: 1.25rem;
+    margin-bottom: 1rem
 }
 
-.id-sup {
-    font-size: 0.75rem;
-    font-style: italic;
-    color: lightslategrey;
+/* TABLE */
+
+table {
+    background-color: #FFFCF8;
+    border: 0.0625rem solid #DAD4CD;
+    border-collapse: collapse;
 }
+
+caption {
+    text-align: left;
+}
+
+th {
+    text-align: left;
+    text-transform: uppercase;
+    background-color: #DAD4CD;
+    border-bottom: 0.0625rem solid #B6B1AB;
+}
+
+th, td {
+    vertical-align: top;
+}
+
+.data-ok {
+    font-style: italic;
+    color: green;
+}
+
+.data-no {
+    color: red;
+}
+
+/* FORM */
 
 .form-field {  
 
@@ -87,6 +134,55 @@ button > a {
 .form-field > textarea {
     width: 17rem;
 }
+
+/* BUTTONS */
+
+button > a {
+    text-decoration: none;
+    color: black;
+}
+
+.btn-route,
+.submit {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
+/* POPUP */
+.hover-popup {
+    position: relative;
+}
+
+.hover-popup > a {
+    text-decoration: none;
+}
+
+.popup {
+    display: none;
+    width: 15rem;
+}
+
+.hover-popup:hover .popup {
+    display: block;
+    position: absolute;
+    left: 5rem;
+    top: -1rem;
+    border: 0.1rem solid #111D4A;
+    padding: 0.25rem;
+    background-color: #FFCF99;
+    color: #1E1E24;
+    z-index: 100;
+}
+
+/* MISCELLANEOUS */
+
+.id-sup {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: lightslategrey;
+}
+
 
 .deregistered {
     font-style: italic;

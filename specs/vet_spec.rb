@@ -11,7 +11,8 @@ class TestVet < MiniTest::Test
         @vet_1 = Vet.new({
             'first_name' => "Sue",
             'last_name' => "Ollogee",
-            'tel' => "0131 765 4321"
+            'tel' => "0131 765 4321",
+            'days_off' => ["Monday", "Wednesday"]
         })
     end
 
@@ -29,6 +30,10 @@ class TestVet < MiniTest::Test
 
     def test_has_full_name()
         assert_equal("Dr Sue Ollogee", @vet_1.full_name)
+    end
+
+    def test_has_days_off()
+        assert_equal(2, @vet_1.days_off.count)
     end
 
 end

@@ -9,6 +9,7 @@ require_relative('./controllers/payments_controller')
 require_relative('./controllers/appointments_controller')
 require_relative('./controllers/products_controller')
 require_relative('./controllers/owner_products_controller')
+require_relative('./models/surgery')
 require_relative('helpers')
 
 get '/' do

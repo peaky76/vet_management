@@ -3,13 +3,14 @@ require_relative( '../db/sql_runner' )
 class Vet
 
     attr_reader :id
-    attr_accessor :first_name, :last_name, :tel
+    attr_accessor :first_name, :last_name, :tel, :days_off
 
     def initialize(options)
         @id = options['id'].to_i if options['id']
         @first_name = options['first_name']
         @last_name = options['last_name']
         @tel = options['tel']
+        options['days_off'] == nil ? @days_off = [] : @days_off = options['days_off'] 
     end
 
     # Instance Methods

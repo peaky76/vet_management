@@ -1,21 +1,44 @@
-<% @owners.sort_by { |owner| owner.last_name } %>
+<% @owners.sort_by! { |owner| owner.last_name } %>
 
-<ul>
+<table id="table-owner-index">
 <% for owner in @owners %>
 
     <% if owner.is_registered?() %>
-        <li>
-            <a href="/owners/<%= owner.id %>">
-                <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>)
-            </a> | 
-            <%= owner.full_address %>
-        </li>
+        <tr>
+            <td>
+                <a href="/owners/<%= owner.id %>">
+                    <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>)
+                </a>
+            </td> 
+            <td>
+                <% if owner.pets.count > 0 %>
+                    <a class="hover-popup" href="/owners/<%= owner.id %>">
+                        <%= owner.pets.count() %> pets
+                        <span class="popup">
+                            <% for pet in owner.pets %>
+                                <%= "#{pet.name} (#{pet.type})" %><br/>
+                            <% end %>
+                        </span>
+                    </a>
+                <% else %>
+                    <em>No pets registered</em>
+                <% end %>
+            </td>
+            <td>
+                <%= owner.pretty_address %><br>
+                <em><%= owner.tel %></em>
+            </td>
+        </tr>
     <% else %>
-        <li class="deregistered">
-            <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>) | 
-            <%= owner.full_address %>
-        </li>
+        <tr class="deregistered">
+            <td>
+                <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>)
+            </td> 
+            <td>
+                <%= owner.full_address %>
+            </td>
+        </tr>
     <% end %>
     
 <% end %>
-</ul>
+</table>
