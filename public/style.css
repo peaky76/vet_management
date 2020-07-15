@@ -15,9 +15,6 @@ h1 {
     color: #92140C;
 }
 
-strong {
-}
-
 a,
 a:visited {
     text-decoration: none;
@@ -207,14 +204,23 @@ form {
     text-align: left;
 }
 
+.prev-next {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 #registered, #marketing {
     width: auto;
 }
 
 /* BUTTONS */
 
-input, button {
+input, button, select, textarea {
     font-family: Geneva, Tahoma, sans-serif;
+}
+
+input, button {
     text-transform: uppercase;
     border: 0.0625rem solid #B6B1AB;
 }
@@ -290,6 +296,7 @@ button > a:visited {
 .submit {
     display: inline-block;
 }
+
 
 /* POPUP */
 .hover-popup {

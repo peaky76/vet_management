@@ -6,7 +6,7 @@
 <% for payment in @payments %>
     <% owner = Owner.find(payment.owner_id).full_name %>
     <li>
-        <%= "#{owner} paid #{payment.amount.to_currency} on #{payment.pretty_date}" %>
+        <a href="/owners/<%= payment.owner_id %>"><%= owner %></a> paid <%= "#{payment.amount.to_currency} on #{payment.pretty_date}" %>
         <form class="btn-route" action="/payments/<%= payment.id %>/delete" method="POST">
             <input type="submit" value="Cancel"></form>
         </form>

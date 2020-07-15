@@ -7,7 +7,7 @@
     <% owner = Owner.find(owner_product.owner_id).full_name %>
     <% product_name = Product.find(owner_product.product_id).name.downcase %>
     <li>
-        <%= "#{owner} bought #{product_name} on #{owner_product.pretty_date}" %>
+        <a href="/owners/<%= owner_product.owner_id %>"><%= owner %></a> bought <%= "#{product_name} on #{owner_product.pretty_date}" %>
         <form class="btn-route" action="/owner_products/<%= owner_product.id %>/delete" method="POST">
             <input type="submit" value="Cancel"></form>
         </form>

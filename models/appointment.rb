@@ -8,7 +8,7 @@ class Appointment
         @id = options['id'].to_i() if options['id']
         @vet_id = options['vet_id'] 
         @pet_id = options['pet_id'] if options['pet_id']
-        @date_time = Time.parse(options['date_time'].to_s)
+        @date_time = DateTime.parse(options['date_time'].to_s)
     end
 
     # Instance methods

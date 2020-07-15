@@ -7,7 +7,7 @@
     <% pet = Pet.find(treatment.pet_id).name %>
     <% treatment_name = Treatment.find(treatment.treatment_id).name.downcase %>
     <li>
-        <%= "#{pet} underwent #{treatment_name} on #{treatment.pretty_date}" %>
+        <a href="/pets/<%= treatment.pet_id %>"><%= pet %></a> underwent <%= "#{treatment_name} on #{treatment.pretty_date}" %>
         <form class="btn-route" action="/pet_treatments/<%= treatment.id %>/delete" method="POST">
             <input type="submit" value="Cancel"></form>
         </form>

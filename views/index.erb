@@ -2,7 +2,9 @@
     <h1> Welcome </h1>
     <span id="homepage-date"><%= Date.today.strftime("%A %-d %B %Y") %></span>
     <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae fringilla ligula. Curabitur tincidunt velit id augue elementum, in pharetra felis porttitor. Donec venenatis, tortor vitae ultrices accumsan, nulla est egestas orci, eu finibus mi odio a nunc. Nulla faucibus semper venenatis. Praesent eu urna eu nibh lobortis tempus. Aenean ac erat sed urna venenatis condimentum et in ante. Nam interdum venenatis odio, non rutrum metus finibus sed. Donec rhoncus, urna id placerat bibendum, mauris nulla semper sem, et ullamcorper justo justo iaculis lacus.
+    Current Registrations: <%= Owner.all().count %> owners / <%= Pet.all().count %> pets<br/>
+    Payments Taken: <%= Payment.all().reduce(0.0) { |total, payment| total + payment.amount }.to_currency %> <br/>
+    Debts Outstanding: <%= Owner.all().reduce(0.0) { |total, owner| total + owner.balance_due }.to_currency %>
     </p>
 
 </header>
@@ -57,11 +59,6 @@
             <% end %>
         <% end %>
         </ul>
-    </article>
-
-    <article>
-        <h3>Overdue treatments</h3>
-
     </article>
 
 </section>

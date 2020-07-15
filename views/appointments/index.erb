@@ -11,9 +11,9 @@
 </div>
 
 <section class="button-row">
-    <form class="btn-route" action="/appointments" method="GET">
-        <button name="date" value="<%= @date - 1.day %>" type="submit"><< Prev</button>
-        <button name="date" value="<%= @date + 1.day %>" type="submit">Next >></button>
+    <form class="prev-next" action="/appointments" method="GET">
+        <button class="btn-prev" name="date" value="<%= @date - 1.day %>" type="submit"><< Prev</button>
+        <button class="btn-next" name="date" value="<%= @date + 1.day %>" type="submit">Next >></button>
     </form>
 </section>
 

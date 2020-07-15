@@ -1,8 +1,8 @@
 
 class Surgery
 
-    @open = { 'hour' => 20, 'minute' => 0 }
-    @close = { 'hour' => 23, 'minute' => 30 }
+    @open = { 'hour' => 9, 'minute' => 0 }
+    @close = { 'hour' => 16, 'minute' => 0 }
     @lunch_start = { 'hour' => 12, 'minute' => 0 } 
     @lunch_end = { 'hour' => 13, 'minute' => 30 }
     @closed_days = ["Saturday", "Sunday"]

@@ -38,7 +38,7 @@ class Vet
     end
 
     def future_schedule()
-        return self.schedule.filter { |appointment| appointment.date_time > Time.now } 
+        return self.schedule.filter { |appointment| appointment.date_time > Time.now() } 
     end
 
     def today_schedule()

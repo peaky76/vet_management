@@ -25,7 +25,9 @@ class Pet
         age = TimeDifference.between(Date.today, @dob).in_years.floor
         return "#{age} year old" if age >= 1
         age = TimeDifference.between(Date.today, @dob).in_months.floor
-        return "#{age} month old"
+        return "#{age} month old" if age >= 1
+        age = TimeDifference.between(Date.today, @dob).in_days.floor
+        return "#{age} day old"
     end
 
     def pretty_dob()
