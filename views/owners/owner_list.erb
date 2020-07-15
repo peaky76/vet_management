@@ -10,15 +10,20 @@
 </thead>
 <% for owner in @owners %>
 
-    <% if owner.is_registered?() %>
+    <% if owner.is_registered? %>
         <tr>
+    <% else%>
+        <tr class="deregistered">
+    <% end%>       
             <td>
                 <a href="/owners/<%= owner.id %>">
                     <strong><%= owner.last_name.upcase %></strong>, <%= owner.first_name %> (<%= owner.title %>)
                 </a>
             </td> 
             <td>
-                <% if owner.pets.count > 0 %>
+                <% if !owner.is_registered? %>
+                    <em>Not currently registered</em>
+                <% elsif owner.pets.count > 0 %>
                     <a class="hover-popup" href="/owners/<%= owner.id %>">
                         <%= owner.pets.count() %> pets
                         <span class="popup">
@@ -28,24 +33,14 @@
                         </span>
                     </a>
                 <% else %>
-                    <em>No pets registered</em>
-                <% end %>
+                    <em>No pets registered</em>                    
+                <% end%>      
             </td>
             <td>
                 <%= owner.pretty_address %><br>
                 <em><%= owner.tel %></em>
             </td>
         </tr>
-    <% else %>
-        <tr class="deregistered">
-            <td>
-                <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>)
-            </td> 
-            <td>
-                <%= owner.full_address %>
-            </td>
-        </tr>
-    <% end %>
     
 <% end %>
 </table>

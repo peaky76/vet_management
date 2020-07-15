@@ -21,6 +21,11 @@ class Appointment
         return @date_time.strftime("%H:%M")
     end
 
+    def status()
+        return Pet.find(@pet_id).name if @pet_id
+        return "Currently available"    
+    end
+
     def pet()
         sql = "SELECT * FROM pets
         WHERE id = $1"

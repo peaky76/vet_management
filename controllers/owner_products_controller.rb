@@ -22,3 +22,10 @@ post '/owner_products' do
     @owner_product.save()
     redirect to '/owner_products'
 end
+
+# DESTROY
+post '/owner_products/:id/delete' do
+    @owner_product = OwnerProduct.find(params['id'])
+    @owner_product.delete()
+    redirect to '/owner_products'
+end

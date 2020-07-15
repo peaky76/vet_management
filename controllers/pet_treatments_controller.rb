@@ -23,3 +23,14 @@ post '/pet_treatments' do
     @pet_treatment.save()
     redirect to "/pets/#{params["pet_id"]}"
 end
+
+# DESTROY
+post '/pet_treatments/:id/delete' do
+    @pet_treatment = PetTreatment.find(params['id'])
+    @pet_treatment.delete()
+    redirect to '/pet_treatments'
+end
+
+
+
+

@@ -1,7 +1,8 @@
 <h1>Register new pet</h1>
 
-Select existing owner below or <a href="/owners/new">enter new owner</a>
+<p>Select existing owner below or <a class="inline-link" href="/owners/new">enter new owner</a></p>
 
+<% @owners.filter! { |owner| owner.is_registered? } %>
 <%= erb( :"owners/owner_list" ) %>  
 
 

@@ -46,7 +46,7 @@ end
 
 # DESTROY
 post '/pets/:id/delete' do
-    @pet = Pet.new(params)
+    @pet = Pet.find(params['id'])
     @pet.delete()
     redirect to '/pets'
 end

@@ -36,6 +36,14 @@ class OwnerProduct < Sale
         values = [@cost, @owner_id]
         SqlRunner.run(sql, values)
     end
+    
+    def unbill_owner()
+        sql = "UPDATE owners 
+        SET balance_due = balance_due - $1
+        WHERE id = $2"
+        values = [@cost, @owner_id]
+        SqlRunner.run(sql, values)
+    end
 
     # CRUD methods
 
@@ -62,6 +70,7 @@ class OwnerProduct < Sale
         sql = "DELETE FROM owner_products
         WHERE id = $1"
         values = [@id]
+        self.unbill_owner()
         SqlRunner.run(sql, values)
     end
 

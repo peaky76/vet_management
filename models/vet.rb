@@ -38,7 +38,19 @@ class Vet
     end
 
     def future_schedule()
-        return self.schedule.filter { |appointment| appointment.date_time.to_date >= Date.today() } 
+        return self.schedule.filter { |appointment| appointment.date_time > Time.now } 
+    end
+
+    def today_schedule()
+        return self.schedule.filter { |appointment| appointment.date_time.to_date == Date.today }
+    end
+
+    def current_appointment()
+        return self.today_schedule.filter { 
+            |appointment| 
+            appointment.date_time < Time.now && 
+            appointment.date_time + Surgery.appointment_length.minutes > Time.now
+        }.first
     end
 
     # CRUD Methods

@@ -1,31 +1,67 @@
-<div class="content-left">
+<header>
+    <h1> Welcome </h1>
+    <span id="homepage-date"><%= Date.today.strftime("%A %-d %B %Y") %></span>
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae fringilla ligula. Curabitur tincidunt velit id augue elementum, in pharetra felis porttitor. Donec venenatis, tortor vitae ultrices accumsan, nulla est egestas orci, eu finibus mi odio a nunc. Nulla faucibus semper venenatis. Praesent eu urna eu nibh lobortis tempus. Aenean ac erat sed urna venenatis condimentum et in ante. Nam interdum venenatis odio, non rutrum metus finibus sed. Donec rhoncus, urna id placerat bibendum, mauris nulla semper sem, et ullamcorper justo justo iaculis lacus.
+    </p>
 
-    <header>
-        <h1> Welcome </h1>
+</header>
 
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae fringilla ligula. Curabitur tincidunt velit id augue elementum, in pharetra felis porttitor. Donec venenatis, tortor vitae ultrices accumsan, nulla est egestas orci, eu finibus mi odio a nunc. Nulla faucibus semper venenatis. Praesent eu urna eu nibh lobortis tempus. Aenean ac erat sed urna venenatis condimentum et in ante. Nam interdum venenatis odio, non rutrum metus finibus sed. Donec rhoncus, urna id placerat bibendum, mauris nulla semper sem, et ullamcorper justo justo iaculis lacus. Quisque eget semper dolor, rhoncus posuere erat. Aliquam finibus massa id nisl congue scelerisque. Aenean et dapibus leo. Nunc rutrum facilisis lorem, in euismod sem sollicitudin non.
-        </p>
-        <p>
-        Pellentesque volutpat dolor vitae tempus bibendum. Aliquam nibh turpis, maximus quis odio ut, euismod dapibus risus. Curabitur eu mattis urna, id pretium sapien. Nunc aliquam congue nunc in blandit. Nam nisl tortor, convallis vitae pharetra vel, pulvinar et ex. Praesent fringilla velit non lacinia pretium. Ut nec nisi leo. Sed vitae finibus nulla. Curabitur convallis gravida tincidunt.
-        </p>
-    </header>
+<div><hr/></div>
 
-    <form class="btn-route" action="/owners/register" method="GET"><input type="submit" value="New registration"></form>
-    <form class="btn-route" action="/payments/new" method="GET"><input type="submit" value="Take payment"></form>
-    <form class="btn-route" action="/appointments/setup" method="GET"><input type="submit" value="Book appointment"></form>
-    <form class="btn-route" action="/owner_products/new" method="GET"><input type="submit" value="Register sale"></form>
+<section id="big-buttons">
+ 
+    <form class="big-button-wrapper" action="/owners/register" method="GET">
+        <input id="big-button-registration" class="big-button" type="submit" value="">
+        <label for="big-button-registration">Register pet</label>
+    </form>
+    <form class="big-button-wrapper" action="/appointments/setup" method="GET">
+        <input id="big-button-appointment" class="big-button" type="submit" value="">
+        <label for="big-button-appointment">Make appointment</label>
+    </form>
+    <form class="big-button-wrapper" action="/owner_products/new" method="GET">
+        <input id="big-button-product" class="big-button" type="submit" value="">
+        <label for="big-button-product">Sell product</label>
+    </form>
+    <form class="big-button-wrapper" action="/payments/new" method="GET">
+        <input id="big-button-payment" class="big-button" type="submit" value="">
+        <label for="big-button-payment">Take payment</label>
+    </form>
+    
+</section>
 
-</div>
+<div><hr/></div>
 
-<div class="content-right">
-    <h2>Outstanding bills</h2>
+<section class="homepage-alerts">
 
-    <ul>
-    <% for owner in Owner.all() %>
-        <% if owner.balance_due > 0 %>
-            <li><%= owner.full_name %> owes <%= owner.balance_due.to_currency %></li>
+    <article>
+        <h3>Current appointments</h3>
+        <% for vet in Vet.all() %>
+            <%= vet.full_name %>: 
+            <% if vet.current_appointment %>
+                <%= vet.current_appointment.status %>
+            <% else %>
+                Out of office
+            <% end %>
+            <br/>
         <% end %>
-    <% end %>
-    </ul>
-</div>
+    </article>
+
+    <article>
+        <h3>Outstanding bills</h3>
+
+        <ul>
+        <% for owner in Owner.all() %>
+            <% if owner.balance_due > 0 %>
+                <li><%= owner.full_name %> owes <%= owner.balance_due.to_currency %></li>
+            <% end %>
+        <% end %>
+        </ul>
+    </article>
+
+    <article>
+        <h3>Overdue treatments</h3>
+
+    </article>
+
+</section>

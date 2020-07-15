@@ -41,6 +41,14 @@ class PetTreatment < Sale
         SqlRunner.run(sql, values)
     end
 
+    def unbill_owner()
+        sql = "UPDATE owners 
+        SET balance_due = balance_due - $1
+        WHERE id = $2"
+        values = [@cost, self.owner_id]
+        SqlRunner.run(sql, values)
+    end
+
     # CRUD methods
 
     def save()
@@ -66,6 +74,7 @@ class PetTreatment < Sale
         sql = "DELETE FROM pet_treatments
         WHERE id = $1"
         values = [@id]
+        self.unbill_owner()
         SqlRunner.run(sql, values)
     end
 

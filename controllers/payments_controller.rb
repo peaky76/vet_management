@@ -29,14 +29,15 @@ post '/payments' do
     redirect to '/payments'
 end
 
-# SHOW
-get '/payments/:id' do
-    @payment = Payment.find(params['id'])
-    erb ( :"payments/show" )    
-end
-
 # EDIT
 get '/payments/:id/edit' do
     @payment = Payment.find(params['id'])
     erb ( :"payments/edit" )
+end
+
+# DESTROY
+post '/payments/:id/delete' do
+    @payment = Payment.find(params['id'])
+    @payment.delete()
+    redirect to '/payments'
 end

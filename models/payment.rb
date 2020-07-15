@@ -26,6 +26,14 @@ class Payment
         SqlRunner.run(sql, values)
     end
 
+    def refund_to_owner()
+        sql = "UPDATE owners 
+        SET balance_due = balance_due + $1
+        WHERE id = $2"
+        values = [@amount, @owner_id]
+        SqlRunner.run(sql, values)
+    end
+
     # CRUD methods
 
     def save()
@@ -48,6 +56,7 @@ class Payment
     end
 
     def delete()
+        self.refund_to_owner()
         sql = "DELETE FROM payments
         WHERE id = $1"
         values = [@id]

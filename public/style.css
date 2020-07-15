@@ -70,6 +70,16 @@ a:hover {
     justify-content: space-between;
 }
 
+/* HOMEPAGE */
+
+.homepage-alerts {
+    display: flex;
+}
+
+.homepage-alerts article {
+    flex-grow: 1;
+}
+
 /* INDIVIDUAL PAGES */
 
 #pet-notes {
@@ -181,10 +191,6 @@ form {
     width: 65%;
 }
 
-.form-field {  
-
-}
-
 .form-field > * {
     display: inline-block;
     margin-top: 0.5rem;
@@ -223,6 +229,52 @@ button > a:hover,
 button > a:visited {
     text-decoration: none;
     color: black;
+}
+
+#big-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#big-button-appointment {
+    background-image: url("appointment.png");
+}
+
+#big-button-payment {
+    background-image: url("payment.png");
+}
+
+#big-button-product {  
+    background-image: url("product.png");
+}
+
+#big-button-registration {
+    background-image: url("registration.png");
+}
+
+.big-button-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.big-button-wrapper label {
+    text-transform: uppercase;
+    color:#92140C;
+    margin: 0;
+}
+
+.big-button {
+    width: 10rem;
+    height: 10rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: 5px solid #92140C;
+    border-radius: 20px;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .button-row {
@@ -267,7 +319,20 @@ button > a:visited {
 
 /* MISCELLANEOUS */
 
+#homepage-date {
+    font-size: 1.25rem;
+    font-style: bold;
+    color: #92140C;
+}
+
 .deregistered {
     font-style: italic;
-    color: lightslategrey;
+    color: #B6B1AB;
 }
+
+.deregistered a,
+.deregistered a:hover {
+    color: #B6B1AB;
+}
+
+
