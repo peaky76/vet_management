@@ -99,8 +99,11 @@
                 </tr>    
             <% end %>        
             <tr>
-                <td colspan="2">
-                    TOTAL: <%= @owner.total_paid.to_currency %>
+                <td>
+                    TOTAL: 
+                </td>
+                <td>
+                    <%= @owner.total_paid.to_currency %>
                 </td>
             </tr>
             <% end %>

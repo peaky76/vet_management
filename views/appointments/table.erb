@@ -30,9 +30,10 @@
     </table>
     <% if Surgery.closed_days.include?(day_of_week) %>
         <em>Surgery closed.</em>
-    <% elsif @vet.day_off == day_of_week %>
+    <% elsif schedule_for_day.length == 0 && @vet.day_off == day_of_week %>
         <em>Day off.</em> 
     <% elsif schedule_for_day.length == 0 %>
         <em>Appointments not set up yet.</em>
     <% end %>
+
 </div>

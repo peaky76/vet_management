@@ -204,7 +204,7 @@ start_date = Date.new(2020,7,1)
 end_date = Date.new(2020,8,1)
 
 for vet in vets
-    schedule = Appointment.generate_schedule(start_date, end_date, vet.id)
+    schedule = Appointment.generate_multiple_schedules(start_date, end_date, vet.id)
     schedule.each { |appointment| appointment.save() }
 end
 
