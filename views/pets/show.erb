@@ -1,20 +1,81 @@
-<div class="content-left">
-    <header>
-        <h1><%= @pet.name %><sup class="id-sup"> (ID: <%= @pet.id %>)</sup></h1> 
-        <%= @pet.age %> (<%= @pet.pretty_dob %>)
-        <h4><%= @pet.type.upcase %></em></h4>
-        <em>
-            Owned by: <a href="/owners/<%= @pet.owner_id %>"><%= @pet.owner.full_name %></a><br/>
+<div class="content-top">
+
+    <header class="header-pet-info">
+        <h1><%= @pet.name %></h1> 
+        <%= @pet.age %> <%= @pet.type %> (<%= @pet.pretty_dob %>)
+        <p><em>
+            Owner: <a href="/owners/<%= @pet.owner_id %>"><%= @pet.owner.full_name %></a><br/>
             <% if @pet.is_assigned? %>
-                Assigned to: <a href="/vets/<%= @pet.vet_id %>"><%= @pet.vet.full_name %></a>
+                Vet: <a href="/vets/<%= @pet.vet_id %>"><%= @pet.vet.full_name %></a>
             <% else %>
                 <a href="/pets/<%= @pet.id %>/edit">
                     Not assigned to vet
                 </a>
             <% end %>
-        </em>
+        </em></p>
+
+        <hr/>
+
+        <div id="pet-notes">
+            <strong>Notes:</strong> <%= @pet.notes %>
+        </div>
+
+        <hr/>
     </header>
 
+</div>
+
+<div class="content-bottom">
+    
+    <section class="section-pet-info">
+        <table id="table-pet-appointments">
+            <caption><h2>Appointments</h2></caption>
+
+            <% for appointment in @pet.appointments %>
+                <tr>
+                    <td>
+                        <%= appointment.pretty_date %>
+                    </td> 
+                    <td>
+                        <%= appointment.pretty_time %>
+                    </td>
+                    <td>
+                        <form class="btn-route" action="/appointments/<%= appointment.id %>" method="POST">
+                            <input type="hidden" name="pet_id" value="<%= @pet.id %>">
+                            <input type="submit" value="Cancel"></form>
+                        </form>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+        <% if @pet.appointments.count == 0 %>
+            <em>No appointments recorded.</em>
+        <% end %>
+    </section>
+
+    <section class="section-pet-info">
+        <table id="table-pet-treatments">
+            <caption><h2>Treatments</h2></caption>
+
+            <% for treatment in @pet.treatments_given %>
+                <tr>
+                    <td>
+                        <%= treatment.pretty_date %>
+                    </td> 
+                    <td>
+                        <%= Treatment.find(treatment.treatment_id).name %>
+                    </td>
+                </tr>
+            <% end %>   
+        </table>
+        <% if @pet.treatments_given.count == 0 %>
+            <em>No treatments given yet.</em>
+        <% end %>    
+    </section>
+
+</div>
+
+<section class="button-row">
     <form class="btn-route" action="/pets/<%= @pet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
     <%# Only display new appointments and treatment button if pet has been assigned a vet  %>
     <% if @pet.vet %>
@@ -28,62 +89,4 @@
         </form>
     <% end %>
     <form class="btn-route" action="/pets/<%= @pet.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
-
-</div>
-
-<div class="content-right">
-    
-    <table id="table-pet-appointments">
-        <caption><h2>Appointments</h2></caption>
-
-        <% for appointment in @pet.appointments %>
-            <tr>
-                <td>
-                    <%= appointment.pretty_date %>
-                </td> 
-                <td>
-                    <%= appointment.pretty_time %>
-                </td>
-                <td>
-                    <form class="btn-route" action="/appointments/<%= appointment.id %>" method="POST">
-                        <input type="hidden" name="pet_id" value="<%= @pet.id %>">
-                        <input type="submit" value="Cancel"></form>
-                    </form>
-                </td>
-            </tr>
-        <% end %>
-        <% if @pet.appointments.count == 0 %>
-            <tr>
-                <em>No appointments recorded.</em>
-            </tr>
-        <% end %>
-    </table>
-    
-    <table id="table-pet-treatments">
-        <caption><h2>Treatments</h2></caption>
-
-        <% for treatment in @pet.treatments_given %>
-            <tr>
-                <td>
-                    <%= treatment.pretty_date %>
-                </td> 
-                <td>
-                    <%= Treatment.find(treatment.treatment_id).name %>
-                </td>
-            </tr>
-        <% end %>
-        <% if @pet.treatments_given.count == 0 %>
-            <tr>
-                <em>No treatments given yet.</em>
-            </tr>
-        <% end %>
-    </table>
-
-    <table id="table-notes">
-        <caption><h2>Notes</h2></caption>
-        <tr>
-            <%= @pet.notes %><br/>
-        </tr>
-    </table>
-</div>
-
+</section>

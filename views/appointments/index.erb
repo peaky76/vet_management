@@ -1,50 +1,19 @@
 <h1> Appointments for <%= @date.strftime("%A %-d %B %Y") %> </h1>
 
-<% day_of_week = @date.strftime("%A") %>
-
 <div class="content-bottom">
-    <% for vet in Vet.all() %>
-        <section id="vet-schedule">
-            <table id="table-vet-schedule">
-                <caption><h2><%= vet.full_name %></h2></caption>
-            
-                <% schedule_for_day = vet.schedule.filter { |appointment| appointment.date_time.to_date == @date } %>
-                <% if schedule_for_day.length > 0 %>     
-                    <% for appointment in schedule_for_day %>    
-                        <tr>
-                            <td>
-                                <%= appointment.pretty_time %>
-                            </td>
-                            <% if appointment.is_available?() %>
-                                <td class="data-ok">
-                                    Currently available
-                                </td>
-                            <% else %>
-                                <td class="data-no">
-                                    <a href="/pets/<%= appointment.pet_id %>">
-                                        <%= Pet.find(appointment.pet_id).name %>
-                                    </a>
-                                </td>
-                            <% end %>
-                        </tr>
-                    <% end %>
-                <% end %>    
-                
-            </table>
-            <% if Surgery.closed_days.include?(day_of_week) %>
-                <em>Surgery closed.</em>
-            <% elsif vet.day_off == day_of_week %>
-                <em>Day off.</em> 
-            <% elsif schedule_for_day.length == 0 %>
-                <em>Appointments not set up yet.</em>
-            <% end %>
-        </section>
-    <% end %>
+    <section id="section-vet-schedule">
+        <% for vet in Vet.all() %>
+            <% @vet = vet %>
+            <% @heading = vet.full_name %>
+            <%= erb( :"appointments/table" ) %>    
+        <% end %>
+    </section>
 </div>
 
-
-<form class="btn-route" action="/appointments" method="GET">
-    <button name="date" value="<%= @date - 1.day %>" type="submit"><< Prev</button>
-    <button name="date" value="<%= @date + 1.day %>" type="submit">Next >></button>
-</form>
+<section class="button-row">
+    <form class="btn-route" action="/appointments" method="GET">
+        <button name="date" value="<%= @date - 1.day %>" type="submit"><< Prev</button>
+        <button name="date" value="<%= @date + 1.day %>" type="submit">Next >></button>
+    </form>
+</section>
 

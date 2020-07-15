@@ -1,0 +1,38 @@
+<div class="schedule-wrapper">
+    <h2><%= @heading %></h2>
+    <table id="table-vet-schedule">
+        
+
+        <% day_of_week = @date.strftime("%A") %>
+        <% schedule_for_day = @vet.schedule.filter { |appointment| appointment.date_time.to_date == @date } %>
+        
+        <% if schedule_for_day.length > 0 %>     
+            <% for appointment in schedule_for_day %>    
+                <tr>
+                    <td>
+                        <%= appointment.pretty_time %>
+                    </td>
+                    <% if appointment.is_available?() %>
+                        <td class="data-ok">
+                            Currently available
+                        </td>
+                    <% else %>
+                        <td class="data-no">
+                            <a href="/pets/<%= appointment.pet_id %>">
+                                <%= Pet.find(appointment.pet_id).name %>
+                            </a>
+                        </td>
+                    <% end %>
+                </tr>
+            <% end %>
+        <% end %>    
+        
+    </table>
+    <% if Surgery.closed_days.include?(day_of_week) %>
+        <em>Surgery closed.</em>
+    <% elsif @vet.day_off == day_of_week %>
+        <em>Day off.</em> 
+    <% elsif schedule_for_day.length == 0 %>
+        <em>Appointments not set up yet.</em>
+    <% end %>
+</div>

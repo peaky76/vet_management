@@ -1,6 +1,6 @@
 <div class="content-top">
     <header>
-        <h1><%= @owner.full_name %><sup class="id-sup"> (ID: <%= @owner.id %>)</sup></h1>
+        <h1><%= @owner.full_name %></h1>
         <em>
             <% for element in @owner.full_address %>
                 <%= element %><br/>
@@ -10,19 +10,11 @@
         <p>Balance due: £<%= sprintf('%.2f', @owner.balance_due) %>
     </header>
 
-    <section class="button-row">
-            <form class="btn-route" action="/owners/<%= @owner.id %>/edit" method="GET"><input type="submit" value="Edit details"></form>
-            <form class="btn-route" action="/pets/new" method="GET">
-                <input type="hidden" name="owner_id" value="<%= @owner.id %>">
-                <input type="submit" value="Add pet">
-            </form>
-            <form class="btn-route" action="/owners/<%= @owner.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
-    </section>
 </div>
 
 <div class="content-bottom">
 
-    <section>    
+    <section class="section-owner-info">    
         <table id="table-pet-index">
             <caption><h2>Pets</h2></caption>    
 
@@ -38,11 +30,11 @@
             <% end %>      
         </table>
         <% if @owner.pets.count == 0 %>
-            <em>No pets assigned.</em>
+            <em>No pets registered.</em>
         <% end %>
     </section>
 
-    <section>
+    <section class="section-owner-billings">
         <table id="table-owner-billings">
             <caption><h2>Billings</h2></caption>
             <% if @owner.purchases.count > 0 %>
@@ -63,7 +55,10 @@
 
                 <tr>
                     <td colspan="2">
-                        TOTAL: <%= @owner.total_billed.to_currency %>
+                        TOTAL:
+                    </td>
+                    <td> 
+                        <%= @owner.total_billed.to_currency %>
                     </td>
                 </tr>
 
@@ -74,7 +69,7 @@
         <% end %>
     </section>
     
-    <section>
+    <section class="section-owner-info">
         <table id="table-owner-payments">
             <caption><h2>Payments</h2></caption>
             
@@ -102,3 +97,12 @@
     </section>
 
 </div>
+
+<section class="button-row">
+    <form class="btn-route" action="/owners/<%= @owner.id %>/edit" method="GET"><input type="submit" value="Edit details"></form>
+    <form class="btn-route" action="/pets/new" method="GET">
+        <input type="hidden" name="owner_id" value="<%= @owner.id %>">
+        <input type="submit" value="Add pet">
+    </form>
+    <form class="btn-route" action="/owners/<%= @owner.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
+</section>

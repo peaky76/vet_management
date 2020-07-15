@@ -30,18 +30,19 @@ a:hover {
 
 /* PAGE LAYOUT */
 
-header {
+#site-header {
     flex-basis: 20%;
     background-color: #92140C;
     color: #FFF8F0;
 }
 
-footer {
+#site-footer {
     width: 100%;
     display: flex;
     justify-content: space-between;
     border-top: 0.25em solid #111D4A;
     background-color: #FFCF99;
+    font-size: 0.8rem;
 }
 
 #footer-right {
@@ -51,15 +52,46 @@ footer {
 /* PAGE BODY */
 
 #content-main {
+    min-height: 80vh;
     flex-basis: 70%;
     display: flex;
     flex-direction: column;
     border-left: 0.25em solid #111D4A;
 }
 
+.content-top {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .content-bottom {
+    min-height: 50vh;
     display: flex;
     justify-content: space-between;
+}
+
+/* INDIVIDUAL PAGES */
+
+#pet-notes {
+    width: 50%;
+}
+
+#section-vet-pets {
+    display: none;
+}
+
+#section-vet-schedule {
+    width: 100%;
+}
+
+.header-pet-info,
+.section-pet-info,
+.section-owner-billings {
+    flex-basis: 50%;
+}
+
+.section-owner-info {
+    flex-basis: 25%;
 }
 
 /* NAV */
@@ -116,12 +148,19 @@ th, td {
     padding: 0.5rem;
 }
 
-#vet-schedule {
+#section-vet-schedule {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
     min-height: 50vh;
-    width: 30%;
 }
 
-#vet-schedule table {
+.schedule-wrapper {
+    flex-basis: 30%;
+}
+
+#table-vet-schedule {
     width: 100%;
 }
 
@@ -172,6 +211,11 @@ button > a {
     color: black;
 }
 
+.button-row {
+    margin-top: 1rem;
+    width: 100%;
+}
+
 .btn-route,
 .submit {
     display: inline-block;
@@ -210,7 +254,6 @@ button > a {
     font-style: italic;
     color: lightslategrey;
 }
-
 
 .deregistered {
     font-style: italic;

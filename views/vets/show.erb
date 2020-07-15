@@ -1,75 +1,63 @@
-<div class="content-left">
+<div class="content-top">
 
     <header>
         <h1><%= @vet.full_name %></h1>
         <%= @vet.tel %><br/>
     </header>
 
-    <table>
-        <caption><h2>Registered pets</h2></caption>
-        <% for pet in @vet.pets %>
-            <tr>
-                <td>
-                    <a href="/pets/<%= pet.id %>"><%= pet.name %></a>
-                </td> 
-                <td>
-                    <%= pet.type %>
-                </td>
-            </tr>
-        <% end %>
-        <% if @vet.pets.count == 0 %>
-            <tr>
-                <em>No pets assigned</em>
-            </tr>
-        <% end %>        
-    </table>  
-
-    <form class="btn-route" action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
-    <form class="btn-route" action="/vets/<%= @vet.id %>/delete" method="POST"><input type="submit" value="Delete"></form><br/>
-
-</div>
-
-<div class="content-right">
-
-    <section id="section-vet-schedule">
-        <h2>Schedule</h2>
-
-        <% if @vet.future_schedule.length > 0 %>
-            <%# Start w/ yesterday's date and change it with every new day in the appts book %>
-            <%# ul tags and title based on curr_date %>
-            <% curr_date = Date.today.prev_day %>
-            <table id="table-vet-schedule">
-            <% for appointment in @vet.future_schedule %>
-                <% if appointment.date_time.to_date > curr_date %>
-                    <% curr_date = appointment.date_time.to_date %>
-                    </table>
-                    <table>
-                    <caption><h4><%= appointment.pretty_date %></h4></caption>
-                <% end %>     
-                <tr>
-                    <td>
-                        <%= appointment.pretty_time %>
-                    </td>
-                    <td>
-                        <% if appointment.is_available?() %>
-                            <em>Currently available</em>
-                        <% else %>
-                            <a href="/pets/<%= appointment.pet_id %>">
-                                <%= Pet.find(appointment.pet_id).name %>
-                            </a>
-                        <% end %>
-                    </td>
-                </tr>
-            <% end %>
-            </table>
-        <% else %>
-            <tr>
-                <em>No appointments scheduled.</em>
-            </tr>
-        <% end %>
+    <section class="button-row">
+        <form class="btn-route" action="/vets/<%= @vet.id %>/edit" method="GET"><input type="submit" value="Edit"></form>
+        <form class="btn-route" action="/vets/<%= @vet.id %>/delete" method="POST"><input type="submit" value="Delete"></form>
     </section>
 
 </div>
+
+<hr/>
+
+<div class="content-bottom">
+
+    <section id="section-vet-pets">
+        <table>
+            <caption><h2>Registered pets</h2></caption>
+            <% for pet in @vet.pets %>
+                <tr>
+                    <td>
+                        <a href="/pets/<%= pet.id %>"><%= pet.name %></a>
+                    </td> 
+                    <td>
+                        <%= pet.type %>
+                    </td>
+                </tr>
+            <% end %>       
+        </table>
+        <% if @vet.pets.count == 0 %>
+            <em>No pets assigned</em>
+        <% end %>
+    </section>
+
+    <section id="section-vet-schedule">
+        
+        <%# Start w/ yesterday's date and change it with every new day in the appts book %>
+        <% curr_date = @start_date - 1.day %>
+        <% while curr_date < @start_date + 2.days do %>
+            <% curr_date += 1.day %>
+            <% @date = curr_date%> 
+            <% @heading = @date.strftime("%-d %B %Y") %>        
+            <%= erb( :"appointments/table" ) %>
+        <% end%>
+        
+    </section>
+
+</div>
+
+<section class="button-row">
+    <form class="btn-route" action="/vets/<%= @vet.id %>" method="GET">
+        <button name="start_date" value="<%= @start_date - 1.day %>" type="submit"><< PREV</button>
+    </form>
+    <form class="btn-route" action="/vets/<%= @vet.id %>" method="GET">
+           <button name="start_date" value="<%= @start_date + 1.day %>" type="submit">NEXT >></button>
+    </form>
+</section>
 
 
 

@@ -26,6 +26,8 @@ end
 # SHOW
 get '/vets/:id' do
     @vet = Vet.find(params['id'])
+    @start_date = Date.today()
+    @start_date = Date.parse(params['start_date']) if params['start_date']
     erb ( :"vets/show" )    
 end
 
