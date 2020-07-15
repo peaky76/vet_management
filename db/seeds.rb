@@ -31,7 +31,7 @@ vet_1 = Vet.new({
     'first_name' => "Sue",
     'last_name' => "Ollogee",
     'tel' => random_tel(),
-    'days_off' => ["Wednesday"]
+    'day_off' => "Wednesday"
 })
 
 vet_2 = Vet.new({
@@ -44,7 +44,7 @@ vet_3 = Vet.new({
     'first_name' => "Abby",
     'last_name' => "Twah",
     'tel' => random_tel(),
-    'days_off' => ["Thursday", "Friday"]
+    'day_off' => "Friday"
 })
 
 vets = [vet_1, vet_2, vet_3]

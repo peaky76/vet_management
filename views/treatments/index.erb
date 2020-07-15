@@ -1,7 +1,14 @@
 <h1> Treatments </h1>
 
 <table id="table-treatments-list">
-<% for treatment in @treatments %>
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+</thead>
+<% for treatment in @treatments.sort_by! { |treatment| -treatment.curr_price } %>
     <tr>
         <td>
             <%= treatment.name %>

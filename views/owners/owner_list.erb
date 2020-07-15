@@ -1,13 +1,20 @@
 <% @owners.sort_by! { |owner| owner.last_name } %>
 
 <table id="table-owner-index">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Registrations</th>
+        <th>Contact details</th>
+    </tr>
+</thead>
 <% for owner in @owners %>
 
     <% if owner.is_registered?() %>
         <tr>
             <td>
                 <a href="/owners/<%= owner.id %>">
-                    <%= owner.last_name %>, <%= owner.first_name %> (<%= owner.title %>)
+                    <strong><%= owner.last_name.upcase %></strong>, <%= owner.first_name %> (<%= owner.title %>)
                 </a>
             </td> 
             <td>

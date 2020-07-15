@@ -1,9 +1,30 @@
 <h1> Vets </h1>
 
-<ul>
+<table id="table-vets-index">
+<thead>
+    <tr>
+        <th>Vet</th>
+        <th>Pets</th>
+        <th>Contact number</th>
+        <th>Day off</th>
+    </tr>
+</thead>
 <% for vet in @vets %>
-    <li><a href="/vets/<%= vet.id %>"><%= vet.full_name %></a></li>  
+    <tr>
+        <td>
+            <a href="/vets/<%= vet.id %>"><%= vet.full_name %></a>
+        </td>
+        <td>
+            <%= vet.pets.count %></a>
+        </td>
+        <td>
+            <%= vet.tel %></a>
+        </td>
+        <td>
+            <%= vet.day_off %>
+        </td>
+    </tr>  
 <% end %>
-</ul>
+</table>
 
 <form class="btn-route" action="/vets/new" method="GET"><input type="submit" value="Add new"></form>

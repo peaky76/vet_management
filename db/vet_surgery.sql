@@ -12,7 +12,8 @@ CREATE TABLE vets (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
-    tel VARCHAR(255)
+    tel VARCHAR(255),
+    day_off VARCHAR(255) 
 );
 
 CREATE TABLE owners (

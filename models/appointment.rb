@@ -93,7 +93,7 @@ class Appointment
             d = curr_date.day 
             dow = curr_date.strftime("%A")
 
-            unless Surgery.closed_days.include?(dow) || vet.days_off.include?(dow)
+            unless Surgery.closed_days.include?(dow) || vet.day_off == dow
                 
                 # Prepare time vars based on date parameter supplied
                 curr_time = DateTime.new(y, m, d, Surgery.open['hour'], Surgery.open['minute'])

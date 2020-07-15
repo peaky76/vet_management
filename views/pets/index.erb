@@ -5,6 +5,7 @@
     <tr>
         <th>Name</th>
         <th>Type</th>
+        <th>Owner</th>
         <th>Vet</th>
     </tr>
 </thead>
@@ -16,10 +17,13 @@
             </td> 
             <td>
                 <%= pet.type %>
-            </td> 
+            </td>
+            <td>
+                <a href="/owners/<%= pet.owner_id %>"><%= pet.owner.full_name %></a>
+            </td>  
             <td>
                 <% if pet.is_assigned?() %>
-                    <%= pet.vet.full_name %>
+                    <a href="/vets/<%= pet.vet_id %>"><%= pet.vet.full_name %></a>
                 <% else %>
                     <a href="/pets/<%= pet.id %>/edit"><em>Not assigned</em></a>
                 <% end %>

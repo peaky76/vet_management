@@ -1,7 +1,14 @@
 <h1> Products </h1>
 
 <table id="table-products-list">
-<% for product in @products %>
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+</thead>
+<% for product in @products.sort_by! { |product| -product.curr_price } %>
     <tr>
         <td>
             <%= product.name %>

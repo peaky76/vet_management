@@ -3,14 +3,14 @@ require_relative( '../db/sql_runner' )
 class Vet
 
     attr_reader :id
-    attr_accessor :first_name, :last_name, :tel, :days_off
+    attr_accessor :first_name, :last_name, :tel, :day_off
 
     def initialize(options)
         @id = options['id'].to_i if options['id']
         @first_name = options['first_name']
         @last_name = options['last_name']
         @tel = options['tel']
-        options['days_off'] == nil ? @days_off = [] : @days_off = options['days_off'] 
+        @day_off = options['day_off'] 
     end
 
     # Instance Methods
@@ -45,19 +45,19 @@ class Vet
 
     def save()
         sql = "INSERT INTO vets
-        (first_name, last_name, tel) 
-        VALUES ($1, $2, $3)
+        (first_name, last_name, tel, day_off) 
+        VALUES ($1, $2, $3, $4)
         RETURNING id"
-        values = [@first_name, @last_name, @tel]
+        values = [@first_name, @last_name, @tel, @day_off]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i
     end
 
     def update()
         sql = "UPDATE vets
-        SET (first_name, last_name, tel) =
-        ($1, $2, $3)
-        WHERE id = $4"
-        values = [@first_name, @last_name, @tel, @id]
+        SET (first_name, last_name, tel, day_off) =
+        ($1, $2, $3, $4)
+        WHERE id = $5"
+        values = [@first_name, @last_name, @tel, @day_off, @id]
         SqlRunner.run(sql, values)
     end
 
