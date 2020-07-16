@@ -4,7 +4,8 @@ body {
     margin: 0;
     color: #1E1E24;
     background-color: #FFF8F0;
-    font-family: Geneva, Tahoma, sans-serif;
+    font-family: Optima, Tahoma, sans-serif;
+    font-size: 18px;
 }
 
 body > * {
@@ -217,7 +218,7 @@ form {
 /* BUTTONS */
 
 input, button, select, textarea {
-    font-family: Geneva, Tahoma, sans-serif;
+    font-family: Optima, sans-serif;
 }
 
 input, button {
