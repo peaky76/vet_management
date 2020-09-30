@@ -1,9 +1,7 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' )
-require( 'pry-byebug' )
 
 require_relative( '../models/treatment' )
-also_reload( '../models/*' )
 
 # INDEX
 get '/treatments' do

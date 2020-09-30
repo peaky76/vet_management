@@ -9,8 +9,6 @@ require_relative( "../models/surgery.rb" )
 require_relative( "../models/treatment.rb" )
 require_relative( "../models/vet.rb" )
 
-require("pry-byebug")
-
 def random_tel()
     part_1 = rand(500) + 499
     part_2 = rand(9999)
@@ -207,6 +205,3 @@ for vet in vets
     schedule = Appointment.generate_multiple_schedules(start_date, end_date, vet.id)
     schedule.each { |appointment| appointment.save() }
 end
-
-binding.pry
-nil

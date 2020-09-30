@@ -2,26 +2,28 @@
 
 A simple vet surgery app, built as an individual project as part of the CodeClan (Edinburgh) Professional Software Development Course (Week 5).
 
-The app allows a vet surgery to 
+The app allows a vet surgery to
+
 - create a list of vets at the surgery, and create schedules for them
 - maintain a list of registered owners and their pets
 - maintain an inventory of treatments and products
 - manage appointments
 - record product sales to owners
 - record treatments for pets
-- track payments for those treatments and products  
+- track payments for those treatments and products
 
 ## Getting Started
 
 - Clone the repo and save it to your local computer.
 - Create a local database in PostgreSQL and name it vet_surgery.
 - Navigate to the repo in your console.
-- Run the following, which will populate the db with seed data: 
+- Run the following, which will populate the db with seed data:
 
 ```
 psql -d vet_surgery -f db/vet_surgery.sql
 ruby seeds.rb
 ```
+
 - Visit 'http://localhost:4567/' in your browser.
 
 ### Prerequisites
@@ -30,14 +32,13 @@ You will need the following ruby gems installed:
 
 - [Sinatra](https://rubygems.org/gems/sinatra/versions/1.4.7)
 - [pg](https://rubygems.org/gems/pg)
-- [pry-byebug](https://rubygems.org/gems/pry-byebug
-)
+  )
 
 ## Built With
 
-* PostgreSQL - Database
-* Ruby/Sinatra - MVC
-* HTML/CSS - Front end
+- PostgreSQL - Database
+- Ruby/Sinatra - MVC
+- HTML/CSS - Front end
 
 ## Brief
 
@@ -67,4 +68,4 @@ A veterinary practice has approached you to build a web application to help them
 
 ## Acknowledgments
 
-* Thanks to CodeClan tutors [Sandy McMillan](https://github.com/waspyfaeleith), [Sky Su](https://github.com/skysu) and [Juan Mata Ruiz](https://github.com/juanmataruiz) and my fellow coursemates who worked on the same project, [Rebeka Geczi](https://github.com/geczirebeka) and [Rudy Zachar](https://github.com/rud-y)
+- Thanks to CodeClan tutors [Sandy McMillan](https://github.com/waspyfaeleith), [Sky Su](https://github.com/skysu) and [Juan Mata Ruiz](https://github.com/juanmataruiz) and my fellow coursemates who worked on the same project, [Rebeka Geczi](https://github.com/geczirebeka) and [Rudy Zachar](https://github.com/rud-y)
