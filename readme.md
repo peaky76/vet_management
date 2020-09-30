@@ -32,6 +32,7 @@ You will need the following ruby gems installed:
 
 - [Sinatra](https://rubygems.org/gems/sinatra/versions/1.4.7)
 - [pg](https://rubygems.org/gems/pg)
+- [time_difference](https://rubygems.org/gems/time_difference/versions/0.7.0)
   )
 
 ## Built With
