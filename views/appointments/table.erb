@@ -29,11 +29,14 @@
         
     </table>
     <% if Surgery.closed_days.include?(day_of_week) %>
-        <em>Surgery closed.</em>
+        <p><em>Surgery closed.</em></p>
     <% elsif schedule_for_day.length == 0 && @vet.day_off == day_of_week %>
-        <em>Day off.</em> 
+        <p><em>Day off.</em></p> 
     <% elsif schedule_for_day.length == 0 %>
-        <em>Appointments not set up yet.</em>
+        <p><em>Appointments not set up yet.</em></p>
+        <form action="/appointments/generate/<%= @vet.id %>/<%= @date %>" method="POST">
+            <button class="btn-setup" name="setup" type="submit">Set up</button>
+        </form>
     <% end %>
 
 </div>

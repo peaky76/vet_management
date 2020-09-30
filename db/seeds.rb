@@ -200,8 +200,8 @@ product_4 = Product.new({
 products = [product_1, product_2, product_3, product_4]
 products.each { |product| product.save() }
 
-start_date = Date.new(2020,7,1)
-end_date = Date.new(2020,8,1)
+start_date = Date.new(2020,9,1)
+end_date = Date.new(2020,10,1)
 
 for vet in vets
     schedule = Appointment.generate_multiple_schedules(start_date, end_date, vet.id)

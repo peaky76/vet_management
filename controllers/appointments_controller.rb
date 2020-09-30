@@ -38,3 +38,12 @@ end
 get '/appointments/setup' do
     erb( :"appointments/setup" ) 
 end
+
+# GENERATE
+post '/appointments/generate/:vet_id/:date' do
+    @date = Date.parse(params['date']) if params['date']
+    @vet_id = params['vet_id']
+    schedule = Appointment.generate_schedule(@date, @vet_id)
+    schedule.each { |appointment| appointment.save() }
+    redirect to "/appointments?date=#{params['date']}"   
+end
