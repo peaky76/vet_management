@@ -26,7 +26,7 @@ GEM
     tilt (2.0.10)
     time_difference (0.7.0)
       activesupport (~> 5.1)
-    tzinfo (1.2.7)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
 
 PLATFORMS
